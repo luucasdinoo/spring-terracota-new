@@ -3,6 +3,7 @@ package com.terracota.customer;
 import com.terracota.user.User;
 import com.terracota.user.UserID;
 import com.terracota.user.UserRole;
+import com.terracota.validation.ValidationHandler;
 
 import java.time.Instant;
 
@@ -60,6 +61,11 @@ public class Customer extends User {
         return new Customer(id, email, password, role, name, phone, cpf, isActive, address, now, now);
     }
 
+    @Override
+    public void validate(ValidationHandler handler) {
+        new CustomerValidator(this, handler).validate();
+    }
+
     public Customer activate(){
         this.active = true;
         this.updatedAt = Instant.now();
@@ -99,4 +105,5 @@ public class Customer extends User {
     public Instant getUpdatedAt() {
         return updatedAt;
     }
+
 }
