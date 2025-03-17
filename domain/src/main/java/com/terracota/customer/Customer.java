@@ -3,9 +3,9 @@ package com.terracota.customer;
 import com.terracota.user.User;
 import com.terracota.user.UserID;
 import com.terracota.user.UserRole;
-import com.terracota.validation.ValidationHandler;
 
 import java.time.Instant;
+import java.util.Optional;
 
 public class Customer extends User {
 
@@ -16,6 +16,8 @@ public class Customer extends User {
     private CPF cpf;
 
     private boolean active;
+
+    private ImagePhoto photo;
 
     private Address address;
 
@@ -32,6 +34,7 @@ public class Customer extends User {
             final String phone,
             final CPF cpf,
             final boolean isActive,
+            final ImagePhoto photo,
             final Address address,
             final Instant createdAt,
             final Instant updatedAt
@@ -41,6 +44,7 @@ public class Customer extends User {
         this.phone = phone;
         this.cpf = cpf;
         this.active = isActive;
+        this.photo = photo;
         this.address = address;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -53,27 +57,48 @@ public class Customer extends User {
             final String name,
             final String phone,
             final CPF cpf,
-            final boolean isActive,
-            final Address address
+            final boolean isActive
     ){
         final UserID id = UserID.unique();
         final Instant now = Instant.now();
-        return new Customer(id, email, password, role, name, phone, cpf, isActive, address, now, now);
+        return new Customer(id, email, password, role, name, phone, cpf, isActive,null, null, now, now);
     }
 
-    @Override
-    public void validate(ValidationHandler handler) {
-        new CustomerValidator(this, handler).validate();
+    public static Customer with(
+            final UserID userID,
+            final String email,
+            final String password,
+            final UserRole role,
+            final String name,
+            final String phone,
+            final CPF cpf,
+            final boolean isActive,
+            final ImagePhoto photo,
+            final Address address,
+            final Instant createdAt,
+            final Instant updatedAt
+    ){
+        return new Customer(userID, email, password, role, name, phone, cpf, isActive, photo, address, createdAt, updatedAt);
     }
 
-    public Customer activate(){
+    public void activate(){
         this.active = true;
         this.updatedAt = Instant.now();
-        return this;
     }
 
-    public Customer deactivate(){
+    public void deactivate(){
         this.active = false;
+        this.updatedAt = Instant.now();
+    }
+
+    public Customer update(final String name, final String phone, final boolean isActive){
+        if (isActive){
+            activate();
+        } else {
+            deactivate();
+        }
+        this.name = name;
+        this.phone = phone;
         this.updatedAt = Instant.now();
         return this;
     }
@@ -94,8 +119,8 @@ public class Customer extends User {
         return active;
     }
 
-    public Address getAddress() {
-        return address;
+    public Optional<Address> getAddress() {
+        return Optional.ofNullable(address);
     }
 
     public Instant getCreatedAt() {
@@ -106,4 +131,7 @@ public class Customer extends User {
         return updatedAt;
     }
 
+    public Optional<ImagePhoto> getPhoto() {
+        return Optional.ofNullable(photo);
+    }
 }

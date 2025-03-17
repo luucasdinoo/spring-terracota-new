@@ -27,7 +27,7 @@ public class Address extends ValueObject {
         this.addressZipCode = addressZipCode;
     }
 
-    public static Address newAddress(
+    public static Address with(
             final String addressStreet,
             final String addressNumber,
             final String addressNeighborhood,
@@ -38,27 +38,27 @@ public class Address extends ValueObject {
         return new Address(addressStreet, addressNumber, addressNeighborhood, addressCity, addressState, addressZipCode);
     }
 
-    public String getAddressStreet() {
+    public String addressStreet() {
         return addressStreet;
     }
 
-    public String getAddressNumber() {
+    public String addressNumber() {
         return addressNumber;
     }
 
-    public String getAddressNeighborhood() {
+    public String addressNeighborhood() {
         return addressNeighborhood;
     }
 
-    public String getAddressCity() {
+    public String addressCity() {
         return addressCity;
     }
 
-    public String getAddressState() {
+    public String addressState() {
         return addressState;
     }
 
-    public String getAddressZipCode() {
+    public String addressZipCode() {
         return addressZipCode;
     }
 }
