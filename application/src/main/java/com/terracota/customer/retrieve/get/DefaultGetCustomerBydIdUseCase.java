@@ -2,7 +2,6 @@ package com.terracota.customer.retrieve.get;
 
 import com.terracota.customer.Customer;
 import com.terracota.customer.CustomerGateway;
-import com.terracota.customer.create.CreateCustomerOutput;
 import com.terracota.exceptions.EntityNotFoundException;
 import com.terracota.user.UserID;
 
@@ -17,10 +16,10 @@ public class DefaultGetCustomerBydIdUseCase extends GetCustomerBydIdUseCase{
     }
 
     @Override
-    public CreateCustomerOutput execute(final String anId) {
+    public CustomerOutput execute(final String anId) {
         UserID userId = UserID.from(anId);
         return this.customerGateway.findById(userId)
-                .map(CreateCustomerOutput::from)
+                .map(CustomerOutput::from)
                 .orElseThrow(() -> EntityNotFoundException.with(Customer.class, userId));
     }
 }

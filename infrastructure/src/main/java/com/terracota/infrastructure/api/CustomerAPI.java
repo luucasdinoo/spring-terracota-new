@@ -1,0 +1,65 @@
+package com.terracota.infrastructure.api;
+
+import com.terracota.infrastructure.customer.models.CreateCustomerRequest;
+import com.terracota.infrastructure.customer.models.CustomerResponse;
+import com.terracota.infrastructure.customer.models.ListCustomerResponse;
+import com.terracota.pagination.Pagination;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RequestMapping("customers")
+@Tag(name = "Customer")
+public interface CustomerAPI {
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Create new customer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Video created successfully")
+    })
+    ResponseEntity<?> create(@RequestBody CreateCustomerRequest request);
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "List customers")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Video listed successfully")
+    })
+    Pagination<ListCustomerResponse> list(
+            @RequestParam(name = "search", required = false, defaultValue = "") final String search,
+            @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
+            @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
+            @RequestParam(name = "sort", required = false, defaultValue = "name") final String sort,
+            @RequestParam(name = "dir", required = false, defaultValue = "asc") final String dir
+    );
+
+    @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Retrieve customer by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Video retrieved successfully")
+    })
+    CustomerResponse getById(@PathVariable String id);
+
+    @DeleteMapping(value = "{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete customer by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Video deleted successfully")
+    })
+    void deleteById(@PathVariable String id);
+
+    @PutMapping(
+            value = "{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Update customer by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Video updated successfully")
+    })
+    ResponseEntity<?> updateById(@PathVariable String id, @RequestBody UpdateCustomerRequest request);
+}

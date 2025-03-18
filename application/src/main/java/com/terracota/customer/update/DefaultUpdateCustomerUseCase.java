@@ -20,7 +20,8 @@ public class DefaultUpdateCustomerUseCase extends UpdateCustomerUseCase{
         UserID anId = UserID.from(input.id());
         Customer customer = this.customerGateway.findById(anId)
                 .orElseThrow(() -> EntityNotFoundException.with(Customer.class, anId));
+        Customer updatedCustomer = customer.update(input.name(), input.phone(), input.isActive());
 
-        return UpdateCustomerOutput.from(this.customerGateway.update(customer));
+        return UpdateCustomerOutput.from(this.customerGateway.update(updatedCustomer));
     }
 }

@@ -2,7 +2,7 @@ package com.terracota.infrastructure.customer.persistence;
 
 import com.terracota.customer.CPF;
 import com.terracota.customer.Customer;
-import com.terracota.infrastructure.user.UserModel;
+import com.terracota.infrastructure.user.persistence.UserModel;
 import com.terracota.user.UserID;
 import com.terracota.user.UserRole;
 import jakarta.persistence.*;

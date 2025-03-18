@@ -1,4 +1,4 @@
-package com.terracota.infrastructure.user;
+package com.terracota.infrastructure.user.persistence;
 
 import com.terracota.user.UserRole;
 import jakarta.persistence.*;

@@ -1,0 +1,99 @@
+package com.terracota.infrastructure.api.controller;
+
+import com.terracota.customer.create.CreateCustomerCommand;
+import com.terracota.customer.create.CreateCustomerOutput;
+import com.terracota.customer.create.CreateCustomerUseCase;
+import com.terracota.customer.delete.DeleteCustomerUseCase;
+import com.terracota.customer.retrieve.get.GetCustomerBydIdUseCase;
+import com.terracota.customer.retrieve.list.ListCustomerUseCase;
+import com.terracota.customer.update.UpdateCustomerCommand;
+import com.terracota.customer.update.UpdateCustomerOutput;
+import com.terracota.customer.update.UpdateCustomerUseCase;
+import com.terracota.infrastructure.api.CustomerAPI;
+import com.terracota.infrastructure.api.UpdateCustomerRequest;
+import com.terracota.infrastructure.customer.models.CreateCustomerRequest;
+import com.terracota.infrastructure.customer.models.CustomerResponse;
+import com.terracota.infrastructure.customer.models.ListCustomerResponse;
+import com.terracota.infrastructure.customer.presenter.CustomerPresenter;
+import com.terracota.pagination.Pagination;
+import com.terracota.pagination.SearchQuery;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
+import java.util.Objects;
+
+@RestController
+public class CustomerController implements CustomerAPI {
+
+    private final CreateCustomerUseCase createCustomerUseCase;
+    private final ListCustomerUseCase listCustomerUseCase;
+    private final GetCustomerBydIdUseCase getCustomerBydIdUseCase;
+    private final DeleteCustomerUseCase deleteCustomerUseCase;
+    private final UpdateCustomerUseCase updateCustomerUseCase;
+
+    public CustomerController(
+            final CreateCustomerUseCase createCustomerUseCase,
+            final ListCustomerUseCase listCustomerUseCase,
+            final GetCustomerBydIdUseCase getCustomerBydIdUseCase,
+            final DeleteCustomerUseCase deleteCustomerUseCase, UpdateCustomerUseCase updateCustomerUseCase
+    ) {
+        this.createCustomerUseCase = Objects.requireNonNull(createCustomerUseCase);
+        this.listCustomerUseCase = Objects.requireNonNull(listCustomerUseCase);
+        this.getCustomerBydIdUseCase = Objects.requireNonNull(getCustomerBydIdUseCase);
+        this.deleteCustomerUseCase = Objects.requireNonNull(deleteCustomerUseCase);
+        this.updateCustomerUseCase = Objects.requireNonNull(updateCustomerUseCase);
+    }
+
+    @Override
+    public ResponseEntity<?> create(final CreateCustomerRequest request) {
+        CreateCustomerCommand aCommand = CreateCustomerCommand.with(
+                request.email(),
+                request.password(),
+                request.role(),
+                request.name(),
+                request.phone(),
+                request.isActive(),
+                request.cpf(),
+                request.address().toDomain()
+        );
+        CreateCustomerOutput output = this.createCustomerUseCase.execute(aCommand);
+
+        return ResponseEntity.created(URI.create("/customers" + output.id())).body(output);
+    }
+
+    @Override
+    public Pagination<ListCustomerResponse> list(
+            final String search,
+            final int page,
+            final int perPage,
+            final String sort,
+            final String dir
+    ) {
+        return this.listCustomerUseCase.execute(new SearchQuery(page, perPage, sort, sort, dir))
+                .map(CustomerPresenter::present);
+    }
+
+    @Override
+    public CustomerResponse getById(String id) {
+        return CustomerPresenter.present(this.getCustomerBydIdUseCase.execute(id));
+    }
+
+    @Override
+    public void deleteById(final String id) {
+        this.deleteCustomerUseCase.execute(id);
+    }
+
+    @Override
+    public ResponseEntity<?> updateById(final String id, final UpdateCustomerRequest request) {
+        UpdateCustomerCommand aCmd = UpdateCustomerCommand.with(
+                id,
+                request.name(),
+                request.phone(),
+                request.isActive()
+        );
+
+        UpdateCustomerOutput output = this.updateCustomerUseCase.execute(aCmd);
+        return ResponseEntity.ok(output);
+    }
+}
