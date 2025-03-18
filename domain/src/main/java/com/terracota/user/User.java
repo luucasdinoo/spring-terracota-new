@@ -38,4 +38,6 @@ public abstract class User extends AggregateRoot<UserID> {
     public UserRole getRole() {
         return role;
     }
+
+
 }

@@ -119,16 +119,16 @@ public class Customer extends User {
         return active;
     }
 
-    public Optional<Address> getAddress() {
-        return Optional.ofNullable(address);
-    }
-
     public Instant getCreatedAt() {
         return createdAt;
     }
 
     public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    public Optional<Address> getAddress() {
+        return Optional.ofNullable(address);
     }
 
     public Optional<ImagePhoto> getPhoto() {

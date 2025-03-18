@@ -1,10 +1,10 @@
 package com.terracota.customer;
 
-import com.terracota.Identifier;
+import com.terracota.ValueObject;
 
 import java.util.Objects;
 
-public class CPF extends Identifier {
+public class CPF extends ValueObject {
 
     private final String value;
 
@@ -16,9 +16,8 @@ public class CPF extends Identifier {
         return new CPF(value);
     }
 
-    @Override
     public String getValue() {
-        return this.value;
+        return value;
     }
 
     @Override
