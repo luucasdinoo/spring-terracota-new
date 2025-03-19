@@ -1,22 +1,22 @@
 package com.terracota.infrastructure.api.controller;
 
-import com.terracota.customer.create.CreateCustomerCommand;
-import com.terracota.customer.create.CreateCustomerOutput;
-import com.terracota.customer.create.CreateCustomerUseCase;
-import com.terracota.customer.delete.DeleteCustomerUseCase;
-import com.terracota.customer.retrieve.get.GetCustomerBydIdUseCase;
-import com.terracota.customer.retrieve.list.ListCustomerUseCase;
-import com.terracota.customer.update.UpdateCustomerCommand;
-import com.terracota.customer.update.UpdateCustomerOutput;
-import com.terracota.customer.update.UpdateCustomerUseCase;
+import com.terracota.application.customer.create.CreateCustomerCommand;
+import com.terracota.application.customer.create.CreateCustomerOutput;
+import com.terracota.application.customer.create.CreateCustomerUseCase;
+import com.terracota.application.customer.delete.DeleteCustomerUseCase;
+import com.terracota.application.customer.retrieve.get.GetCustomerBydIdUseCase;
+import com.terracota.application.customer.retrieve.list.ListCustomerUseCase;
+import com.terracota.application.customer.update.UpdateCustomerCommand;
+import com.terracota.application.customer.update.UpdateCustomerOutput;
+import com.terracota.application.customer.update.UpdateCustomerUseCase;
+import com.terracota.domain.pagination.Pagination;
+import com.terracota.domain.pagination.SearchQuery;
 import com.terracota.infrastructure.api.CustomerAPI;
 import com.terracota.infrastructure.api.UpdateCustomerRequest;
-import com.terracota.infrastructure.customer.models.CreateCustomerRequest;
-import com.terracota.infrastructure.customer.models.CustomerResponse;
-import com.terracota.infrastructure.customer.models.ListCustomerResponse;
-import com.terracota.infrastructure.customer.presenter.CustomerPresenter;
-import com.terracota.pagination.Pagination;
-import com.terracota.pagination.SearchQuery;
+import com.terracota.infrastructure.user.customer.models.CreateCustomerRequest;
+import com.terracota.infrastructure.user.customer.models.CustomerResponse;
+import com.terracota.infrastructure.user.customer.models.ListCustomerResponse;
+import com.terracota.infrastructure.user.customer.presenter.CustomerPresenter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 

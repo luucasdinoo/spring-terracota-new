@@ -1,16 +1,16 @@
 package com.terracota.infrastructure.config;
 
-import com.terracota.customer.CustomerGateway;
-import com.terracota.customer.create.CreateCustomerUseCase;
-import com.terracota.customer.create.DefaultCreateCustomerUseCase;
-import com.terracota.customer.delete.DefaultDeleteCustomerUseCase;
-import com.terracota.customer.delete.DeleteCustomerUseCase;
-import com.terracota.customer.retrieve.get.DefaultGetCustomerBydIdUseCase;
-import com.terracota.customer.retrieve.get.GetCustomerBydIdUseCase;
-import com.terracota.customer.retrieve.list.DefaultListCustomerUseCase;
-import com.terracota.customer.retrieve.list.ListCustomerUseCase;
-import com.terracota.customer.update.DefaultUpdateCustomerUseCase;
-import com.terracota.customer.update.UpdateCustomerUseCase;
+import com.terracota.application.customer.create.CreateCustomerUseCase;
+import com.terracota.application.customer.create.DefaultCreateCustomerUseCase;
+import com.terracota.application.customer.delete.DefaultDeleteCustomerUseCase;
+import com.terracota.application.customer.delete.DeleteCustomerUseCase;
+import com.terracota.application.customer.retrieve.get.DefaultGetCustomerBydIdUseCase;
+import com.terracota.application.customer.retrieve.get.GetCustomerBydIdUseCase;
+import com.terracota.application.customer.retrieve.list.DefaultListCustomerUseCase;
+import com.terracota.application.customer.retrieve.list.ListCustomerUseCase;
+import com.terracota.application.customer.update.DefaultUpdateCustomerUseCase;
+import com.terracota.application.customer.update.UpdateCustomerUseCase;
+import com.terracota.domain.user.customer.CustomerGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

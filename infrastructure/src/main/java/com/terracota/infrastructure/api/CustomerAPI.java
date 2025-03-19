@@ -1,9 +1,9 @@
 package com.terracota.infrastructure.api;
 
-import com.terracota.infrastructure.customer.models.CreateCustomerRequest;
-import com.terracota.infrastructure.customer.models.CustomerResponse;
-import com.terracota.infrastructure.customer.models.ListCustomerResponse;
-import com.terracota.pagination.Pagination;
+import com.terracota.domain.pagination.Pagination;
+import com.terracota.infrastructure.user.customer.models.CreateCustomerRequest;
+import com.terracota.infrastructure.user.customer.models.CustomerResponse;
+import com.terracota.infrastructure.user.customer.models.ListCustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
