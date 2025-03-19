@@ -1,4 +1,4 @@
-package com.terracota.infrastructure.user.customer.persistence;
+package com.terracota.infrastructure.user;
 
 import com.terracota.domain.user.Address;
 import jakarta.persistence.Column;

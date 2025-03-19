@@ -1,4 +1,4 @@
-package com.terracota.infrastructure.user.customer.persistence;
+package com.terracota.infrastructure.user;
 
 import com.terracota.domain.user.ImagePhoto;
 import jakarta.persistence.Column;

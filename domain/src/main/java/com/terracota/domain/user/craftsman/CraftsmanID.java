@@ -3,7 +3,8 @@ package com.terracota.domain.user.craftsman;
 import com.terracota.domain.Identifier;
 
 import java.util.Objects;
-import java.util.UUID;
+
+import static com.terracota.domain.utils.IdUtils.uuid;
 
 public class CraftsmanID extends Identifier {
 
@@ -14,14 +15,11 @@ public class CraftsmanID extends Identifier {
     }
 
     public static CraftsmanID unique(){
-        return new CraftsmanID(UUID.randomUUID().toString().toLowerCase());
+        return new CraftsmanID(uuid());
     }
 
     public static CraftsmanID from(String anId){
         return new CraftsmanID(anId);
-    }
-    public static CraftsmanID from(UUID anId){
-        return new CraftsmanID(anId.toString().toLowerCase());
     }
 
     @Override

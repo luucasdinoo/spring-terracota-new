@@ -1,19 +1,18 @@
-package com.terracota.infrastructure.user.customer.persistence;
+package com.terracota.infrastructure.user.craftsman.persistence;
 
-import com.terracota.domain.user.customer.Customer;
-import com.terracota.domain.user.customer.CustomerID;
 import com.terracota.domain.user.CPF;
+import com.terracota.domain.user.craftsman.Craftsman;
+import com.terracota.domain.user.craftsman.CraftsmanID;
+import com.terracota.infrastructure.user.UserEmbedded;
 import com.terracota.infrastructure.user.AddressEmbedded;
 import com.terracota.infrastructure.user.ImagePhotoModel;
-import com.terracota.infrastructure.user.UserEmbedded;
 import jakarta.persistence.*;
 
 import java.time.Instant;
-import java.util.Optional;
 
-@Entity(name = "Customer")
-@Table(name = "customers")
-public class CustomerModel{
+@Entity(name = "Craftsman")
+@Table(name = "craftsmen")
+public class CraftsmanModel {
 
     @Id
     private String id;
@@ -46,9 +45,9 @@ public class CustomerModel{
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    public CustomerModel(){}
+    public CraftsmanModel(){}
 
-    private CustomerModel(
+    private CraftsmanModel(
             final String id,
             final UserEmbedded user,
             final String name,
@@ -72,39 +71,35 @@ public class CustomerModel{
         this.updatedAt = updatedAt;
     }
 
-    public static CustomerModel from(final Customer customer){
-        return new CustomerModel(
-                customer.getId().getValue(),
-                UserEmbedded.from(customer.getUser()),
-                customer.getName(),
-                customer.getPhone(),
-                customer.getCpf().getValue(),
-                customer.isActive(),
-                customer.getPhoto()
+    public static CraftsmanModel from(final Craftsman craftsman) {
+        return new CraftsmanModel(
+                craftsman.getId().getValue(),
+                UserEmbedded.from(craftsman.getUser()),
+                craftsman.getName(),
+                craftsman.getPhone(),
+                craftsman.getCpf().getValue(),
+                craftsman.isActive(),
+                craftsman.getPhoto()
                         .map(ImagePhotoModel::from)
                         .orElse(null),
-                customer.getAddress()
+                craftsman.getAddress()
                         .map(AddressEmbedded::from)
                         .orElse(null),
-                customer.getCreatedAt(),
-                customer.getUpdatedAt()
+                craftsman.getCreatedAt(),
+                craftsman.getUpdatedAt()
         );
     }
 
-    public Customer toDomain(){
-        return Customer.with(
-                CustomerID.from(getId()),
+    public Craftsman toDomain(){
+        return Craftsman.with(
+                CraftsmanID.from(getId()),
                 getUser().toDomain(),
                 getName(),
                 getPhone(),
                 CPF.from(getCpf()),
                 isActive(),
-                Optional.ofNullable(getPhoto())
-                        .map(ImagePhotoModel::toDomain)
-                        .orElse(null),
-                Optional.ofNullable(getAddress())
-                        .map(AddressEmbedded::toDomain)
-                        .orElse(null),
+                getPhoto().toDomain(),
+                getAddress().toDomain(),
                 getCreatedAt(),
                 getUpdatedAt()
         );

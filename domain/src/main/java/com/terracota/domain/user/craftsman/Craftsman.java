@@ -1,11 +1,14 @@
 package com.terracota.domain.user.craftsman;
 
+import com.terracota.domain.AggregateRoot;
 import com.terracota.domain.user.*;
 
 import java.time.Instant;
 import java.util.Optional;
 
-public class Craftsman extends User {
+public class Craftsman extends AggregateRoot<CraftsmanID> {
+
+    private final User user;
 
     private String name;
 
@@ -24,10 +27,8 @@ public class Craftsman extends User {
     private Instant updatedAt;
 
     private Craftsman(
-            final UserID userID,
-            final String email,
-            final String password,
-            final Role role,
+            final CraftsmanID craftsmanID,
+            final User user,
             final String name,
             final String phone,
             final CPF cpf,
@@ -37,7 +38,8 @@ public class Craftsman extends User {
             final Instant createdAt,
             final Instant updatedAt
     ) {
-        super(userID, email, password, role);
+        super(craftsmanID);
+        this.user = user;
         this.name = name;
         this.phone = phone;
         this.cpf = cpf;
@@ -57,16 +59,15 @@ public class Craftsman extends User {
             final CPF cpf,
             final boolean isActive
     ){
-        final UserID anId = UserID.unique();
+        final User user = User.newUser(email, password, role);
+        final CraftsmanID anId = CraftsmanID.unique();
         final Instant now = Instant.now();
-        return new Craftsman(anId, email, password, role, name, phone, cpf, isActive,null, null, now, now);
+        return new Craftsman(anId, user , name, phone, cpf, isActive,null, null, now, now);
     }
 
     public static Craftsman with(
-            final UserID userID,
-            final String email,
-            final String password,
-            final Role role,
+            final CraftsmanID craftsmanID,
+            final User user,
             final String name,
             final String phone,
             final CPF cpf,
@@ -76,7 +77,7 @@ public class Craftsman extends User {
             final Instant createdAt,
             final Instant updatedAt
     ){
-        return new Craftsman(userID, email, password, role, name, phone, cpf, isActive, photo, address, createdAt, updatedAt);
+        return new Craftsman(craftsmanID, user, name, phone, cpf, isActive, photo, address, createdAt, updatedAt);
     }
 
     public void activate(){
@@ -123,6 +124,10 @@ public class Craftsman extends User {
 
     public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public Optional<Address> getAddress() {
