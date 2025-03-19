@@ -12,7 +12,7 @@ import com.terracota.application.customer.update.UpdateCustomerUseCase;
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.domain.pagination.SearchQuery;
 import com.terracota.infrastructure.api.CustomerAPI;
-import com.terracota.infrastructure.api.UpdateCustomerRequest;
+import com.terracota.infrastructure.user.customer.models.UpdateCustomerRequest;
 import com.terracota.infrastructure.user.customer.models.CreateCustomerRequest;
 import com.terracota.infrastructure.user.customer.models.CustomerResponse;
 import com.terracota.infrastructure.user.customer.models.ListCustomerResponse;
@@ -59,7 +59,7 @@ public class CustomerController implements CustomerAPI {
         );
         CreateCustomerOutput output = this.createCustomerUseCase.execute(aCommand);
 
-        return ResponseEntity.created(URI.create("/customers" + output.id())).body(output);
+        return ResponseEntity.created(URI.create("/customers/" + output.id())).body(output);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class CustomerController implements CustomerAPI {
             final String sort,
             final String dir
     ) {
-        return this.listCustomerUseCase.execute(new SearchQuery(page, perPage, sort, sort, dir))
+        return this.listCustomerUseCase.execute(new SearchQuery(page, perPage, search, sort, dir))
                 .map(CustomerPresenter::present);
     }
 

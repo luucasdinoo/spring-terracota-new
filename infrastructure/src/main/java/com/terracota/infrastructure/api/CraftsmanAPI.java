@@ -1,9 +1,10 @@
 package com.terracota.infrastructure.api;
 
 import com.terracota.domain.pagination.Pagination;
-import com.terracota.infrastructure.user.customer.models.CreateCustomerRequest;
-import com.terracota.infrastructure.user.customer.models.CustomerResponse;
-import com.terracota.infrastructure.user.customer.models.ListCustomerResponse;
+import com.terracota.infrastructure.user.craftsman.models.CraftsmanResponse;
+import com.terracota.infrastructure.user.craftsman.models.CreateCraftsmanRequest;
+import com.terracota.infrastructure.user.craftsman.models.ListCraftsmenResponse;
+import com.terracota.infrastructure.user.craftsman.models.UpdateCraftsmanRequest;
 import com.terracota.infrastructure.user.customer.models.UpdateCustomerRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -14,23 +15,23 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("customers")
-@Tag(name = "Customer")
-public interface CustomerAPI {
+@RequestMapping("craftsmen")
+@Tag(name = "Craftsman")
+public interface CraftsmanAPI {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Create new customer")
+    @Operation(summary = "Create new craftsman")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Customer created successfully")
+            @ApiResponse(responseCode = "201", description = "Craftsman created successfully")
     })
-    ResponseEntity<?> create(@RequestBody CreateCustomerRequest request);
+    ResponseEntity<?> create(@RequestBody CreateCraftsmanRequest request);
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "List customers")
+    @Operation(summary = "List craftsmen")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Customer listed successfully")
+            @ApiResponse(responseCode = "200", description = "Craftsmen listed successfully")
     })
-    Pagination<ListCustomerResponse> list(
+    Pagination<ListCraftsmenResponse> list(
             @RequestParam(name = "search", required = false, defaultValue = "") final String search,
             @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
             @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
@@ -39,17 +40,17 @@ public interface CustomerAPI {
     );
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Retrieve customer by id")
+    @Operation(summary = "Retrieve craftsman by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Customer retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Craftsman retrieved successfully")
     })
-    CustomerResponse getById(@PathVariable String id);
+    CraftsmanResponse getById(@PathVariable String id);
 
     @DeleteMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Delete customer by id")
+    @Operation(summary = "Delete craftsman by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Customer deleted successfully")
+            @ApiResponse(responseCode = "204", description = "Craftsman deleted successfully")
     })
     void deleteById(@PathVariable String id);
 
@@ -58,9 +59,9 @@ public interface CustomerAPI {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @Operation(summary = "Update customer by id")
+    @Operation(summary = "Craftsman customer by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Customer updated successfully")
+            @ApiResponse(responseCode = "200", description = "Craftsman updated successfully")
     })
-    ResponseEntity<?> updateById(@PathVariable String id, @RequestBody UpdateCustomerRequest request);
+    ResponseEntity<?> updateById(@PathVariable String id, @RequestBody UpdateCraftsmanRequest request);
 }

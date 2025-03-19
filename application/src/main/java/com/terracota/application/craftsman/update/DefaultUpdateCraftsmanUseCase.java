@@ -1,7 +1,5 @@
 package com.terracota.application.craftsman.update;
 
-import com.terracota.application.customer.update.UpdateCustomerCommand;
-import com.terracota.application.customer.update.UpdateCustomerOutput;
 import com.terracota.domain.exceptions.EntityNotFoundException;
 import com.terracota.domain.user.craftsman.Craftsman;
 import com.terracota.domain.user.craftsman.CraftsmanGateway;
@@ -18,7 +16,7 @@ public class DefaultUpdateCraftsmanUseCase extends UpdateCraftsmanUseCase{
     }
 
     @Override
-    public UpdateCustomerOutput execute(final UpdateCustomerCommand input) {
+    public UpdateCraftsmanOutput execute(final UpdateCraftsmanCommand input) {
         CraftsmanID anId = CraftsmanID.from(input.id());
         Craftsman craftsman = this.craftsmanGateway.findById(anId)
                 .orElseThrow(() -> EntityNotFoundException.with(Craftsman.class, anId));
