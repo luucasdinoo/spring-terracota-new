@@ -1,7 +1,7 @@
 package com.terracota.application.customer.retrieve.get;
 
-import com.terracota.domain.user.customer.Customer;
 import com.terracota.domain.user.Address;
+import com.terracota.domain.user.customer.Customer;
 
 import java.time.Instant;
 

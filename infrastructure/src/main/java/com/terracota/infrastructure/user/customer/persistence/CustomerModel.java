@@ -1,8 +1,8 @@
 package com.terracota.infrastructure.user.customer.persistence;
 
+import com.terracota.domain.user.CPF;
 import com.terracota.domain.user.customer.Customer;
 import com.terracota.domain.user.customer.CustomerID;
-import com.terracota.domain.user.CPF;
 import com.terracota.infrastructure.user.AddressEmbedded;
 import com.terracota.infrastructure.user.ImagePhotoModel;
 import com.terracota.infrastructure.user.UserEmbedded;

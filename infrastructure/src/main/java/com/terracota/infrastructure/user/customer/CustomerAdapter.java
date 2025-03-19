@@ -1,11 +1,11 @@
 package com.terracota.infrastructure.user.customer;
 
-import com.terracota.domain.user.customer.Customer;
-import com.terracota.domain.user.customer.CustomerGateway;
-import com.terracota.domain.user.customer.CustomerID;
 import com.terracota.domain.exceptions.EntityNotFoundException;
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.domain.pagination.SearchQuery;
+import com.terracota.domain.user.customer.Customer;
+import com.terracota.domain.user.customer.CustomerGateway;
+import com.terracota.domain.user.customer.CustomerID;
 import com.terracota.infrastructure.user.customer.persistence.CustomerModel;
 import com.terracota.infrastructure.user.customer.persistence.CustomerRepository;
 import org.springframework.data.domain.Page;

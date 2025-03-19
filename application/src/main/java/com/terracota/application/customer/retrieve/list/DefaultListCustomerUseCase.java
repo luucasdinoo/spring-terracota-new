@@ -1,8 +1,8 @@
 package com.terracota.application.customer.retrieve.list;
 
-import com.terracota.domain.user.customer.CustomerGateway;
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.domain.pagination.SearchQuery;
+import com.terracota.domain.user.customer.CustomerGateway;
 
 import java.util.Objects;
 

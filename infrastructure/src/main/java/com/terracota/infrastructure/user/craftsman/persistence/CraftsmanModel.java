@@ -3,9 +3,9 @@ package com.terracota.infrastructure.user.craftsman.persistence;
 import com.terracota.domain.user.CPF;
 import com.terracota.domain.user.craftsman.Craftsman;
 import com.terracota.domain.user.craftsman.CraftsmanID;
-import com.terracota.infrastructure.user.UserEmbedded;
 import com.terracota.infrastructure.user.AddressEmbedded;
 import com.terracota.infrastructure.user.ImagePhotoModel;
+import com.terracota.infrastructure.user.UserEmbedded;
 import jakarta.persistence.*;
 
 import java.time.Instant;

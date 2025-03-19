@@ -1,4 +1,4 @@
-package com.terracota.infrastructure.config;
+package com.terracota.infrastructure.config.usecase;
 
 import com.terracota.application.customer.create.CreateCustomerUseCase;
 import com.terracota.application.customer.create.DefaultCreateCustomerUseCase;

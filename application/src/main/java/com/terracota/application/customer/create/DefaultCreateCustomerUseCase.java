@@ -1,10 +1,10 @@
 package com.terracota.application.customer.create;
 
-import com.terracota.domain.user.customer.Customer;
-import com.terracota.domain.user.customer.CustomerGateway;
 import com.terracota.domain.exceptions.DomainException;
 import com.terracota.domain.user.CPF;
 import com.terracota.domain.user.Role;
+import com.terracota.domain.user.customer.Customer;
+import com.terracota.domain.user.customer.CustomerGateway;
 
 import java.util.Objects;
 

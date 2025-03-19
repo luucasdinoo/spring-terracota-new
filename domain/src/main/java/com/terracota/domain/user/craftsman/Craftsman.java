@@ -50,7 +50,7 @@ public class Craftsman extends AggregateRoot<CraftsmanID> {
         this.updatedAt = updatedAt;
     }
 
-    private Craftsman newCraftsman(
+    public static Craftsman newCraftsman(
             final String email,
             final String password,
             final Role role,

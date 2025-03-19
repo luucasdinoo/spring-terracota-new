@@ -1,9 +1,9 @@
 package com.terracota.application.customer.retrieve.get;
 
+import com.terracota.domain.exceptions.EntityNotFoundException;
 import com.terracota.domain.user.customer.Customer;
 import com.terracota.domain.user.customer.CustomerGateway;
 import com.terracota.domain.user.customer.CustomerID;
-import com.terracota.domain.exceptions.EntityNotFoundException;
 
 import java.util.Objects;
 
