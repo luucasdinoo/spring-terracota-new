@@ -44,14 +44,14 @@ public class AddressEmbedded {
     }
 
 
-    public static AddressEmbedded from(Address address) {
+    public static AddressEmbedded from(final Address address) {
         return new AddressEmbedded(
-                address.addressStreet(),
-                address.addressNumber(),
-                address.addressNeighborhood(),
-                address.addressCity(),
-                address.addressState(),
-                address.addressZipCode()
+                address.getAddressStreet(),
+                address.getAddressNumber(),
+                address.getAddressNeighborhood(),
+                address.getAddressCity(),
+                address.getAddressState(),
+                address.getAddressZipCode()
         );
     }
 

@@ -17,11 +17,13 @@ import com.terracota.infrastructure.user.craftsman.models.CreateCraftsmanRequest
 import com.terracota.infrastructure.user.craftsman.models.ListCraftsmenResponse;
 import com.terracota.infrastructure.user.craftsman.models.UpdateCraftsmanRequest;
 import com.terracota.infrastructure.user.craftsman.presenter.CraftsmanPresenter;
+import com.terracota.infrastructure.user.customer.models.AddressRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 public class CraftsmanController implements CraftsmanAPI {
@@ -56,7 +58,9 @@ public class CraftsmanController implements CraftsmanAPI {
                 request.phone(),
                 request.isActive(),
                 request.cpf(),
-                request.address().toDomain()
+                Optional.ofNullable(request.address())
+                        .map(AddressRequest::toDomain)
+                        .orElse(null)
         );
         CreateCraftsmanOutput output = this.createCraftsmanUseCase.execute(aCmd);
 
@@ -64,7 +68,13 @@ public class CraftsmanController implements CraftsmanAPI {
     }
 
     @Override
-    public Pagination<ListCraftsmenResponse> list(String search, int page, int perPage, String sort, String dir) {
+    public Pagination<ListCraftsmenResponse> list(
+            final String search,
+            final int page,
+            final int perPage,
+            final String sort,
+            final String dir
+    ) {
         return this.listCraftsmenUseCase.execute(new SearchQuery(page, perPage, search, sort, dir))
                 .map(CraftsmanPresenter::present);
     }

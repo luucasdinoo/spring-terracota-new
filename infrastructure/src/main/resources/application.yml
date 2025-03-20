@@ -2,15 +2,17 @@ spring:
   profiles:
     active: development
   datasource:
-    url: jdbc:postgresql://${postgres.url}/${postgres.schema} #TODO
+    url: jdbc:postgresql://${postgres.url}/${postgres.schema}
     username: ${postgres.username}
     password: ${postgres.password}
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     open-in-view: false
     show-sql: true
     hibernate:
       ddl-auto: none
+    driver-class-name: org.postgresql.Driver
 
 server:
   port: 8080

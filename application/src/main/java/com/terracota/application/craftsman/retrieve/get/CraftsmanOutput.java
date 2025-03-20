@@ -29,7 +29,9 @@ public record CraftsmanOutput(
                 craftsman.getCpf().getValue(),
                 craftsman.isActive(),
                 null,
-                null,
+                craftsman.getAddress()
+                        .map(Address::with)
+                        .orElse(null),
                 craftsman.getCreatedAt(),
                 craftsman.getUpdatedAt()
         );

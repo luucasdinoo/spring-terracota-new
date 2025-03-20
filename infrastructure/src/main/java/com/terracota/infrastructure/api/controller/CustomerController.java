@@ -12,16 +12,14 @@ import com.terracota.application.customer.update.UpdateCustomerUseCase;
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.domain.pagination.SearchQuery;
 import com.terracota.infrastructure.api.CustomerAPI;
-import com.terracota.infrastructure.user.customer.models.UpdateCustomerRequest;
-import com.terracota.infrastructure.user.customer.models.CreateCustomerRequest;
-import com.terracota.infrastructure.user.customer.models.CustomerResponse;
-import com.terracota.infrastructure.user.customer.models.ListCustomerResponse;
+import com.terracota.infrastructure.user.customer.models.*;
 import com.terracota.infrastructure.user.customer.presenter.CustomerPresenter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 public class CustomerController implements CustomerAPI {
@@ -55,7 +53,9 @@ public class CustomerController implements CustomerAPI {
                 request.phone(),
                 request.isActive(),
                 request.cpf(),
-                request.address().toDomain()
+                Optional.ofNullable(request.address())
+                        .map(AddressRequest::toDomain)
+                        .orElse(null)
         );
         CreateCustomerOutput output = this.createCustomerUseCase.execute(aCommand);
 

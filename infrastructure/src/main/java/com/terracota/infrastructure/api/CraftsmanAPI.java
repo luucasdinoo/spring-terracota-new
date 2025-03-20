@@ -5,7 +5,6 @@ import com.terracota.infrastructure.user.craftsman.models.CraftsmanResponse;
 import com.terracota.infrastructure.user.craftsman.models.CreateCraftsmanRequest;
 import com.terracota.infrastructure.user.craftsman.models.ListCraftsmenResponse;
 import com.terracota.infrastructure.user.craftsman.models.UpdateCraftsmanRequest;
-import com.terracota.infrastructure.user.customer.models.UpdateCustomerRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

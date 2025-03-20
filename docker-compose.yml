@@ -2,6 +2,7 @@ version: '4.33.1'
 
 services:
   postgres:
+    restart: always
     container_name: terracota_db
     image: bitnami/postgresql
     ports:

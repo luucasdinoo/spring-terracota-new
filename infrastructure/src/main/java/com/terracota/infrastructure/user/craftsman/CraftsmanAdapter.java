@@ -53,7 +53,7 @@ public class CraftsmanAdapter implements CraftsmanGateway {
     public Pagination<Craftsman> findAll(final SearchQuery aQuery) {
         PageRequest page = PageRequest.of(
                 aQuery.page(),
-                aQuery.page(),
+                aQuery.perPage(),
                 Sort.by(Sort.Direction.fromString(aQuery.direction()), aQuery.sort())
         );
 

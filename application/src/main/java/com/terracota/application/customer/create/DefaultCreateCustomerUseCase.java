@@ -28,7 +28,9 @@ public class DefaultCreateCustomerUseCase extends CreateCustomerUseCase{
                 input.name(),
                 input.phone(),
                 CPF.from(input.cpf()),
-                input.isActive());
+                input.isActive(),
+                input.address()
+        );
 
         return CreateCustomerOutput.from(this.customerGateway.create(aCustomer));
     }

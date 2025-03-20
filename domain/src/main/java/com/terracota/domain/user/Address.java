@@ -38,27 +38,38 @@ public class Address extends ValueObject {
         return new Address(addressStreet, addressNumber, addressNeighborhood, addressCity, addressState, addressZipCode);
     }
 
-    public String addressStreet() {
+    public static Address with(final Address address) {
+        return new Address(
+                address.getAddressStreet(),
+                address.getAddressNumber(),
+                address.getAddressNeighborhood(),
+                address.getAddressCity(),
+                address.getAddressState(),
+                address.getAddressZipCode()
+        );
+    }
+
+    public String getAddressStreet() {
         return addressStreet;
     }
 
-    public String addressNumber() {
+    public String getAddressNumber() {
         return addressNumber;
     }
 
-    public String addressNeighborhood() {
+    public String getAddressNeighborhood() {
         return addressNeighborhood;
     }
 
-    public String addressCity() {
+    public String getAddressCity() {
         return addressCity;
     }
 
-    public String addressState() {
+    public String getAddressState() {
         return addressState;
     }
 
-    public String addressZipCode() {
+    public String getAddressZipCode() {
         return addressZipCode;
     }
 }

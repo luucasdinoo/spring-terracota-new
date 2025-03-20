@@ -1,5 +1,5 @@
 postgres:
   username: docker
-  password: docker123
-  schema: terracota_db_dev
+  password: docker
+  schema: terracote_db_dev
   url: localhost:5432

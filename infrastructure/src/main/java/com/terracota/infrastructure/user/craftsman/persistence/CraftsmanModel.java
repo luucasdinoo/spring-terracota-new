@@ -9,6 +9,7 @@ import com.terracota.infrastructure.user.UserEmbedded;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.Optional;
 
 @Entity(name = "Craftsman")
 @Table(name = "craftsmen")
@@ -98,8 +99,12 @@ public class CraftsmanModel {
                 getPhone(),
                 CPF.from(getCpf()),
                 isActive(),
-                getPhoto().toDomain(),
-                getAddress().toDomain(),
+                Optional.ofNullable(getPhoto())
+                        .map(ImagePhotoModel::toDomain)
+                        .orElse(null),
+                Optional.ofNullable(getAddress())
+                        .map(AddressEmbedded::toDomain)
+                        .orElse(null),
                 getCreatedAt(),
                 getUpdatedAt()
         );

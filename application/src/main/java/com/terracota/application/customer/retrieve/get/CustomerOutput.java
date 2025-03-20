@@ -29,7 +29,9 @@ public record CustomerOutput(
                 customer.getCpf().getValue(),
                 customer.isActive(),
                 null,
-                null,
+                customer.getAddress()
+                        .map(Address::with)
+                        .orElse(null),
                 customer.getCreatedAt(),
                 customer.getUpdatedAt()
         );
