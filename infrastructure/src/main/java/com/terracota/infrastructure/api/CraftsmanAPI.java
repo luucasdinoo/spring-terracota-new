@@ -49,7 +49,7 @@ public interface CraftsmanAPI {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete craftsman by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Craftsman deleted successfully")
+            @ApiResponse(responseCode = "204", description = "Craftsman deleted")
     })
     void deleteById(@PathVariable String id);
 
@@ -58,7 +58,7 @@ public interface CraftsmanAPI {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @Operation(summary = "Craftsman customer by id")
+    @Operation(summary = "Craftsman customer by identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Craftsman updated successfully")
     })

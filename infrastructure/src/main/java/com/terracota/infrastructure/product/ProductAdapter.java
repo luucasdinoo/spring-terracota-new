@@ -10,6 +10,10 @@ import com.terracota.domain.user.craftsman.Craftsman;
 import com.terracota.domain.user.craftsman.CraftsmanID;
 import com.terracota.infrastructure.product.persistence.ProductModel;
 import com.terracota.infrastructure.product.persistence.ProductRepository;
+import com.terracota.infrastructure.user.craftsman.persistence.CraftsmanModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -37,8 +41,21 @@ public class ProductAdapter implements ProductGateway {
 
     @Override
     public Pagination<Product> listByCraftsman(final Craftsman craftsman, final SearchQuery aQuery) {
-        // TODO
-        return null;
+        PageRequest page = PageRequest.of(
+                aQuery.page(),
+                aQuery.perPage(),
+                Sort.by(Sort.Direction.fromString(aQuery.direction()), aQuery.sort())
+        );
+
+        CraftsmanModel craftsmanModel = CraftsmanModel.from(craftsman);
+        Page<ProductModel> pageResult = this.productRepository.findProductsByCraftsman(craftsmanModel, page);
+
+        return new Pagination<>(
+            pageResult.getNumber(),
+            pageResult.getSize(),
+            pageResult.getTotalElements(),
+            pageResult.map(ProductModel::toDomain).toList()
+        );
     }
 
     @Override

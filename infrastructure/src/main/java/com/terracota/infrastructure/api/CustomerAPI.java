@@ -39,7 +39,7 @@ public interface CustomerAPI {
     );
 
     @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Retrieve customer by id")
+    @Operation(summary = "Retrieve customer by identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Customer retrieved successfully")
     })
@@ -49,7 +49,7 @@ public interface CustomerAPI {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete customer by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Customer deleted successfully")
+            @ApiResponse(responseCode = "204", description = "Customer deleted")
     })
     void deleteById(@PathVariable String id);
 
@@ -58,7 +58,7 @@ public interface CustomerAPI {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @Operation(summary = "Update customer by id")
+    @Operation(summary = "Update customer by identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Customer updated successfully")
     })
