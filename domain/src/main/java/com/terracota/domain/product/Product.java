@@ -73,6 +73,14 @@ public class Product extends AggregateRoot<ProductID> {
         return new Product(anId, name, description, price, type, photo, craftsman, createdAt, updatedAt);
     }
 
+    public Product update(final String name, final String description, final BigDecimal price){
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.updatedAt = Instant.now();
+        return this;
+    }
+
     public String getName() {
         return name;
     }

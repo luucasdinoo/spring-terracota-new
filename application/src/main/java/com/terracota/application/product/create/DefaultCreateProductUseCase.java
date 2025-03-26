@@ -15,7 +15,6 @@ import java.util.Objects;
 public class DefaultCreateProductUseCase extends CreateProductUseCase{
 
     private final ProductGateway productGateway;
-
     private final CraftsmanGateway craftsmanGateway;
 
     public DefaultCreateProductUseCase(
@@ -32,7 +31,7 @@ public class DefaultCreateProductUseCase extends CreateProductUseCase{
                 .orElseThrow(() -> DomainException.with("Invalid product type"));
 
         CraftsmanID anId = CraftsmanID.from(input.craftsmanId());
-        Craftsman craftsman = craftsmanGateway.findById(anId)
+        Craftsman craftsman = this.craftsmanGateway.findById(anId)
                 .orElseThrow(() -> EntityNotFoundException.with(Craftsman.class, anId));
 
         Product product = Product.newProduct(
@@ -43,6 +42,6 @@ public class DefaultCreateProductUseCase extends CreateProductUseCase{
                 null,
                 craftsman
         );
-        return CreateProductOutput.from(productGateway.create(product));
+        return CreateProductOutput.from(this.productGateway.create(product));
     }
 }

@@ -1,0 +1,31 @@
+package com.terracota.application.product.retrieve.get;
+
+import com.terracota.domain.product.Product;
+
+import java.time.Instant;
+
+public record ProductOutput(
+        String id,
+        String name,
+        String description,
+        double price,
+        String type,
+        String photo,
+        String craftsmanId,
+        Instant createdAt,
+        Instant updatedAt
+) {
+    public static ProductOutput from(final Product product){
+        return new ProductOutput(
+                product.getId().getValue(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice().doubleValue(),
+                product.getType().name(),
+                null,
+                product.getCraftsman().getId().getValue(),
+                product.getCreatedAt(),
+                product.getUpdatedAt()
+        );
+    }
+}
