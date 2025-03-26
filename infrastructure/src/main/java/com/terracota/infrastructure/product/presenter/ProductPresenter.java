@@ -2,6 +2,7 @@ package com.terracota.infrastructure.product.presenter;
 
 import com.terracota.application.product.retrieve.get.ProductOutput;
 import com.terracota.domain.product.ProductType;
+import com.terracota.infrastructure.product.models.ListProductResponse;
 import com.terracota.infrastructure.product.models.ProductResponse;
 
 public interface ProductPresenter {
@@ -17,6 +18,17 @@ public interface ProductPresenter {
                 output.craftsmanId(),
                 output.createdAt(),
                 output.createdAt()
+        );
+    }
+
+    static ListProductResponse presentList(final ProductOutput output){
+        return new ListProductResponse(
+                output.id(),
+                output.name(),
+                output.description(),
+                output.price(),
+                output.photo(),
+                output.craftsmanId()
         );
     }
 }

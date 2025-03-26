@@ -1,9 +1,11 @@
 package com.terracota.infrastructure.api;
 
+import com.terracota.domain.pagination.Pagination;
 import com.terracota.infrastructure.product.models.CreateProductRequest;
+import com.terracota.infrastructure.product.models.ListProductResponse;
 import com.terracota.infrastructure.product.models.ProductResponse;
 import com.terracota.infrastructure.product.models.UpdateProductRequest;
-import com.terracota.infrastructure.user.customer.models.UpdateCustomerRequest;
+import com.terracota.infrastructure.user.customer.models.ListCustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -51,5 +53,20 @@ public interface ProductAPI {
     ResponseEntity<?> updateById(
             @PathVariable String productId,
             @PathVariable String craftsmanId,
-            @RequestBody UpdateProductRequest request);
+            @RequestBody UpdateProductRequest request
+    );
+
+    @GetMapping(value = "craftsmen/{craftsmanId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "List products")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product listed successfully")
+    })
+    Pagination<ListProductResponse> list(
+            @PathVariable(name = "craftsmanId") final String craftsmanId,
+            @RequestParam(name = "search", required = false, defaultValue = "") final String search,
+            @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
+            @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
+            @RequestParam(name = "sort", required = false, defaultValue = "name") final String sort,
+            @RequestParam(name = "dir", required = false, defaultValue = "asc") final String dir
+    );
 }

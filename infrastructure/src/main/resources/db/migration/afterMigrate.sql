@@ -1,8 +1,12 @@
 DELETE FROM customers_image;
 
+DELETE FROM products_image;
+
 DELETE FROM customers;
 
 DELETE FROM craftsmen;
+
+DELETE FROM products;
 
 INSERT INTO customers (id, email, password, role, name, phone, cpf, active, photo_id, address_street, address_number, address_neighborhood, address_city, address_state, address_zip_code, created_at, updated_at)
     VALUES
@@ -48,3 +52,25 @@ INSERT INTO craftsmen (id, email, password, role, name, phone, cpf, active, phot
         ('32d0706a6cdb4694a9e3d7c94482f3c3', 'carolina.pereira@email.com', 'senha6780', 'CRAFTSMAN', 'Carolina Pereira', '31970098765', '66778899002', TRUE, NULL, 'Rua Q', '345', 'São Lucas', 'Belo Horizonte', 'MG', '30139-012', NOW(), NOW()),
         ('2bcb98309e0a4e72a9371f245d72a300', 'felipe.alves@email.com', 'senha0124', 'CRAFTSMAN', 'Felipe Alves', '31968987654', '77889900113', TRUE, NULL, 'Rua R', '456', 'Caiçara', 'Belo Horizonte', 'MG', '30140-123', NOW(), NOW()),
         ('34652d32cd634e7b9c7bb32192a62f8b', 'raquel.lima@email.com', 'senha3458', 'CRAFTSMAN', 'Raquel Lima', '31967876543', '88990011224', TRUE, NULL, 'Rua S', '567', 'Caratateua', 'Belo Horizonte', 'MG', '30141-234', NOW(), NOW());
+
+INSERT INTO products (id, name, description, price, type, photo_id, craftsman_id, created_at, updated_at)
+    VALUES
+        ('8c9f7d1e2a3b4c5d8e9f0a1b2c3d4e5f', 'Colar Artesanal de Prata', 'Colar feito à mão com prata pura.', 150.00, 'HANDMADE_JEWELRY', NULL, '4acb12cd53cf45a3a3d8ad6db2f801ef', NOW(), NOW()),
+        ('b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6', 'Escultura de Madeira', 'Peça única esculpida em madeira nobre.', 300.00, 'SCULPTURE', NULL, '0c62a9f6b5754cb18e5d2edc84b75f99', NOW(), NOW()),
+        ('d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0', 'Vaso de Cerâmica', 'Vaso artesanal pintado à mão.', 90.00, 'CERAMICS', NULL, 'f263ad51a1c9476db1c5ea9b413e3b4b', NOW(), NOW()),
+        ('a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4', 'Quadro Abstrato', 'Pintura vibrante em tela.', 450.00, 'PAINTING', NULL, '4acb12cd53cf45a3a3d8ad6db2f801ef', NOW(), NOW()),
+        ('c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0', 'Carteira de Couro', 'Feita à mão com couro legítimo.', 120.00, 'LEATHER_CRAFT', NULL, '0c62a9f6b5754cb18e5d2edc84b75f99', NOW(), NOW()),
+        ('e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6', 'Brinquedo de Madeira', 'Carrinho artesanal ecológico.', 80.00, 'HANDMADE_TOYS', NULL, 'f263ad51a1c9476db1c5ea9b413e3b4b', NOW(), NOW()),
+        ('d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8', 'Pote de Vidro Decorado', 'Vidro soprado com detalhes pintados.', 110.00, 'GLASS_ART', NULL, '4acb12cd53cf45a3a3d8ad6db2f801ef', NOW(), NOW()),
+        ('b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2', 'Caderno Artesanal', 'Feito com papel reciclado.', 50.00, 'PAPER_CRAFT', NULL, '0c62a9f6b5754cb18e5d2edc84b75f99', NOW(), NOW()),
+        ('e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4', 'Tapete de Crochê', 'Feito à mão com fios de algodão.', 200.00, 'CROCHET_KNITTING', NULL, 'f263ad51a1c9476db1c5ea9b413e3b4b', NOW(), NOW()),
+        ('c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6', 'Escultura de Metal', 'Peça moderna feita com aço.', 500.00, 'METAL_ART', NULL, '4acb12cd53cf45a3a3d8ad6db2f801ef', NOW(), NOW()),
+        ('a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8', 'Caixa de Madeira', 'Feita à mão com entalhes detalhados.', 140.00, 'WOODWORK', NULL, '0c62a9f6b5754cb18e5d2edc84b75f99', NOW(), NOW()),
+        ('e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0', 'Bijuteria de Resina', 'Colar feito com resina colorida.', 95.00, 'RESIN_ART', NULL, 'f263ad51a1c9476db1c5ea9b413e3b4b', NOW(), NOW()),
+        ('f4d3b2a1c0e9f8a7b6d5e4c3b2a1d0e9', 'Porta-copos Sustentável', 'Feito com materiais reciclados.', 35.00, 'ECO_FRIENDLY_PRODUCTS', NULL, '4acb12cd53cf45a3a3d8ad6db2f801ef', NOW(), NOW()),
+        ('b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7', 'Bolsa de Tecido Artesanal', 'Bolsa feita com tecidos reciclados.', 180.00, 'TEXTILE_ART', NULL, '0c62a9f6b5754cb18e5d2edc84b75f99', NOW(), NOW()),
+        ('a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6', 'Relógio de Madeira', 'Relógio feito à mão.', 250.00, 'WOODWORK', NULL, 'f263ad51a1c9476db1c5ea9b413e3b4b', NOW(), NOW()),
+        ('f9e8d7c6b5a4d3e2f1a0b9c8d7e6f5a4', 'Cesta de Palha', 'Trançada à mão.', 75.00, 'ECO_FRIENDLY_PRODUCTS', NULL, '4acb12cd53cf45a3a3d8ad6db2f801ef', NOW(), NOW()),
+        ('e7d6c5b4a3d2f1e0b9c8d7e6f5a4b3c2', 'Espelho com Moldura Artesanal', 'Feito com madeira sustentável.', 320.00, 'WOODWORK', NULL, '0c62a9f6b5754cb18e5d2edc84b75f99', NOW(), NOW()),
+        ('c3b2a1d0e9f8a7b6d5e4c3b2a1d0e9f8', 'Escultura de Resina', 'Obra moderna feita à mão.', 400.00, 'RESIN_ART', NULL, 'f263ad51a1c9476db1c5ea9b413e3b4b', NOW(), NOW()),
+        ('d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7', 'Pintura em Aquarela', 'Paisagem natural pintada à mão.', 280.00, 'PAINTING', NULL, '4acb12cd53cf45a3a3d8ad6db2f801ef', NOW(), NOW());

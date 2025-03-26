@@ -6,11 +6,17 @@ import com.terracota.application.product.create.CreateProductUseCase;
 import com.terracota.application.product.delete.DeleteProductUseCase;
 import com.terracota.application.product.retrieve.get.GetProductByIdUseCase;
 import com.terracota.application.product.retrieve.get.GetProductCommand;
+import com.terracota.application.product.retrieve.get.ProductOutput;
+import com.terracota.application.product.retrieve.list.ListByCraftsmanCommand;
+import com.terracota.application.product.retrieve.list.ListByCraftsmanUseCase;
 import com.terracota.application.product.update.UpdateProductCommand;
 import com.terracota.application.product.update.UpdateProductOutput;
 import com.terracota.application.product.update.UpdateProductUseCase;
+import com.terracota.domain.pagination.Pagination;
+import com.terracota.domain.pagination.SearchQuery;
 import com.terracota.infrastructure.api.ProductAPI;
 import com.terracota.infrastructure.product.models.CreateProductRequest;
+import com.terracota.infrastructure.product.models.ListProductResponse;
 import com.terracota.infrastructure.product.models.ProductResponse;
 import com.terracota.infrastructure.product.models.UpdateProductRequest;
 import com.terracota.infrastructure.product.presenter.ProductPresenter;
@@ -27,17 +33,20 @@ public class ProductController implements ProductAPI {
     private final GetProductByIdUseCase getProductByIdUseCase;
     private final DeleteProductUseCase deleteProductUseCase;
     private final UpdateProductUseCase updateProductUseCase;
+    private final ListByCraftsmanUseCase listByCraftsmanUseCase;
 
     public ProductController(
             final CreateProductUseCase createProductUseCase,
             final GetProductByIdUseCase getProductByIdUseCase,
             final DeleteProductUseCase deleteProductUseCase,
-            final UpdateProductUseCase updateProductUseCase
+            final UpdateProductUseCase updateProductUseCase,
+            final ListByCraftsmanUseCase listByCraftsmanUseCase
     ) {
         this.createProductUseCase = Objects.requireNonNull(createProductUseCase);
         this.getProductByIdUseCase = Objects.requireNonNull(getProductByIdUseCase);
         this.deleteProductUseCase = Objects.requireNonNull(deleteProductUseCase);
         this.updateProductUseCase = Objects.requireNonNull(updateProductUseCase);
+        this.listByCraftsmanUseCase = Objects.requireNonNull(listByCraftsmanUseCase);
     }
 
     @Override
@@ -51,7 +60,7 @@ public class ProductController implements ProductAPI {
         );
 
         CreateProductOutput output = this.createProductUseCase.execute(aCmd);
-        return ResponseEntity.created(URI.create("/products/" + output.id())).body(output);
+        return ResponseEntity.created(URI.create("/products/" + output.productId())).body(output);
     }
 
     @Override
@@ -77,5 +86,23 @@ public class ProductController implements ProductAPI {
 
         UpdateProductOutput output = this.updateProductUseCase.execute(aCmd);
         return ResponseEntity.ok(output);
+    }
+
+    @Override
+    public Pagination<ListProductResponse> list(
+            final String craftsmanId,
+            final String search,
+            final int page,
+            final int perPage,
+            final String sort,
+            final String dir
+    ) {
+        ListByCraftsmanCommand aCmd = ListByCraftsmanCommand.with(
+                craftsmanId,
+                new SearchQuery(page, perPage, search, sort, dir)
+        );
+
+        return this.listByCraftsmanUseCase.execute(aCmd)
+                .map(ProductPresenter::presentList);
     }
 }
