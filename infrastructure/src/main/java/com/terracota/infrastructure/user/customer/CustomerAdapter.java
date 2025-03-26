@@ -50,7 +50,7 @@ public class CustomerAdapter implements CustomerGateway {
     }
 
     @Override
-    public Pagination<Customer> findAll(final SearchQuery aQuery) {
+    public Pagination<Customer> list(final SearchQuery aQuery) {
         PageRequest page = PageRequest.of(
                 aQuery.page(),
                 aQuery.perPage(),

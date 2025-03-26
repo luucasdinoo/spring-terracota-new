@@ -1,28 +1,26 @@
-package com.terracota.domain.user.customer;
+package com.terracota.domain.product;
 
 import com.terracota.domain.Identifier;
 import com.terracota.domain.utils.IdUtils;
 
 import java.util.Objects;
 
-public class CustomerID extends Identifier {
+public class ProductID extends Identifier {
 
     private final String value;
 
-    private CustomerID(final String value) {
+    private ProductID(final String value) {
         this.value = value;
     }
 
-    public static CustomerID unique(){
-        return new CustomerID(IdUtils.uuid());
+    public static ProductID unique(){
+        return new ProductID(IdUtils.uuid());
     }
 
-    public static CustomerID from(String anId){
-        return new CustomerID(anId);
+    public static ProductID from(final String anId){
+        return new ProductID(anId);
     }
 
-
-    @Override
     public String getValue() {
         return value;
     }
@@ -30,8 +28,8 @@ public class CustomerID extends Identifier {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        CustomerID that = (CustomerID) o;
-        return Objects.equals(getValue(), that.getValue());
+        ProductID productID = (ProductID) o;
+        return Objects.equals(getValue(), productID.getValue());
     }
 
     @Override

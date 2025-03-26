@@ -16,7 +16,7 @@ public class DefaultListCraftsmenUseCase extends ListCraftsmenUseCase{
 
     @Override
     public Pagination<ListCraftsmenOutput> execute(final SearchQuery aQuery) {
-        return this.craftsmanGateway.findAll(aQuery)
+        return this.craftsmanGateway.list(aQuery)
                 .map(ListCraftsmenOutput::from);
     }
 }

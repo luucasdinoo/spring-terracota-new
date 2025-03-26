@@ -15,6 +15,6 @@ public interface CustomerGateway {
 
     Customer update(Customer aCustomer);
 
-    Pagination<Customer> findAll(SearchQuery aQuery);
+    Pagination<Customer> list(SearchQuery aQuery);
 
 }

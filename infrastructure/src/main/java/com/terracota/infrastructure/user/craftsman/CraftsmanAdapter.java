@@ -50,7 +50,7 @@ public class CraftsmanAdapter implements CraftsmanGateway {
     }
 
     @Override
-    public Pagination<Craftsman> findAll(final SearchQuery aQuery) {
+    public Pagination<Craftsman> list(final SearchQuery aQuery) {
         PageRequest page = PageRequest.of(
                 aQuery.page(),
                 aQuery.perPage(),

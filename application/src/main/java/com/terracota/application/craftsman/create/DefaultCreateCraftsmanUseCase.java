@@ -31,6 +31,7 @@ public class DefaultCreateCraftsmanUseCase extends CreateCraftsmanUseCase{
                 input.phone(),
                 CPF.from(input.cpf()),
                 input.isActive(),
+                null,
                 input.address()
         );
         return CreateCraftsmanOutput.from(this.craftsmanGateway.create(craftsman));

@@ -29,6 +29,7 @@ public class DefaultCreateCustomerUseCase extends CreateCustomerUseCase{
                 input.phone(),
                 CPF.from(input.cpf()),
                 input.isActive(),
+                null,
                 input.address()
         );
 

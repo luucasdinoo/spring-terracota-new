@@ -16,7 +16,7 @@ public class DefaultListCustomerUseCase extends ListCustomerUseCase{
 
     @Override
     public Pagination<ListCustomerOutput> execute(final SearchQuery aQuery) {
-        return this.customerGateway.findAll(aQuery)
+        return this.customerGateway.list(aQuery)
                 .map(ListCustomerOutput::from);
     }
 }

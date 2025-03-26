@@ -15,6 +15,6 @@ public interface CraftsmanGateway {
 
     Craftsman update(Craftsman aCraftsman);
 
-    Pagination<Craftsman> findAll(SearchQuery aQuery);
+    Pagination<Craftsman> list(SearchQuery aQuery);
 
 }

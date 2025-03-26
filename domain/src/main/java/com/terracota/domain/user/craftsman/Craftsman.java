@@ -58,12 +58,13 @@ public class Craftsman extends AggregateRoot<CraftsmanID> {
             final String phone,
             final CPF cpf,
             final boolean isActive,
+            final ImagePhoto photo,
             final Address address
     ){
         final User user = User.newUser(email, password, role);
         final CraftsmanID anId = CraftsmanID.unique();
         final Instant now = Instant.now();
-        return new Craftsman(anId, user , name, phone, cpf, isActive,null, address, now, now);
+        return new Craftsman(anId, user , name, phone, cpf, isActive,photo, address, now, now);
     }
 
     public static Craftsman with(
