@@ -67,7 +67,7 @@ public class CustomerAdapter implements CustomerGateway {
         );
     }
 
-    private Customer save(Customer aCustomer) {
+    private Customer save(final Customer aCustomer) {
         return this.customerRepository.save(CustomerModel.from(aCustomer))
                 .toDomain();
     }

@@ -5,6 +5,7 @@ import com.terracota.domain.user.craftsman.Craftsman;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Optional;
 
 public class Product extends AggregateRoot<ProductID> {
 
@@ -97,8 +98,8 @@ public class Product extends AggregateRoot<ProductID> {
         return type;
     }
 
-    public ProductPhoto getPhoto() {
-        return photo;
+    public Optional<ProductPhoto> getPhoto() {
+        return Optional.ofNullable(photo);
     }
 
     public Craftsman getCraftsman() {
