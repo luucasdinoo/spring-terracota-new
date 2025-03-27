@@ -1,4 +1,4 @@
-package com.terracota.application.stock;
+package com.terracota.application.stock.movement;
 
 import com.terracota.application.UnitUseCase;
 

@@ -1,4 +1,4 @@
-package com.terracota.application.stock;
+package com.terracota.application.stock.movement;
 
 import com.terracota.domain.exceptions.EntityNotFoundException;
 import com.terracota.domain.product.Product;
@@ -34,7 +34,7 @@ public class DefaultAddRemoveItemUseCase extends AddRemoveItemUseCase {
         Product product = this.productGateway.findById(productId, stock.getCraftsman().getId())
                 .orElseThrow(() -> EntityNotFoundException.with(Product.class, productId));
 
-        StockItem stockItem = StockItem.with(
+        StockItem stockItem = StockItem.newItem(
                 input.quantity(),
                 product.getPrice(),
                 product,
