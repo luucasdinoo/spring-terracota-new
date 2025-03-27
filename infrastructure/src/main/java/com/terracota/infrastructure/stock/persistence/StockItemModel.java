@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity(name = "StockItem")
-@Table(name = "stock_item")
+@Table(name = "stocks_item")
 public class StockItemModel {
 
     @Id

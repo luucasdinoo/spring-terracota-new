@@ -8,6 +8,10 @@ DELETE FROM craftsmen;
 
 DELETE FROM products;
 
+DELETE FROM stocks;
+
+DELETE FROM stocks_item;
+
 INSERT INTO customers (id, email, password, role, name, phone, cpf, active, photo_id, address_street, address_number, address_neighborhood, address_city, address_state, address_zip_code, created_at, updated_at)
     VALUES
         ('c1a2b3d4e5f6g7h8i9j0k1l2m3n4o5p6', 'user1@example.com', 'hashedpassword1', 'CUSTOMER', 'Alice Silva', '11987654321', '12345678901', TRUE, NULL, 'Street 1', '123', 'Neighborhood A', 'City X', 'State Y', '12345678', NOW(), NOW()),
