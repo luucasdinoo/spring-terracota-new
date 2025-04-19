@@ -26,6 +26,9 @@ public class ProductModel {
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
+
     @Enumerated(EnumType.STRING)
     private ProductType type;
 
@@ -50,6 +53,7 @@ public class ProductModel {
         final String name,
         final String description,
         final BigDecimal price,
+        final int quantity,
         final ProductType type,
         final ProductPhotoModel photo,
         final CraftsmanModel craftsman,
@@ -60,6 +64,7 @@ public class ProductModel {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.quantity = quantity;
         this.type = type;
         this.photo = photo;
         this.craftsman = craftsman;
@@ -73,6 +78,7 @@ public class ProductModel {
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
+                product.getQuantity(),
                 product.getType(),
                 product.getPhoto()
                         .map(ProductPhotoModel::from)
@@ -89,6 +95,7 @@ public class ProductModel {
                 getName(),
                 getDescription(),
                 getPrice(),
+                getQuantity(),
                 getType(),
                 Optional.ofNullable(getPhoto())
                         .map(ProductPhotoModel::toDomain)
@@ -125,6 +132,14 @@ public class ProductModel {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void setPrice(BigDecimal price) {

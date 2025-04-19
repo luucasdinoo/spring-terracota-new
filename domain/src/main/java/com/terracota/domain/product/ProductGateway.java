@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ProductGateway {
 
-    Product create(Product product);
+    Product save(Product product);
 
     Optional<Product> findById(ProductID productId, CraftsmanID craftsmanId);
 

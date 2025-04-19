@@ -4,6 +4,10 @@ import com.terracota.application.product.create.CreateProductUseCase;
 import com.terracota.application.product.create.DefaultCreateProductUseCase;
 import com.terracota.application.product.delete.DefaultDeleteProductUseCase;
 import com.terracota.application.product.delete.DeleteProductUseCase;
+import com.terracota.application.product.management.add.AddProductUseCase;
+import com.terracota.application.product.management.add.DefaultAddProductUseCase;
+import com.terracota.application.product.management.remove.DefaultRemoveProductUseCase;
+import com.terracota.application.product.management.remove.RemoveProductUseCase;
 import com.terracota.application.product.retrieve.get.DefaultGetProductByIdUseCase;
 import com.terracota.application.product.retrieve.get.GetProductByIdUseCase;
 import com.terracota.application.product.retrieve.list.DefaultListByCraftsmanUseCase;
@@ -54,5 +58,15 @@ public class ProductUseCaseConfig {
     @Bean
     public DeleteProductUseCase deleteProductUseCase(){
         return new DefaultDeleteProductUseCase(productGateway);
+    }
+
+    @Bean
+    public AddProductUseCase addProductUseCase(){
+        return new DefaultAddProductUseCase(productGateway);
+    }
+
+    @Bean
+    public RemoveProductUseCase removeProductUseCase(){
+        return new DefaultRemoveProductUseCase(productGateway);
     }
 }

@@ -4,6 +4,7 @@ public record CreateProductCommand(
         String name,
         String description,
         double price,
+        int quantity,
         String type,
         String craftsmanId
 ) {
@@ -11,9 +12,10 @@ public record CreateProductCommand(
             final String name,
             final String description,
             final double price,
+            final int quantity,
             final String type,
             final String craftsmanId
     ){
-        return new CreateProductCommand(name, description, price, type, craftsmanId);
+        return new CreateProductCommand(name, description, price, quantity, type, craftsmanId);
     }
 }

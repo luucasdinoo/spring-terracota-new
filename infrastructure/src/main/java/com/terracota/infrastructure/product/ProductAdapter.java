@@ -29,8 +29,9 @@ public class ProductAdapter implements ProductGateway {
     }
 
     @Override
-    public Product create(final Product product) {
-        return save(product);
+    public Product save(final Product product) {
+        return this.productRepository.save(ProductModel.from(product))
+                .toDomain();
     }
 
     @Override
@@ -69,10 +70,5 @@ public class ProductAdapter implements ProductGateway {
             throw EntityNotFoundException.with(Product.class, anId);
         }
         this.productRepository.deleteById(anId.getValue());
-    }
-
-    private Product save(final Product product) {
-        return this.productRepository.save(ProductModel.from(product))
-                .toDomain();
     }
 }

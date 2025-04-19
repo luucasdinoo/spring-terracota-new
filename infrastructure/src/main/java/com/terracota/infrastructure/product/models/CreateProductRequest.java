@@ -6,6 +6,7 @@ public record CreateProductRequest(
         String name,
         String description,
         Double price,
+        Integer quantity,
         String type,
         @JsonProperty("craftsman_id") String craftsmanId
 ) {

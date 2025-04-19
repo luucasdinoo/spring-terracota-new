@@ -10,6 +10,7 @@ public record ProductResponse(
         String name,
         String description,
         Double price,
+        Integer quantity,
         ProductType type,
         String photo,
         @JsonProperty("craftsman_id") String craftsmanId,

@@ -38,10 +38,11 @@ public class DefaultCreateProductUseCase extends CreateProductUseCase{
                 input.name(),
                 input.description(),
                 BigDecimal.valueOf(input.price()),
+                input.quantity(),
                 type,
                 null,
                 craftsman
         );
-        return CreateProductOutput.from(this.productGateway.create(product));
+        return CreateProductOutput.from(this.productGateway.save(product));
     }
 }

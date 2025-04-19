@@ -13,6 +13,7 @@ public interface ProductPresenter {
                 output.name(),
                 output.description(),
                 output.price(),
+                output.quantity(),
                 ProductType.valueOf(output.type()),
                 output.photo(),
                 output.craftsmanId(),
@@ -27,6 +28,7 @@ public interface ProductPresenter {
                 output.name(),
                 output.description(),
                 output.price(),
+                output.quantity(),
                 output.photo(),
                 output.craftsmanId()
         );

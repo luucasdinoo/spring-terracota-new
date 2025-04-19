@@ -5,7 +5,6 @@ import com.terracota.infrastructure.product.models.CreateProductRequest;
 import com.terracota.infrastructure.product.models.ListProductResponse;
 import com.terracota.infrastructure.product.models.ProductResponse;
 import com.terracota.infrastructure.product.models.UpdateProductRequest;
-import com.terracota.infrastructure.user.customer.models.ListCustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -68,5 +67,29 @@ public interface ProductAPI {
             @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
             @RequestParam(name = "sort", required = false, defaultValue = "name") final String sort,
             @RequestParam(name = "dir", required = false, defaultValue = "asc") final String dir
+    );
+
+    @PatchMapping("{productId}/craftsmen/{craftsmanId}/add")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Add product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Product added")
+    })
+    void addProduct(
+            @RequestParam(name = "qtd", required = false, defaultValue = "0") int qtd,
+            @PathVariable String productId,
+            @PathVariable String craftsmanId
+    );
+
+    @PatchMapping("{productId}/craftsmen/{craftsmanId}/remove")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Remove product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Product removed")
+    })
+    void removeProduct(
+            @RequestParam(name = "qtd", required = false, defaultValue = "0") int qtd,
+            @PathVariable String productId,
+            @PathVariable String craftsmanId
     );
 }
