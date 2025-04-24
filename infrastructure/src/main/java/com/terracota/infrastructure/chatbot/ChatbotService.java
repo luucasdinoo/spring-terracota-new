@@ -1,6 +1,8 @@
 package com.terracota.infrastructure.chatbot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.terracota.infrastructure.chatbot.models.ChatbotRequest;
+import com.terracota.infrastructure.chatbot.models.ChatbotResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class ChatbotService {
         this.objectMapper = Objects.requireNonNull(objectMapper);
     }
 
-    public String processMessage(final String prompt) throws Exception {
+    public ChatbotResponse processMessage(final ChatbotRequest request) throws Exception {
         // Monta o JSON como mapa
         Map<String, Object> data = Map.of(
                 "model", "deepseek/deepseek-chat:free",
@@ -35,7 +37,7 @@ public class ChatbotService {
                         ),
                         Map.of(
                                 "role", "user",
-                                "content", prompt
+                                "content", request.prompt()
                         )
                 ),
                 "max_tokens", 4000,
@@ -43,7 +45,7 @@ public class ChatbotService {
         );
 
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
+        HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(new URI("https://openrouter.ai/api/v1/chat/completions"))
                 .header("Authorization", "Bearer " + API_KEY)
                 .header("Content-Type", "application/json")
@@ -51,7 +53,7 @@ public class ChatbotService {
                 .build();
 
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() != 200) {
             throw new RuntimeException("Erro na requisição: " + response.statusCode() + " - " + response.body());
 
@@ -62,7 +64,7 @@ public class ChatbotService {
 
             Map<String, Object> message = (Map<String, Object>) choices.get(0).get("message");
 
-            return (String) message.get("content");
+            return new ChatbotResponse((String) message.get("content"));
         }
     }
 

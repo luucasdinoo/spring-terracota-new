@@ -1,10 +1,10 @@
 spring:
   profiles:
-    active: development
+    active: ${CONTEXT_PROFILE:development}
   datasource:
-    url: jdbc:postgresql://${postgres.url}/${postgres.schema}
-    username: ${postgres.username}
-    password: ${postgres.password}
+    url: ${production.postgres.url}
+    username: ${production.postgres.username}
+    password: ${production.postgres.password}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -13,6 +13,11 @@ spring:
     hibernate:
       ddl-auto: none
     driver-class-name: org.postgresql.Driver
+
+  flyway:
+    locations:
+      - classpath:db/migration
+      - classpath:db/migration/${spring.profiles.active}
 
 server:
   port: 8080
