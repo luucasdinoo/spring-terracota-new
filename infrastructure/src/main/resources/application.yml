@@ -2,9 +2,10 @@ spring:
   profiles:
     active: ${CONTEXT_PROFILE:development}
   datasource:
-    url: ${production.postgres.url}
-    username: ${production.postgres.username}
-    password: ${production.postgres.password}
+    url: ${postgres.url}
+    username: ${postgres.username}
+    password: ${postgres.password}
+    schema: ${postgres.schema}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -17,7 +18,6 @@ spring:
   flyway:
     locations:
       - classpath:db/migration
-      - classpath:db/migration/${spring.profiles.active}
 
 server:
   port: 8080
