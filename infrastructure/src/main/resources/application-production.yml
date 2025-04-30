@@ -1,8 +1,7 @@
-production:
-  postgres:
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
-    url: ${DATABASE_URL}
+postgres:
+  username: ${DATABASE_USERNAME}
+  password: ${DATABASE_PASSWORD}
+  url: ${DATABASE_URL}
 
 spring:
   jpa:
