@@ -27,3 +27,7 @@ server:
 open-router:
   api:
     key: ${OPEN_ROUTER_API_KEY}
+
+security:
+  secret-token: ${SECURITY_SECRET_TOKEN}
+  expiration-token: 1 # hours
