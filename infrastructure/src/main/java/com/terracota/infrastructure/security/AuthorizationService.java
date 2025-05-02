@@ -27,9 +27,9 @@ public class AuthorizationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws EntityNotFoundException {
-        return customerRepository.findByEmail(email)
+        return customerRepository.findByUserEmail(email)
                 .map(CustomerModel::getUser)
-                .or(() -> craftsmanRepository.findByEmail(email)
+                .or(() -> craftsmanRepository.findByUserEmail(email)
                         .map(CraftsmanModel::getUser))
                 .orElseThrow(() -> EntityNotFoundException.with("User not found"));
     }

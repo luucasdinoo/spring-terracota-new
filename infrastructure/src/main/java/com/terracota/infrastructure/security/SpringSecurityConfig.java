@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -42,9 +41,12 @@ public class SpringSecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable) // Disable HTTP Basic
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session management
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/api/auth").permitAll() // Permit all
-                        .requestMatchers(HttpMethod.POST, "/api/customers").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/craftsmen").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth").permitAll() // Permit all
+                        .requestMatchers(HttpMethod.POST, "/customers").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/customers", "/customers/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/craftsmen").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/craftsmen", "/craftsmen/{id}").permitAll()
+
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))

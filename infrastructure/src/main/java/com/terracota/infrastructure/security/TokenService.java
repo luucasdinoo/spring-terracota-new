@@ -14,15 +14,15 @@ import java.time.temporal.ChronoUnit;
 @Service
 public class TokenService {
 
-    @Value("${security.secret-token}")
-    private String secreteToken;
+    @Value("${security.secret-key}")
+    private String secretKey;
 
     @Value("${security.expiration-token}")
     private Integer expirationToken;
 
     public String generateToken(UserEmbedded user) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secreteToken);
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
             return JWT.create()
                     .withIssuer("terracota-api")
@@ -37,7 +37,7 @@ public class TokenService {
 
     public String validateToken(String token){
         try{
-            Algorithm algorithm = Algorithm.HMAC256(secreteToken);
+            Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
             return JWT.require(algorithm)
                     .withIssuer("terracota-api")

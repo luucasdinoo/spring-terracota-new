@@ -5,6 +5,23 @@ Esta documentação descreve os endpoints disponíveis na aplicação Terracota.
 
 ## Endpoints
 
+### Authentication
+
+#### 1. **POST /api/auth**
+- **Descrição:** Autenticação de usuário.
+```json
+{
+  "email": "",
+  "password": ""
+}
+```
+**Response**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30"
+}
+```
+
 ### Customer
 
 #### 1. **POST /api/customers**
@@ -63,7 +80,7 @@ Esta documentação descreve os endpoints disponíveis na aplicação Terracota.
     {
       "email": "",
       "password": "",
-      "user_role": "CUSTOMER",
+      "user_role": "CRAFTSMAN",
       "name": "",
       "phone": "",
       "cpf": "",
@@ -139,3 +156,10 @@ Esta documentação descreve os endpoints disponíveis na aplicação Terracota.
   "price": 0.0
 }
 ```
+#### 6. **PATCH /api/products/{product_id}/craftsmen/craftsmen_id/add**
+- **Descrição:** Adiciona um produto.
+- `qtd` (opcional)
+
+#### 7. **PATCH /api/products/{product_id}/craftsmen/craftsmen_id/remove**
+- **Descrição:** Remove um produto.
+- `qtd` (opcional)

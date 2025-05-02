@@ -21,9 +21,14 @@ public class DefaultCreateCustomerUseCase extends CreateCustomerUseCase{
         Role role = Role.of(input.role())
                 .orElseThrow(() -> DomainException.with("Invalid role"));
 
+        if (role == Role.ADMIN)
+            throw DomainException.with("Invalid role");
+
+        String hashPassword = customerGateway.hashPassword(input.password());
+
         Customer aCustomer = Customer.newCustomer(
                 input.email(),
-                input.password(),
+                hashPassword,
                 role,
                 input.name(),
                 input.phone(),

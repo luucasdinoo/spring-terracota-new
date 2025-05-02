@@ -17,4 +17,5 @@ public interface CustomerGateway {
 
     Pagination<Customer> list(SearchQuery aQuery);
 
+    String hashPassword(String password);
 }

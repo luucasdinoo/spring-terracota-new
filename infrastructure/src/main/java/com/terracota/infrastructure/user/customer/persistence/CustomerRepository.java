@@ -1,6 +1,7 @@
 package com.terracota.infrastructure.user.customer.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -8,5 +9,7 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerModel, String> {
 
-    Optional<CustomerModel> findByEmail(String email);
+    @Query("FROM Customer c WHERE c.user.email = :email")
+    Optional<CustomerModel> findByUserEmail(String email);
+
 }
