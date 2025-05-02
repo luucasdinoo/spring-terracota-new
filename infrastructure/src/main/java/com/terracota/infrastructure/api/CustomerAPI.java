@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("customers")
@@ -46,6 +47,7 @@ public interface CustomerAPI {
     CustomerResponse getById(@PathVariable String id);
 
     @DeleteMapping(value = "{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete customer by id")
     @ApiResponses(value = {
@@ -58,6 +60,7 @@ public interface CustomerAPI {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @Operation(summary = "Update customer by identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Customer updated successfully")

@@ -27,3 +27,12 @@ server:
 open-router:
   api:
     key: ${OPEN_ROUTER_API_KEY}
+
+security:
+  secret-key: ${SECURITY_SECRET_KEY}
+  expiration-token: 1 # hours
+
+logging:
+  level:
+    org.springframework:
+      security: DEBUG

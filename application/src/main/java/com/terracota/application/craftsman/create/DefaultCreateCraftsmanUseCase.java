@@ -21,11 +21,15 @@ public class DefaultCreateCraftsmanUseCase extends CreateCraftsmanUseCase{
         Role role = Role.of(input.role())
                 .orElseThrow(() -> DomainException.with("Invalid role"));
 
-        //TODO: encrypt password
+        if (role == Role.ADMIN)
+            throw DomainException.with("Invalid role");
+
+
+        String hashPassword = craftsmanGateway.hashPassword(input.password());
 
         Craftsman craftsman = Craftsman.newCraftsman(
                 input.email(),
-                input.password(),
+                hashPassword,
                 role,
                 input.name(),
                 input.phone(),

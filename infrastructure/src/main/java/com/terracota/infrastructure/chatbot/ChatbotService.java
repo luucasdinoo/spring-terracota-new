@@ -27,13 +27,12 @@ public class ChatbotService {
     }
 
     public ChatbotResponse processMessage(final ChatbotRequest request) throws Exception {
-        // Monta o JSON como mapa
         Map<String, Object> data = Map.of(
                 "model", "deepseek/deepseek-chat:free",
                 "messages", List.of(
                         Map.of(
                                 "role", "system",
-                                "content", "Você é um assistente de suporte especializado na plataforma de venda de produtos de artesanato. Responda apenas dúvidas relacionadas ao funcionamento da plataforma, cadastro de produtos, compras, vendas e suporte aos usuários. Se a pergunta não for sobre isso, responda educadamente que não pode ajudar."
+                                "content", "Você é um assistente de suporte especializado na plataforma de venda de produtos de artesanato 'Terracota'. Responda apenas dúvidas relacionadas ao funcionamento da plataforma, cadastro de produtos, compras, vendas e suporte aos usuários. Se a pergunta não for sobre isso, responda educadamente que não pode ajudar."
                         ),
                         Map.of(
                                 "role", "user",

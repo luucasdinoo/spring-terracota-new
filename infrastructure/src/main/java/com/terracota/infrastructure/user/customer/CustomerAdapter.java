@@ -11,6 +11,7 @@ import com.terracota.infrastructure.user.customer.persistence.CustomerRepository
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -20,9 +21,11 @@ import java.util.Optional;
 public class CustomerAdapter implements CustomerGateway {
 
     private final CustomerRepository customerRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CustomerAdapter(final CustomerRepository customerRepository) {
+    public CustomerAdapter(final CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         this.customerRepository = Objects.requireNonNull(customerRepository);
+        this.passwordEncoder = Objects.requireNonNull(passwordEncoder);
     }
 
     @Override
@@ -65,6 +68,11 @@ public class CustomerAdapter implements CustomerGateway {
                 pageResult.getTotalElements(),
                 pageResult.map(CustomerModel::toDomain).toList()
         );
+    }
+
+    @Override
+    public String hashPassword(String password) {
+        return passwordEncoder.encode(password);
     }
 
     private Customer save(final Customer aCustomer) {

@@ -17,4 +17,6 @@ public interface CraftsmanGateway {
 
     Pagination<Craftsman> list(SearchQuery aQuery);
 
+    String hashPassword(String password);
+
 }

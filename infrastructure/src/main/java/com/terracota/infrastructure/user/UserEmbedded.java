@@ -6,9 +6,18 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Embeddable
-public class UserEmbedded {
+@Getter @Setter
+public class UserEmbedded implements UserDetails {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -40,27 +49,20 @@ public class UserEmbedded {
         );
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role == Role.ADMIN){
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_CUSTOMER"),
+                    new SimpleGrantedAuthority("ROLE_CRAFTSMAN")
+            );
+        }
+        return List.of(new SimpleGrantedAuthority(this.role.getRole()));
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 }

@@ -11,6 +11,7 @@ import com.terracota.infrastructure.user.craftsman.persistence.CraftsmanReposito
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -20,9 +21,11 @@ import java.util.Optional;
 public class CraftsmanAdapter implements CraftsmanGateway {
 
     private final CraftsmanRepository craftsmanRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public CraftsmanAdapter(final CraftsmanRepository craftsmanRepository) {
+    public CraftsmanAdapter(final CraftsmanRepository craftsmanRepository, PasswordEncoder passwordEncoder) {
         this.craftsmanRepository = Objects.requireNonNull(craftsmanRepository);
+        this.passwordEncoder = Objects.requireNonNull(passwordEncoder);
     }
 
     @Override
@@ -65,6 +68,11 @@ public class CraftsmanAdapter implements CraftsmanGateway {
                 pageResult.getTotalElements(),
                 pageResult.map(CraftsmanModel::toDomain).toList()
         );
+    }
+
+    @Override
+    public String hashPassword(String password) {
+        return passwordEncoder.encode(password);
     }
 
     private Craftsman save(final Craftsman aCraftsman) {
