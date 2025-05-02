@@ -29,6 +29,12 @@ public class SpringSecurityConfig {
 
     private final SecurityFilter securityFilter;
 
+    private static final String[] SWAGGER_LIST = {
+            "swagger-ui/**",
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+    };
+
     public SpringSecurityConfig(final SecurityFilter securityFilter) {
         this.securityFilter = Objects.requireNonNull(securityFilter);
     }
@@ -46,6 +52,7 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/customers", "/customers/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/craftsmen").permitAll()
                         .requestMatchers(HttpMethod.GET, "/craftsmen", "/craftsmen/{id}").permitAll()
+                        .requestMatchers(SWAGGER_LIST).permitAll()
 
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
