@@ -1,6 +1,8 @@
 package com.terracota.domain.user.customer;
 
 import com.terracota.domain.AggregateRoot;
+import com.terracota.domain.cart.Cart;
+import com.terracota.domain.cart.CartID;
 import com.terracota.domain.user.*;
 
 import java.time.Instant;
@@ -26,6 +28,8 @@ public class Customer extends AggregateRoot<CustomerID> {
 
     private Instant updatedAt;
 
+    private CartID cartId;
+
     private Customer(
             final CustomerID customerID,
             final User user,
@@ -48,6 +52,7 @@ public class Customer extends AggregateRoot<CustomerID> {
         this.address = address;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.cartId = Cart.newCart(this).getId();
     }
 
     public static Customer newCustomer(
@@ -130,6 +135,10 @@ public class Customer extends AggregateRoot<CustomerID> {
 
     public User getUser() {
         return user;
+    }
+
+    public CartID getCartId() {
+        return cartId;
     }
 
     public Optional<Address> getAddress() {

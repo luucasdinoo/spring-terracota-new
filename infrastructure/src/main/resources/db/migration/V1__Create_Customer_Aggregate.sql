@@ -5,6 +5,7 @@ CREATE TABLE customers_image(
     location VARCHAR(255) NOT NULL
 );
 
+-- TODO
 CREATE TABLE customers(
     id CHAR(32) NOT NULL PRIMARY KEY,
     email VARCHAR(255) NOT NULL,

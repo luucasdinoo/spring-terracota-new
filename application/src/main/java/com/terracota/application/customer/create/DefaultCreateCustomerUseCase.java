@@ -1,5 +1,6 @@
 package com.terracota.application.customer.create;
 
+import com.terracota.domain.cart.Cart;
 import com.terracota.domain.exceptions.DomainException;
 import com.terracota.domain.user.CPF;
 import com.terracota.domain.user.Role;
