@@ -1,11 +1,13 @@
 package com.terracota.domain.cart;
 
-import com.terracota.domain.ValueObject;
 import com.terracota.domain.product.Product;
+import com.terracota.domain.utils.IdUtils;
 
 import java.math.BigDecimal;
 
-public class CartItem extends ValueObject {
+public class CartItem {
+
+    private String id;
 
     private Integer quantity;
 
@@ -18,12 +20,14 @@ public class CartItem extends ValueObject {
     private Product product;
 
     private CartItem(
+            final String id,
             final Integer quantity,
             final BigDecimal unitPrice,
             final BigDecimal totalPrice,
             final Cart cart,
             final Product product
     ) {
+        this.id = id;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;
@@ -37,7 +41,18 @@ public class CartItem extends ValueObject {
             final Cart cart,
             final Product product
     ) {
-        return new CartItem(quantity, unitPrice, null, cart, product);
+        return new CartItem(IdUtils.uuid(), quantity, unitPrice, null, cart, product);
+    }
+
+    public static CartItem with(
+            final String id,
+            final Integer quantity,
+            final BigDecimal unitPrice,
+            final BigDecimal totalPrice,
+            final Cart cart,
+            final Product product
+    ) {
+        return new CartItem(id, quantity, unitPrice, totalPrice, cart, product);
     }
 
     public void calculateTotalPrice(){
@@ -52,6 +67,10 @@ public class CartItem extends ValueObject {
 
     public void remove(final int qtd){
         this.quantity -= qtd;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Integer getQuantity() {

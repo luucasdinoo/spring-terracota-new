@@ -41,6 +41,17 @@ public class Cart extends AggregateRoot<CartID> {
         return new Cart(cartID, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO, customer, new HashSet<>());
     }
 
+    public static Cart with(
+            final CartID cartID,
+            final BigDecimal subTotal,
+            final BigDecimal shippingFee,
+            final BigDecimal total,
+            final Customer customer,
+            final Set<CartItem> items
+    ){
+        return new Cart(cartID, subTotal, shippingFee, total, customer, items);
+    }
+
     public void calculateTotal(){
         getItems().forEach(CartItem::calculateTotalPrice);
 
