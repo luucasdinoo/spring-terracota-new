@@ -5,6 +5,7 @@ import com.terracota.infrastructure.user.craftsman.models.CraftsmanResponse;
 import com.terracota.infrastructure.user.craftsman.models.CreateCraftsmanRequest;
 import com.terracota.infrastructure.user.craftsman.models.ListCraftsmenResponse;
 import com.terracota.infrastructure.user.craftsman.models.UpdateCraftsmanRequest;
+import com.terracota.infrastructure.user.customer.models.CustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -45,6 +46,13 @@ public interface CraftsmanAPI {
             @ApiResponse(responseCode = "200", description = "Craftsman retrieved successfully")
     })
     CraftsmanResponse getById(@PathVariable String id);
+
+    @GetMapping(value = "email/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Retrieve craftsman by email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Customer retrieved successfully")
+    })
+    CraftsmanResponse getByEmail(@PathVariable String email);
 
     @DeleteMapping(value = "{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN')")

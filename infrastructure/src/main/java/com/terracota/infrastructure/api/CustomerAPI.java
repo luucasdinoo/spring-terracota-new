@@ -46,6 +46,13 @@ public interface CustomerAPI {
     })
     CustomerResponse getById(@PathVariable String id);
 
+    @GetMapping(value = "email/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Retrieve customer by email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Customer retrieved successfully")
+    })
+    CustomerResponse getByEmail(@PathVariable String email);
+
     @DeleteMapping(value = "{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -4,6 +4,9 @@ import com.terracota.infrastructure.security.TokenService;
 import com.terracota.infrastructure.security.models.AuthenticationRequest;
 import com.terracota.infrastructure.security.models.AuthenticationResponse;
 import com.terracota.infrastructure.user.UserEmbedded;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,6 +32,10 @@ public class AuthController {
         this.tokenService = Objects.requireNonNull(tokenService);
     }
 
+    @Operation(summary = "Authenticate customer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Customer authenticated")
+    })
     @PostMapping
     public AuthenticationResponse auth(@RequestBody AuthenticationRequest request){
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =

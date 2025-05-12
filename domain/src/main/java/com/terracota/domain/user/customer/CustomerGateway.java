@@ -13,6 +13,8 @@ public interface CustomerGateway {
 
     Optional<Customer> findById(CustomerID anId);
 
+    Optional<Customer> findByEmail(String email);
+
     Customer update(Customer aCustomer);
 
     Pagination<Customer> list(SearchQuery aQuery);

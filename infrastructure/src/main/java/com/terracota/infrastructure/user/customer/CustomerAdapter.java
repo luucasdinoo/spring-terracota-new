@@ -48,6 +48,12 @@ public class CustomerAdapter implements CustomerGateway {
     }
 
     @Override
+    public Optional<Customer> findByEmail(String email) {
+        return this.customerRepository.findByUserEmail(email)
+                .map(CustomerModel::toDomain);
+    }
+
+    @Override
     public Customer update(final Customer aCustomer) {
         return save(aCustomer);
     }

@@ -48,6 +48,12 @@ public class CraftsmanAdapter implements CraftsmanGateway {
     }
 
     @Override
+    public Optional<Craftsman> findByEmail(String email) {
+        return this.craftsmanRepository.findByUserEmail(email)
+                .map(CraftsmanModel::toDomain);
+    }
+
+    @Override
     public Craftsman update(final Craftsman aCraftsman) {
         return save(aCraftsman);
     }

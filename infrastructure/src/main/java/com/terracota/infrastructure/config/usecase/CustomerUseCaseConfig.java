@@ -4,7 +4,9 @@ import com.terracota.application.customer.create.CreateCustomerUseCase;
 import com.terracota.application.customer.create.DefaultCreateCustomerUseCase;
 import com.terracota.application.customer.delete.DefaultDeleteCustomerUseCase;
 import com.terracota.application.customer.delete.DeleteCustomerUseCase;
+import com.terracota.application.customer.retrieve.get.DefaultGetCustomerByEmailUseCase;
 import com.terracota.application.customer.retrieve.get.DefaultGetCustomerBydIdUseCase;
+import com.terracota.application.customer.retrieve.get.GetCustomerByEmailUseCase;
 import com.terracota.application.customer.retrieve.get.GetCustomerBydIdUseCase;
 import com.terracota.application.customer.retrieve.list.DefaultListCustomerUseCase;
 import com.terracota.application.customer.retrieve.list.ListCustomerUseCase;
@@ -43,6 +45,11 @@ public class CustomerUseCaseConfig {
     @Bean
     public GetCustomerBydIdUseCase getCustomerBydIdUseCase(){
         return new DefaultGetCustomerBydIdUseCase(customerGateway);
+    }
+
+    @Bean
+    public GetCustomerByEmailUseCase getCustomerByEmailUseCase(){
+        return new DefaultGetCustomerByEmailUseCase(customerGateway);
     }
 
     @Bean

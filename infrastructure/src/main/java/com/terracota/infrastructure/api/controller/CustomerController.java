@@ -4,6 +4,7 @@ import com.terracota.application.customer.create.CreateCustomerCommand;
 import com.terracota.application.customer.create.CreateCustomerOutput;
 import com.terracota.application.customer.create.CreateCustomerUseCase;
 import com.terracota.application.customer.delete.DeleteCustomerUseCase;
+import com.terracota.application.customer.retrieve.get.GetCustomerByEmailUseCase;
 import com.terracota.application.customer.retrieve.get.GetCustomerBydIdUseCase;
 import com.terracota.application.customer.retrieve.list.ListCustomerUseCase;
 import com.terracota.application.customer.update.UpdateCustomerCommand;
@@ -27,6 +28,7 @@ public class CustomerController implements CustomerAPI {
     private final CreateCustomerUseCase createCustomerUseCase;
     private final ListCustomerUseCase listCustomerUseCase;
     private final GetCustomerBydIdUseCase getCustomerBydIdUseCase;
+    private final GetCustomerByEmailUseCase getCustomerByEmailUseCase;
     private final DeleteCustomerUseCase deleteCustomerUseCase;
     private final UpdateCustomerUseCase updateCustomerUseCase;
 
@@ -34,11 +36,14 @@ public class CustomerController implements CustomerAPI {
             final CreateCustomerUseCase createCustomerUseCase,
             final ListCustomerUseCase listCustomerUseCase,
             final GetCustomerBydIdUseCase getCustomerBydIdUseCase,
-            final DeleteCustomerUseCase deleteCustomerUseCase, UpdateCustomerUseCase updateCustomerUseCase
+            final GetCustomerByEmailUseCase getCustomerByEmailUseCase,
+            final DeleteCustomerUseCase deleteCustomerUseCase,
+            final UpdateCustomerUseCase updateCustomerUseCase
     ) {
         this.createCustomerUseCase = Objects.requireNonNull(createCustomerUseCase);
         this.listCustomerUseCase = Objects.requireNonNull(listCustomerUseCase);
         this.getCustomerBydIdUseCase = Objects.requireNonNull(getCustomerBydIdUseCase);
+        this.getCustomerByEmailUseCase = Objects.requireNonNull(getCustomerByEmailUseCase);
         this.deleteCustomerUseCase = Objects.requireNonNull(deleteCustomerUseCase);
         this.updateCustomerUseCase = Objects.requireNonNull(updateCustomerUseCase);
     }
@@ -77,6 +82,11 @@ public class CustomerController implements CustomerAPI {
     @Override
     public CustomerResponse getById(String id) {
         return CustomerPresenter.present(this.getCustomerBydIdUseCase.execute(id));
+    }
+
+    @Override
+    public CustomerResponse getByEmail(String email) {
+        return CustomerPresenter.present(this.getCustomerByEmailUseCase.execute(email));
     }
 
     @Override

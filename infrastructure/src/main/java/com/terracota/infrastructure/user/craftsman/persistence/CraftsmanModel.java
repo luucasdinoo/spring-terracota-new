@@ -7,12 +7,16 @@ import com.terracota.infrastructure.user.AddressEmbedded;
 import com.terracota.infrastructure.user.ImagePhotoModel;
 import com.terracota.infrastructure.user.UserEmbedded;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.Optional;
 
 @Entity(name = "Craftsman")
 @Table(name = "craftsmen")
+@Getter @Setter
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class CraftsmanModel {
 
     @Id
@@ -45,32 +49,6 @@ public class CraftsmanModel {
 
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
-
-    public CraftsmanModel(){}
-
-    private CraftsmanModel(
-            final String id,
-            final UserEmbedded user,
-            final String name,
-            final String phone,
-            final String cpf,
-            final boolean active,
-            final ImagePhotoModel photo,
-            final AddressEmbedded address,
-            final Instant createdAt,
-            final Instant updatedAt
-    ) {
-        this.id = id;
-        this.user = user;
-        this.name = name;
-        this.phone = phone;
-        this.cpf = cpf;
-        this.active = active;
-        this.photo = photo;
-        this.address = address;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
 
     public static CraftsmanModel from(final Craftsman craftsman) {
         return new CraftsmanModel(
@@ -108,85 +86,5 @@ public class CraftsmanModel {
                 getCreatedAt(),
                 getUpdatedAt()
         );
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public UserEmbedded getUser() {
-        return user;
-    }
-
-    public void setUser(UserEmbedded user) {
-        this.user = user;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public ImagePhotoModel getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(ImagePhotoModel photo) {
-        this.photo = photo;
-    }
-
-    public AddressEmbedded getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressEmbedded address) {
-        this.address = address;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

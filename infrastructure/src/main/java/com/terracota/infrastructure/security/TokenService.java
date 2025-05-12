@@ -27,6 +27,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("terracota-api")
                     .withSubject(user.getEmail())
+                    .withClaim("role", user.getRole().name())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
         }catch (JWTCreationException e){

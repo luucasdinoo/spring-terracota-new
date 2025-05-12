@@ -13,6 +13,8 @@ public interface CraftsmanGateway {
 
     Optional<Craftsman> findById(CraftsmanID anId);
 
+    Optional<Craftsman> findByEmail(String email);
+
     Craftsman update(Craftsman aCraftsman);
 
     Pagination<Craftsman> list(SearchQuery aQuery);

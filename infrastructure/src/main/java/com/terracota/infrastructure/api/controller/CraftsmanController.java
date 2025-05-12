@@ -4,6 +4,7 @@ import com.terracota.application.craftsman.create.CreateCraftsmanCommand;
 import com.terracota.application.craftsman.create.CreateCraftsmanOutput;
 import com.terracota.application.craftsman.create.CreateCraftsmanUseCase;
 import com.terracota.application.craftsman.delete.DeleteCraftsmanUseCase;
+import com.terracota.application.craftsman.retrieve.get.GetCraftsmanByEmailUseCase;
 import com.terracota.application.craftsman.retrieve.get.GetCraftsmanByIdUseCase;
 import com.terracota.application.craftsman.retrieve.list.ListCraftsmenUseCase;
 import com.terracota.application.craftsman.update.UpdateCraftsmanCommand;
@@ -31,6 +32,7 @@ public class CraftsmanController implements CraftsmanAPI {
     private final CreateCraftsmanUseCase createCraftsmanUseCase;
     private final ListCraftsmenUseCase listCraftsmenUseCase;
     private final GetCraftsmanByIdUseCase getCraftsmanByIdUseCase;
+    private final GetCraftsmanByEmailUseCase getCraftsmanByEmailUseCase;
     private final DeleteCraftsmanUseCase deleteCraftsmanUseCase;
     private final UpdateCraftsmanUseCase updateCraftsmanUseCase;
 
@@ -38,12 +40,14 @@ public class CraftsmanController implements CraftsmanAPI {
             final CreateCraftsmanUseCase createCraftsmanUseCase,
             final ListCraftsmenUseCase listCraftsmenUseCase,
             final GetCraftsmanByIdUseCase getCraftsmanByIdUseCase,
+            final GetCraftsmanByEmailUseCase getCraftsmanByEmailUseCase,
             final DeleteCraftsmanUseCase deleteCraftsmanUseCase,
             final UpdateCraftsmanUseCase updateCraftsmanUseCase
     ) {
         this.createCraftsmanUseCase = Objects.requireNonNull(createCraftsmanUseCase);
         this.listCraftsmenUseCase = Objects.requireNonNull(listCraftsmenUseCase);
         this.getCraftsmanByIdUseCase = Objects.requireNonNull(getCraftsmanByIdUseCase);
+        this.getCraftsmanByEmailUseCase = Objects.requireNonNull(getCraftsmanByEmailUseCase);
         this.deleteCraftsmanUseCase = Objects.requireNonNull(deleteCraftsmanUseCase);
         this.updateCraftsmanUseCase = Objects.requireNonNull(updateCraftsmanUseCase);
     }
@@ -82,6 +86,11 @@ public class CraftsmanController implements CraftsmanAPI {
     @Override
     public CraftsmanResponse getById(final String id) {
         return CraftsmanPresenter.present(this.getCraftsmanByIdUseCase.execute(id));
+    }
+
+    @Override
+    public CraftsmanResponse getByEmail(String email) {
+        return CraftsmanPresenter.present(this.getCraftsmanByEmailUseCase.execute(email));
     }
 
     @Override

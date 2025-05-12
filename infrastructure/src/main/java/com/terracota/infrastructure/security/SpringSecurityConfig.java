@@ -49,11 +49,11 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth").permitAll() // Permit all
                         .requestMatchers(HttpMethod.POST, "/customers").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/customers", "/customers/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/customers", "/customers/{id}", "/customers/email/{email}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/craftsmen").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/craftsmen", "/craftsmen/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/craftsmen", "/craftsmen/{id}", "/craftsmen/email/{email}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/chatbot").permitAll()
                         .requestMatchers(SWAGGER_LIST).permitAll()
-
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))

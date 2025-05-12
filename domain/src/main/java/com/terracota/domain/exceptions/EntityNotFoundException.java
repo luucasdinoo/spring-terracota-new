@@ -17,6 +17,14 @@ public class EntityNotFoundException extends DomainException {
         return new EntityNotFoundException(msg);
     }
 
+    public static EntityNotFoundException with(
+            final Class<? extends AggregateRoot<?>> aggregate,
+            final String email
+    ) {
+        final String msg = "%s with EMAIL %s was not found".formatted(aggregate.getSimpleName(), email);
+        return new EntityNotFoundException(msg);
+    }
+
     public static EntityNotFoundException with(final String msg){
         return new EntityNotFoundException(msg);
     }

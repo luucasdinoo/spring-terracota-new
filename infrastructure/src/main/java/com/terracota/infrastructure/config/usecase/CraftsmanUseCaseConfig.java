@@ -4,7 +4,9 @@ import com.terracota.application.craftsman.create.CreateCraftsmanUseCase;
 import com.terracota.application.craftsman.create.DefaultCreateCraftsmanUseCase;
 import com.terracota.application.craftsman.delete.DefaultDeleteCraftsmanUseCase;
 import com.terracota.application.craftsman.delete.DeleteCraftsmanUseCase;
+import com.terracota.application.craftsman.retrieve.get.DefaultGetCraftsmanByEmailUseCase;
 import com.terracota.application.craftsman.retrieve.get.DefaultGetCraftsmanByIdUseCase;
+import com.terracota.application.craftsman.retrieve.get.GetCraftsmanByEmailUseCase;
 import com.terracota.application.craftsman.retrieve.get.GetCraftsmanByIdUseCase;
 import com.terracota.application.craftsman.retrieve.list.DefaultListCraftsmenUseCase;
 import com.terracota.application.craftsman.retrieve.list.ListCraftsmenUseCase;
@@ -43,6 +45,11 @@ public class CraftsmanUseCaseConfig {
     @Bean
     public GetCraftsmanByIdUseCase getCraftsmanByIdUseCase(){
         return new DefaultGetCraftsmanByIdUseCase(craftsmanGateway);
+    }
+
+    @Bean
+    public GetCraftsmanByEmailUseCase getCraftsmanByEmailUseCase(){
+        return new DefaultGetCraftsmanByEmailUseCase(craftsmanGateway);
     }
 
     @Bean
