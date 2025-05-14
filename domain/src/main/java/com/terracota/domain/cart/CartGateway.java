@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface CartGateway {
 
-    Cart save(Cart cart);
+    void save(Cart cart);
 
     Optional<Cart> findById(CartID cartID);
 

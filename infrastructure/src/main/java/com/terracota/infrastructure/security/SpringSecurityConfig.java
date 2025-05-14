@@ -52,8 +52,9 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/customers", "/customers/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/craftsmen").permitAll()
                         .requestMatchers(HttpMethod.GET, "/craftsmen", "/craftsmen/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/carts").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/carts").permitAll()
                         .requestMatchers(SWAGGER_LIST).permitAll()
-
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))

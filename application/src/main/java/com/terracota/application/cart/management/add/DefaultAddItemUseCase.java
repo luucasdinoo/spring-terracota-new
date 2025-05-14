@@ -52,7 +52,7 @@ public class DefaultAddItemUseCase extends AddItemUseCase {
 
         if (existingItem.isPresent()) {
             CartItem item = existingItem.get();
-            item.add(item.getQuantity() + input.quantity());
+            item.add(input.quantity());
             item.calculateTotalPrice();
         } else {
             CartItem cartItem = CartItem.newCartItem(

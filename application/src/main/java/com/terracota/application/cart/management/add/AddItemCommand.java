@@ -6,4 +6,12 @@ public record AddItemCommand(
         String customerId,
         int quantity
 ) {
+    public static AddItemCommand with(
+            String productId,
+            String craftsmanId,
+            String customerId,
+            int quantity
+    ) {
+        return new AddItemCommand(productId, craftsmanId, customerId, quantity);
+    }
 }

@@ -1,4 +1,6 @@
 package com.terracota.application.cart.management.remove;
 
-public class RemoveItemUseCase {
+import com.terracota.application.UnitUseCase;
+
+public abstract class RemoveItemUseCase extends UnitUseCase<RemoveItemCommand> {
 }
