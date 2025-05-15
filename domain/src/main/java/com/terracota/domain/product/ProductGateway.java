@@ -15,6 +15,8 @@ public interface ProductGateway {
 
     Pagination<Product> listByCraftsman(Craftsman craftsman, SearchQuery aQuery);
 
+    Pagination<Product> list(SearchQuery aQuery);
+
     Product update(Product product);
 
     void deleteById(ProductID anId);

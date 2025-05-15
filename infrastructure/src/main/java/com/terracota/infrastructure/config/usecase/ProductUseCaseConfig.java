@@ -11,7 +11,9 @@ import com.terracota.application.product.management.remove.RemoveProductUseCase;
 import com.terracota.application.product.retrieve.get.DefaultGetProductByIdUseCase;
 import com.terracota.application.product.retrieve.get.GetProductByIdUseCase;
 import com.terracota.application.product.retrieve.list.DefaultListByCraftsmanUseCase;
+import com.terracota.application.product.retrieve.list.DefaultListProductsUseCase;
 import com.terracota.application.product.retrieve.list.ListByCraftsmanUseCase;
+import com.terracota.application.product.retrieve.list.ListProductsUseCase;
 import com.terracota.application.product.update.DefaultUpdateProductUseCase;
 import com.terracota.application.product.update.UpdateProductUseCase;
 import com.terracota.domain.product.ProductGateway;
@@ -48,6 +50,11 @@ public class ProductUseCaseConfig {
     @Bean
     public ListByCraftsmanUseCase listByCraftsmanUseCase(){
         return new DefaultListByCraftsmanUseCase(productGateway, craftsmanGateway);
+    }
+
+    @Bean
+    public ListProductsUseCase listProductsUseCase(){
+        return new DefaultListProductsUseCase(productGateway);
     }
 
     @Bean

@@ -52,6 +52,7 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/customers", "/customers/{id}", "/customers/email/{email}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/craftsmen").permitAll()
                         .requestMatchers(HttpMethod.GET, "/craftsmen", "/craftsmen/{id}", "/craftsmen/email/{email}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/products").permitAll()
                         .requestMatchers(HttpMethod.POST, "/chatbot").permitAll()
                         .requestMatchers(SWAGGER_LIST).permitAll()
                         .anyRequest().authenticated())

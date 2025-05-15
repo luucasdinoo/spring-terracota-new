@@ -60,12 +60,25 @@ public interface ProductAPI {
     );
 
     @GetMapping(value = "craftsmen/{craftsmanId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "List craftsman products")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Craftsman products listed successfully")
+    })
+    Pagination<ListProductResponse> listByCraftsman(
+            @PathVariable(name = "craftsmanId") final String craftsmanId,
+            @RequestParam(name = "search", required = false, defaultValue = "") final String search,
+            @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
+            @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
+            @RequestParam(name = "sort", required = false, defaultValue = "name") final String sort,
+            @RequestParam(name = "dir", required = false, defaultValue = "asc") final String dir
+    );
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "List products")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Product listed successfully")
     })
     Pagination<ListProductResponse> list(
-            @PathVariable(name = "craftsmanId") final String craftsmanId,
             @RequestParam(name = "search", required = false, defaultValue = "") final String search,
             @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
             @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,

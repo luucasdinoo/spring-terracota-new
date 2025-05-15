@@ -40,7 +40,7 @@ public class ProductModel {
     @JoinColumn(name = "photo_id")
     private ProductPhotoModel photo;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "craftsman_id", nullable = false)
     private CraftsmanModel craftsman;
 

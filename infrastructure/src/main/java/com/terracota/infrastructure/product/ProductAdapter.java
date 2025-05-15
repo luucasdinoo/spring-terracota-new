@@ -60,6 +60,22 @@ public class ProductAdapter implements ProductGateway {
     }
 
     @Override
+    public Pagination<Product> list(SearchQuery aQuery) {
+        PageRequest page = PageRequest.of(
+                aQuery.page(),
+                aQuery.perPage(),
+                Sort.by(Sort.Direction.fromString(aQuery.direction()), aQuery.sort())
+        );
+        Page<ProductModel> pageResult = this.productRepository.findAll(page);
+        return new Pagination<>(
+                pageResult.getNumber(),
+                pageResult.getSize(),
+                pageResult.getTotalElements(),
+                pageResult.map(ProductModel::toDomain).toList()
+        );
+    }
+
+    @Override
     public Product update(final Product product) {
         return save(product);
     }
