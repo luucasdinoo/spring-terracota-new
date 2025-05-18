@@ -18,11 +18,13 @@ public class Sale extends AggregateRoot<SaleID> {
 
     private Set<ProductID> productsIds;
 
-    private Integer quantity;
-
     private BigDecimal total;
 
     private PaymentMethod paymentMethod;
+
+    private String nsu;
+
+    private Long aut;
 
     private Instant createdAt;
 
@@ -32,37 +34,42 @@ public class Sale extends AggregateRoot<SaleID> {
             final Customer customer,
             final Set<ProductID> productsIds,
             final BigDecimal total,
-            final Integer quantity,
             final PaymentMethod paymentMethod,
+            final String nsu,
+            final Long aut,
             final Instant createdAt
     ) {
         super(saleID);
         this.craftsman = craftsman;
         this.customer = customer;
         this.productsIds = productsIds;
-        this.quantity = quantity;
         this.total = total;
         this.paymentMethod = paymentMethod;
+        this.nsu = nsu;
+        this.aut = aut;
         this.createdAt = createdAt;
     }
 
     public static Sale newSale(
+            final SaleID saleID,
             final Craftsman craftsman,
             final Customer customer,
             final Set<ProductID> productsIds,
             final BigDecimal total,
-            final Integer quantity,
-            final PaymentMethod paymentMethod
+            final PaymentMethod paymentMethod,
+            final String nsu,
+            final Long aut
 
             ) {
         return new Sale(
-                SaleID.unique(),
+                saleID,
                 craftsman,
                 customer,
                 productsIds,
                 total,
-                quantity,
                 paymentMethod,
+                nsu,
+                aut,
                 Instant.now()
         );
     }
@@ -73,11 +80,12 @@ public class Sale extends AggregateRoot<SaleID> {
             final Customer customer,
             final Set<ProductID> productsIds,
             final BigDecimal total,
-            final Integer quantity,
             final PaymentMethod paymentMethod,
+            final String nsu,
+            final Long aut,
             final Instant createdAt
     ){
-        return new Sale(saleID, craftsman, customer, productsIds, total, quantity, paymentMethod, createdAt);
+        return new Sale(saleID, craftsman, customer, productsIds, total, paymentMethod, nsu, aut, createdAt);
     }
 
     public Craftsman getCraftsman() {
@@ -92,16 +100,20 @@ public class Sale extends AggregateRoot<SaleID> {
         return productsIds != null ? Collections.unmodifiableSet(productsIds) : Collections.emptySet();
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
     public BigDecimal getTotal() {
         return total;
     }
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
+    }
+
+    public String getNsu() {
+        return nsu;
+    }
+
+    public Long getAut() {
+        return aut;
     }
 
     public Instant getCreatedAt() {

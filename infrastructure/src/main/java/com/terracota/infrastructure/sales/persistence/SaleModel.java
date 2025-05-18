@@ -32,11 +32,14 @@ public class SaleModel {
     @JoinColumn(name = "customer_id", nullable = false)
     private CustomerModel customer;
 
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
-
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
+
+    @Column(name = "nsu", nullable = false)
+    private String nsu;
+
+    @Column(name = "aut", nullable = false)
+    private Long aut;
 
     @ElementCollection
     @CollectionTable(name = "sale_products", joinColumns = @JoinColumn(name = "sale_id"))
@@ -53,8 +56,9 @@ public class SaleModel {
                 sale.getId().getValue(),
                 CraftsmanModel.from(sale.getCraftsman()),
                 CustomerModel.from(sale.getCustomer()),
-                sale.getQuantity(),
                 sale.getPaymentMethod(),
+                sale.getNsu(),
+                sale.getAut(),
                 sale.getProductsIds().stream()
                         .map(ProductID::getValue).collect(Collectors.toSet()),
                 sale.getTotal(),
@@ -71,8 +75,9 @@ public class SaleModel {
                         .map(ProductID::from)
                         .collect(Collectors.toSet()),
                 getTotal(),
-                getQuantity(),
                 getPaymentMethod(),
+                getNsu(),
+                getAut(),
                 getCreatedAt()
         );
     }

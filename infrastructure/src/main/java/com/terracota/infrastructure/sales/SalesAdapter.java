@@ -20,8 +20,8 @@ public class SalesAdapter implements SalesGateway {
     }
 
     @Override
-    public void create(final Sale sale) {
-        this.persist(sale);
+    public Sale create(final Sale sale) {
+        return this.persist(sale).toDomain();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SalesAdapter implements SalesGateway {
         return Optional.empty();
     }
 
-    private void persist(final Sale sale) {
-        salesRepository.save(SaleModel.from(sale));
+    private SaleModel persist(final Sale sale) {
+        return salesRepository.save(SaleModel.from(sale));
     }
 }
