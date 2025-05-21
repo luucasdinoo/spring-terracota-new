@@ -10,13 +10,18 @@ import com.terracota.application.customer.retrieve.list.ListCustomerUseCase;
 import com.terracota.application.customer.update.UpdateCustomerCommand;
 import com.terracota.application.customer.update.UpdateCustomerOutput;
 import com.terracota.application.customer.update.UpdateCustomerUseCase;
+import com.terracota.application.files.UploadImageCommand;
+import com.terracota.application.files.UploadImageUseCase;
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.domain.pagination.SearchQuery;
+import com.terracota.domain.resource.Resource;
 import com.terracota.infrastructure.api.CustomerAPI;
 import com.terracota.infrastructure.user.customer.models.*;
 import com.terracota.infrastructure.user.customer.presenter.CustomerPresenter;
+import com.terracota.infrastructure.utils.HashingUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.util.Objects;
@@ -31,6 +36,7 @@ public class CustomerController implements CustomerAPI {
     private final GetCustomerByEmailUseCase getCustomerByEmailUseCase;
     private final DeleteCustomerUseCase deleteCustomerUseCase;
     private final UpdateCustomerUseCase updateCustomerUseCase;
+    private final UploadImageUseCase uploadImageUseCase;
 
     public CustomerController(
             final CreateCustomerUseCase createCustomerUseCase,
@@ -38,7 +44,8 @@ public class CustomerController implements CustomerAPI {
             final GetCustomerBydIdUseCase getCustomerBydIdUseCase,
             final GetCustomerByEmailUseCase getCustomerByEmailUseCase,
             final DeleteCustomerUseCase deleteCustomerUseCase,
-            final UpdateCustomerUseCase updateCustomerUseCase
+            final UpdateCustomerUseCase updateCustomerUseCase,
+            final UploadImageUseCase uploadImageUseCase
     ) {
         this.createCustomerUseCase = Objects.requireNonNull(createCustomerUseCase);
         this.listCustomerUseCase = Objects.requireNonNull(listCustomerUseCase);
@@ -46,6 +53,7 @@ public class CustomerController implements CustomerAPI {
         this.getCustomerByEmailUseCase = Objects.requireNonNull(getCustomerByEmailUseCase);
         this.deleteCustomerUseCase = Objects.requireNonNull(deleteCustomerUseCase);
         this.updateCustomerUseCase = Objects.requireNonNull(updateCustomerUseCase);
+        this.uploadImageUseCase = Objects.requireNonNull(uploadImageUseCase);
     }
 
     @Override
@@ -65,6 +73,13 @@ public class CustomerController implements CustomerAPI {
         CreateCustomerOutput output = this.createCustomerUseCase.execute(aCommand);
 
         return ResponseEntity.created(URI.create("/customers/" + output.id())).body(output);
+    }
+
+    @Override
+    public ResponseEntity<?> uploadFile(final MultipartFile file, final String customerId) {
+        UploadImageCommand aCmd = UploadImageCommand.with(resourceOf(file), customerId);
+        this.uploadImageUseCase.execute(aCmd);
+        return ResponseEntity.noContent().build();
     }
 
     @Override
@@ -105,5 +120,20 @@ public class CustomerController implements CustomerAPI {
 
         UpdateCustomerOutput output = this.updateCustomerUseCase.execute(aCmd);
         return ResponseEntity.ok(output);
+    }
+
+    private Resource resourceOf(final MultipartFile photo) {
+        if (photo == null) return null;
+
+        try {
+            return Resource.with(
+                    photo.getBytes(),
+                    HashingUtils.checksum(photo.getBytes()),
+                    photo.getContentType(),
+                    photo.getOriginalFilename()
+            );
+        }catch (Throwable t){
+            throw new RuntimeException(t);
+        }
     }
 }

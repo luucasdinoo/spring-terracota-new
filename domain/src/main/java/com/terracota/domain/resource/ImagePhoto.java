@@ -1,10 +1,10 @@
-package com.terracota.domain.user;
+package com.terracota.domain.resource;
 
-import com.terracota.domain.ValueObject;
+import com.terracota.domain.utils.IdUtils;
 
 import java.util.Objects;
 
-public class ImagePhoto extends ValueObject {
+public class ImagePhoto {
 
     private final String id;
     private final String checksum;
@@ -20,6 +20,10 @@ public class ImagePhoto extends ValueObject {
 
     public static ImagePhoto with(final String id, final String checksum, final String name, final String location){
         return new ImagePhoto(id, checksum, name, location);
+    }
+
+    public static ImagePhoto with(final String checksum, final String name, final String location){
+        return new ImagePhoto(IdUtils.uuid(), checksum, name, location);
     }
 
     public String id() {

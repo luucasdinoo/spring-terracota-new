@@ -35,4 +35,22 @@ security:
 logging:
   level:
     org.springframework:
+      web: DEBUG
       security: DEBUG
+      web.multipart: DEBUG
+      http.converter: DEBUG
+
+azure:
+  storage:
+    terracota:
+      account-name: ${AZURE_STORAGE_ACCOUNT_NAME}
+      account-key: ${AZURE_STORAGE_ACCOUNT_KEY}
+      blob-endpoint: ${AZURE_STORAGE_BLOB_ENDPOINT}
+      photos-container-name: ${AZURE_STORAGE_PHOTOS_CONTAINER_NAME}
+
+
+storage:
+  terracota:
+    location-pattern: userId
+    filename-pattern: type
+

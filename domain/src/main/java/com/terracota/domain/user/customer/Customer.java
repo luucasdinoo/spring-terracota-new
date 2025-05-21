@@ -1,6 +1,7 @@
 package com.terracota.domain.user.customer;
 
 import com.terracota.domain.AggregateRoot;
+import com.terracota.domain.resource.ImagePhoto;
 import com.terracota.domain.user.*;
 
 import java.time.Instant;
@@ -58,13 +59,12 @@ public class Customer extends AggregateRoot<CustomerID> {
             final String phone,
             final CPF cpf,
             final boolean isActive,
-            final ImagePhoto photo,
             final Address address
     ){
         final User user = User.newUser(email, password, role);
         final CustomerID id = CustomerID.unique();
         final Instant now = Instant.now();
-        return new Customer(id, user, name, phone, cpf, isActive,photo, address, now, now);
+        return new Customer(id, user, name, phone, cpf, isActive,null, address, now, now);
     }
 
     public static Customer with(
@@ -104,6 +104,7 @@ public class Customer extends AggregateRoot<CustomerID> {
         return this;
     }
 
+
     public String getName() {
         return name;
     }
@@ -138,5 +139,10 @@ public class Customer extends AggregateRoot<CustomerID> {
 
     public Optional<ImagePhoto> getPhoto() {
         return Optional.ofNullable(photo);
+    }
+
+    public Customer setPhoto(final ImagePhoto photo) {
+        this.photo = photo;
+        return this;
     }
 }
