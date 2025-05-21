@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public interface SalesAPI {
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
-    @Operation(summary = "Create new sale")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Sale created successfully")
-    })
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
+//    @Operation(summary = "Create new sale")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "201", description = "Sale created successfully")
+//    })
     ResponseEntity<?> create(@RequestBody CreateSaleRequest request);
 }
