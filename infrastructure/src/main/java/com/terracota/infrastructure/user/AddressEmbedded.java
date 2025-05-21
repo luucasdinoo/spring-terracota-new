@@ -3,8 +3,11 @@ package com.terracota.infrastructure.user;
 import com.terracota.domain.user.Address;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
+import lombok.Setter;
 
 @Embeddable
+@Getter @Setter
 public class AddressEmbedded {
 
     @Column(name = "address_street")
@@ -64,53 +67,5 @@ public class AddressEmbedded {
                 getAddressState(),
                 getAddressZipCode()
         );
-    }
-
-    public String getAddressStreet() {
-        return addressStreet;
-    }
-
-    public void setAddressStreet(String addressStreet) {
-        this.addressStreet = addressStreet;
-    }
-
-    public String getAddressNumber() {
-        return addressNumber;
-    }
-
-    public void setAddressNumber(String addressNumber) {
-        this.addressNumber = addressNumber;
-    }
-
-    public String getAddressNeighborhood() {
-        return addressNeighborhood;
-    }
-
-    public void setAddressNeighborhood(String addressNeighborhood) {
-        this.addressNeighborhood = addressNeighborhood;
-    }
-
-    public String getAddressCity() {
-        return addressCity;
-    }
-
-    public void setAddressCity(String addressCity) {
-        this.addressCity = addressCity;
-    }
-
-    public String getAddressState() {
-        return addressState;
-    }
-
-    public void setAddressState(String addressState) {
-        this.addressState = addressState;
-    }
-
-    public String getAddressZipCode() {
-        return addressZipCode;
-    }
-
-    public void setAddressZipCode(String addressZipCode) {
-        this.addressZipCode = addressZipCode;
     }
 }

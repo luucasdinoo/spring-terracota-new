@@ -1,4 +1,4 @@
-CREATE TABLE customers_image(
+CREATE TABLE resources(
     id CHAR(32) NOT NULL PRIMARY KEY,
     checksum VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -26,5 +26,5 @@ CREATE TABLE customers(
 
     CONSTRAINT uk_customers_email UNIQUE (email),
     CONSTRAINT uk_customers_cpf UNIQUE (cpf),
-    CONSTRAINT fk_customers_photo_id FOREIGN KEY (photo_id) REFERENCES customers_image (id) ON DELETE SET NULL
+    CONSTRAINT fk_customers_photo_id FOREIGN KEY (photo_id) REFERENCES resources (id) ON DELETE SET NULL
 );

@@ -12,6 +12,10 @@ import com.terracota.application.customer.retrieve.list.DefaultListCustomerUseCa
 import com.terracota.application.customer.retrieve.list.ListCustomerUseCase;
 import com.terracota.application.customer.update.DefaultUpdateCustomerUseCase;
 import com.terracota.application.customer.update.UpdateCustomerUseCase;
+import com.terracota.application.files.DefaultUploadImageUseCase;
+import com.terracota.application.files.UploadImageUseCase;
+import com.terracota.domain.resource.ImageGateway;
+import com.terracota.domain.resource.ResourceGateway;
 import com.terracota.domain.user.customer.CustomerGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +26,17 @@ import java.util.Objects;
 public class CustomerUseCaseConfig {
 
     private final CustomerGateway customerGateway;
+    private final ResourceGateway resourceGateway;
+    private final ImageGateway imageGateway;
 
-    public CustomerUseCaseConfig(final CustomerGateway customerGateway) {
+    public CustomerUseCaseConfig(
+            final CustomerGateway customerGateway,
+            final ResourceGateway resourceGateway,
+            final ImageGateway imageGateway
+    ) {
         this.customerGateway = Objects.requireNonNull(customerGateway);
+        this.resourceGateway = Objects.requireNonNull(resourceGateway);
+        this.imageGateway = Objects.requireNonNull(imageGateway);
     }
 
     @Bean
@@ -55,6 +67,11 @@ public class CustomerUseCaseConfig {
     @Bean
     public ListCustomerUseCase listCustomerUseCase(){
         return new DefaultListCustomerUseCase(customerGateway);
+    }
+
+    @Bean
+    public UploadImageUseCase uploadImageUseCase(){
+        return new DefaultUploadImageUseCase(resourceGateway, customerGateway, imageGateway);
     }
 
 }

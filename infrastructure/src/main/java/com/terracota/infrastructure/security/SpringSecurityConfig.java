@@ -50,6 +50,7 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth").permitAll() // Permit all
                         .requestMatchers(HttpMethod.POST, "/customers").permitAll()
                         .requestMatchers(HttpMethod.GET, "/customers", "/customers/{id}", "/customers/email/{email}").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/customers/image").permitAll()
                         .requestMatchers(HttpMethod.POST, "/craftsmen").permitAll()
                         .requestMatchers(HttpMethod.GET, "/craftsmen", "/craftsmen/{id}", "/craftsmen/email/{email}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products").permitAll()

@@ -19,5 +19,5 @@ CREATE TABLE craftsmen(
 
     CONSTRAINT uk_craftsmen_email UNIQUE (email),
     CONSTRAINT uk_craftsmen_cpf UNIQUE (cpf),
-    CONSTRAINT fk_customers_photo_id FOREIGN KEY (photo_id) REFERENCES customers_image (id) ON DELETE SET NULL
+    CONSTRAINT fk_customers_photo_id FOREIGN KEY (photo_id) REFERENCES resources (id) ON DELETE SET NULL
 );

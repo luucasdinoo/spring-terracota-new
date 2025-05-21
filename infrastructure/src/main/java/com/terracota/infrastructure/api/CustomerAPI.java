@@ -14,17 +14,34 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("customers")
 @Tag(name = "Customer")
 public interface CustomerAPI {
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @Operation(summary = "Create new customer")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Customer created successfully")
     })
-    ResponseEntity<?> create(@RequestBody CreateCustomerRequest request);
+    ResponseEntity<?> create(
+            @RequestBody CreateCustomerRequest request
+    );
+
+    @PatchMapping(value = "image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Upload file")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "File uploaded successfully")
+    })
+    ResponseEntity<?> uploadFile(
+            @RequestPart("file") MultipartFile file,
+            @RequestPart("customerId") String customerId
+    );
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "List customers")

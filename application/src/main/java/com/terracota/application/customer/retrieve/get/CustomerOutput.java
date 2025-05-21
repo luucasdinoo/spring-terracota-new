@@ -1,5 +1,6 @@
 package com.terracota.application.customer.retrieve.get;
 
+import com.terracota.domain.resource.ImagePhoto;
 import com.terracota.domain.user.Address;
 import com.terracota.domain.user.customer.Customer;
 
@@ -28,7 +29,9 @@ public record CustomerOutput(
                 customer.getPhone(),
                 customer.getCpf().getValue(),
                 customer.isActive(),
-                null,
+                customer.getPhoto()
+                .map(ImagePhoto::location)
+                        .orElse(null),
                 customer.getAddress()
                         .map(Address::with)
                         .orElse(null),

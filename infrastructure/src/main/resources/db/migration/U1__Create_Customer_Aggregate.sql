@@ -1,2 +1,2 @@
-DROP TABLE customers_image;
+DROP TABLE resources;
 DROP TABLE customers;

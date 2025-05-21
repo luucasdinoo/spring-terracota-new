@@ -1,6 +1,7 @@
 package com.terracota.domain.user.craftsman;
 
 import com.terracota.domain.AggregateRoot;
+import com.terracota.domain.resource.ImagePhoto;
 import com.terracota.domain.user.*;
 
 import java.time.Instant;

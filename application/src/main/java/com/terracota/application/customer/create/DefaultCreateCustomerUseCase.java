@@ -1,8 +1,7 @@
 package com.terracota.application.customer.create;
 
 import com.terracota.domain.exceptions.DomainException;
-import com.terracota.domain.user.CPF;
-import com.terracota.domain.user.Role;
+import com.terracota.domain.user.*;
 import com.terracota.domain.user.customer.Customer;
 import com.terracota.domain.user.customer.CustomerGateway;
 
@@ -12,7 +11,9 @@ public class DefaultCreateCustomerUseCase extends CreateCustomerUseCase{
 
     private final CustomerGateway customerGateway;
 
-    public DefaultCreateCustomerUseCase(final CustomerGateway customerGateway) {
+    public DefaultCreateCustomerUseCase(
+            final CustomerGateway customerGateway
+    ) {
         this.customerGateway = Objects.requireNonNull(customerGateway);
     }
 
@@ -34,7 +35,6 @@ public class DefaultCreateCustomerUseCase extends CreateCustomerUseCase{
                 input.phone(),
                 CPF.from(input.cpf()),
                 input.isActive(),
-                null,
                 input.address()
         );
 

@@ -1,6 +1,4 @@
-DELETE FROM customers_image;
-
-DELETE FROM products_image;
+DELETE FROM resources;
 
 DELETE FROM customers;
 
