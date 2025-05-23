@@ -3,7 +3,6 @@ package com.terracota.application.sales.create;
 import java.util.Set;
 
 public record CreateSaleCommand(
-        String orderId,
         String craftsmanId,
         String customerId,
         Set<String> productsIds,
@@ -13,7 +12,6 @@ public record CreateSaleCommand(
         Long aut
 ) {
     public static CreateSaleCommand with(
-            final String orderId,
             final String craftsmanId,
             final String customerId,
             final Set<String> productsIds,
@@ -22,6 +20,6 @@ public record CreateSaleCommand(
             final String nsu,
             final Long aut
     ){
-        return new CreateSaleCommand(orderId, craftsmanId, customerId, productsIds, total, paymentMethod, nsu, aut);
+        return new CreateSaleCommand(craftsmanId, customerId, productsIds, total, paymentMethod, nsu, aut);
     }
 }

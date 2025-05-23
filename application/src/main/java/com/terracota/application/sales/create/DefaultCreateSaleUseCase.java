@@ -3,10 +3,7 @@ package com.terracota.application.sales.create;
 import com.terracota.domain.exceptions.DomainException;
 import com.terracota.domain.exceptions.EntityNotFoundException;
 import com.terracota.domain.product.ProductID;
-import com.terracota.domain.sales.PaymentMethod;
-import com.terracota.domain.sales.Sale;
-import com.terracota.domain.sales.SaleID;
-import com.terracota.domain.sales.SalesGateway;
+import com.terracota.domain.sales.*;
 import com.terracota.domain.user.craftsman.Craftsman;
 import com.terracota.domain.user.craftsman.CraftsmanGateway;
 import com.terracota.domain.user.craftsman.CraftsmanID;
@@ -24,15 +21,17 @@ public class DefaultCreateSaleUseCase extends CreateSaleUseCase{
     private final SalesGateway salesGateway;
     private final CustomerGateway customerGateway;
     private final CraftsmanGateway craftsmanGateway;
+    private final PaymentGateway paymentGateway;
 
     public DefaultCreateSaleUseCase(
             final SalesGateway salesGateway,
             final CustomerGateway customerGateway,
-            final CraftsmanGateway craftsmanGateway
+            final CraftsmanGateway craftsmanGateway, PaymentGateway paymentGateway
     ) {
         this.salesGateway = Objects.requireNonNull(salesGateway);
         this.customerGateway = Objects.requireNonNull(customerGateway);
         this.craftsmanGateway = Objects.requireNonNull(craftsmanGateway);
+        this.paymentGateway = Objects.requireNonNull(paymentGateway);
     }
 
     @Override
@@ -49,8 +48,11 @@ public class DefaultCreateSaleUseCase extends CreateSaleUseCase{
         PaymentMethod paymentMethod = PaymentMethod.of(input.paymentMethod())
                 .orElseThrow(() -> DomainException.with("Invalid payment method"));
 
+        SaleID saleId = SaleID.unique();
+        this.paymentGateway.process(saleId, productIds);
+
         Sale sale = Sale.newSale(
-                SaleID.from(input.orderId()),
+                saleId,
                 craftsman,
                 customer,
                 productIds,

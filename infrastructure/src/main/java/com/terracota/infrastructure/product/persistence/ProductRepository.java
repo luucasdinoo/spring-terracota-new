@@ -16,4 +16,5 @@ public interface ProductRepository extends JpaRepository<ProductModel, String> {
     Optional<ProductModel> findProductById(String productId, String craftsmanId);
 
     Page<ProductModel> findProductsByCraftsman(CraftsmanModel craftsman, Pageable pageable);
+
 }

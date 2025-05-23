@@ -48,9 +48,14 @@ azure:
       blob-endpoint: ${AZURE_STORAGE_BLOB_ENDPOINT}
       photos-container-name: ${AZURE_STORAGE_PHOTOS_CONTAINER_NAME}
 
-
 storage:
   terracota:
     location-pattern: userId
     filename-pattern: type
 
+mercado-pago:
+  terracota:
+    public-key: ${MERCADO_PAGO_PUBLIC_KEY}
+    access-token: ${MERCADO_PAGO_ACCESS_TOKEN}
+    client-id: ${MERCADO_PAGO_CLIENT_ID}
+    client-secret: ${MERCADO_PAGO_CLIENT_SECRET}
