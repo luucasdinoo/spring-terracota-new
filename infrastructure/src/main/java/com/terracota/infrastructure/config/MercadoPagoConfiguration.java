@@ -8,7 +8,7 @@ import com.mercadopago.MercadoPagoConfig;
 @Configuration
 public class MercadoPagoConfiguration {
 
-    @Value("${mercado-pago.terracota-access.token}")
+    @Value("${mercado-pago.terracota.access-token}")
     private String accessToken;
 
     @PostConstruct

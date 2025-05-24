@@ -1,18 +1,14 @@
 package com.terracota.infrastructure.sales;
 
-import com.mercadopago.client.preference.PreferenceBackUrlsRequest;
-import com.mercadopago.client.preference.PreferenceClient;
-import com.mercadopago.client.preference.PreferenceItemRequest;
-import com.mercadopago.client.preference.PreferenceRequest;
+import com.mercadopago.client.preference.*;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 import com.terracota.domain.exceptions.PaymentProcessingException;
 import com.terracota.domain.product.Product;
-import com.terracota.domain.product.ProductID;
 import com.terracota.domain.resource.ImagePhoto;
 import com.terracota.domain.sales.PaymentGateway;
-import com.terracota.domain.sales.SaleID;
+import com.terracota.domain.sales.SaleItem;
 import com.terracota.infrastructure.product.persistence.ProductRepository;
 import org.springframework.stereotype.Component;
 
@@ -28,22 +24,23 @@ public class PaymentAdapter implements PaymentGateway {
     }
 
     @Override
-    public void process(SaleID saleId, Set<ProductID> productIds){
+    public String generateLink(Set<SaleItem> saleItems){
         try {
+            PreferenceClient client = new PreferenceClient();
             List<PreferenceItemRequest> items = new ArrayList<>();
-            productIds.forEach(productID -> {
-                productRepository.findById(productID.getValue())
+            saleItems.forEach(saleItem -> {
+                productRepository.findById(saleItem.productId().getValue())
                         .ifPresent(productModel -> {
                             Product product = productModel.toDomain();
                             Optional<ImagePhoto> photo = product.getPhoto();
                             PreferenceItemRequest itemRequest =
                                     PreferenceItemRequest.builder()
-                                            .id(saleId.getValue())
+                                            .id(product.getId().getValue())
                                             .title(product.getName())
                                             .description(product.getDescription())
                                             .pictureUrl(photo.isPresent() ? photo.get().location() : "")
                                             .categoryId(product.getType().getValue())
-                                            .quantity(2)
+                                            .quantity(saleItem.quantity())
                                             .currencyId("BRL")
                                             .unitPrice(product.getPrice())
                                             .build();
@@ -51,21 +48,25 @@ public class PaymentAdapter implements PaymentGateway {
                         });
             });
             PreferenceRequest preferenceRequest = PreferenceRequest.builder()
-                    .items(items).build();
-
-            PreferenceClient client = new PreferenceClient();
-            Preference preference = client.create(preferenceRequest);
-
-            PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                    .success("https://www.seu-site/success")
-                    .pending("https://www.seu-site/pending")
-                    .failure("https://www.seu-site/failure")
+                    .items(items)
+                    .backUrls(
+                            PreferenceBackUrlsRequest.builder()
+                                    .success("https://test.com/success")
+                                    .failure("https://test.com/failure")
+                                    .pending("https://test.com/pending")
+                                    .build())
                     .build();
 
-            PreferenceRequest request = PreferenceRequest.builder()
-                    .backUrls(backUrls).build();
+            Preference preference = client.create(preferenceRequest);
+            return preference.getSandboxInitPoint();
+
         }catch (MPException | MPApiException e) {
             throw PaymentProcessingException.with("An error occurred while processing the payment with Mercado Pago.");
         }
+    }
+
+    @Override
+    public void process() {
+
     }
 }

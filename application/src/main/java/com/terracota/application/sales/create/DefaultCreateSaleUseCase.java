@@ -49,7 +49,7 @@ public class DefaultCreateSaleUseCase extends CreateSaleUseCase{
                 .orElseThrow(() -> DomainException.with("Invalid payment method"));
 
         SaleID saleId = SaleID.unique();
-        this.paymentGateway.process(saleId, productIds);
+        //this.paymentGateway.process(saleId, productIds);
 
         Sale sale = Sale.newSale(
                 saleId,

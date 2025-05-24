@@ -3,6 +3,7 @@ package com.terracota.infrastructure.product.persistence;
 import com.terracota.domain.product.Product;
 import com.terracota.domain.product.ProductID;
 import com.terracota.domain.product.ProductType;
+import com.terracota.infrastructure.user.ImagePhotoModel;
 import com.terracota.infrastructure.user.craftsman.persistence.CraftsmanModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -38,7 +39,7 @@ public class ProductModel {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "photo_id")
-    private ProductPhotoModel photo;
+    private ImagePhotoModel photo;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "craftsman_id", nullable = false)
@@ -59,7 +60,7 @@ public class ProductModel {
                 product.getQuantity(),
                 product.getType(),
                 product.getPhoto()
-                        .map(ProductPhotoModel::from)
+                        .map(ImagePhotoModel::from)
                         .orElse(null),
                 CraftsmanModel.from(product.getCraftsman()),
                 product.getCreatedAt(),
@@ -76,7 +77,7 @@ public class ProductModel {
                 getQuantity(),
                 getType(),
                 Optional.ofNullable(getPhoto())
-                        .map(ProductPhotoModel::toDomain)
+                        .map(ImagePhotoModel::toDomain)
                         .orElse(null),
                 getCraftsman().toDomain(),
                 getCreatedAt(),
