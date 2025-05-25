@@ -35,7 +35,7 @@ public class SalesUseCaseConfig {
 
     @Bean
     public CreateSaleUseCase createSaleUseCase(){
-        return new DefaultCreateSaleUseCase(salesGateway, customerGateway, craftsmanGateway, paymentGateway);
+        return new DefaultCreateSaleUseCase(salesGateway, customerGateway, craftsmanGateway);
     }
 
     @Bean

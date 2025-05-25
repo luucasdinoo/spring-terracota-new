@@ -7,10 +7,11 @@ import com.terracota.domain.user.customer.Customer;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Collections;
 import java.util.Set;
 
 public class Sale extends AggregateRoot<SaleID> {
+
+    private Long paymentId;
 
     private Craftsman craftsman;
 
@@ -22,70 +23,71 @@ public class Sale extends AggregateRoot<SaleID> {
 
     private PaymentMethod paymentMethod;
 
-    private String nsu;
-
-    private Long aut;
+    private String status;
 
     private Instant createdAt;
 
     private Sale(
             final SaleID saleID,
+            final Long paymentId,
             final Craftsman craftsman,
             final Customer customer,
             final Set<ProductID> productsIds,
             final BigDecimal total,
             final PaymentMethod paymentMethod,
-            final String nsu,
-            final Long aut,
+            final String status,
             final Instant createdAt
     ) {
         super(saleID);
+        this.paymentId = paymentId;
         this.craftsman = craftsman;
         this.customer = customer;
         this.productsIds = productsIds;
         this.total = total;
         this.paymentMethod = paymentMethod;
-        this.nsu = nsu;
-        this.aut = aut;
+        this.status = status;
         this.createdAt = createdAt;
     }
 
     public static Sale newSale(
             final SaleID saleID,
+            final Long paymentId,
             final Craftsman craftsman,
             final Customer customer,
             final Set<ProductID> productsIds,
             final BigDecimal total,
             final PaymentMethod paymentMethod,
-            final String nsu,
-            final Long aut
-
+            final String status
             ) {
         return new Sale(
                 saleID,
+                paymentId,
                 craftsman,
                 customer,
                 productsIds,
                 total,
                 paymentMethod,
-                nsu,
-                aut,
+                status,
                 Instant.now()
         );
     }
 
     public static Sale with(
             final SaleID saleID,
+            final Long paymentId,
             final Craftsman craftsman,
             final Customer customer,
             final Set<ProductID> productsIds,
             final BigDecimal total,
             final PaymentMethod paymentMethod,
-            final String nsu,
-            final Long aut,
+            final String status,
             final Instant createdAt
     ){
-        return new Sale(saleID, craftsman, customer, productsIds, total, paymentMethod, nsu, aut, createdAt);
+        return new Sale(saleID, paymentId, craftsman, customer, productsIds, total, paymentMethod, status, createdAt);
+    }
+
+    public Long getPaymentId() {
+        return paymentId;
     }
 
     public Craftsman getCraftsman() {
@@ -97,7 +99,7 @@ public class Sale extends AggregateRoot<SaleID> {
     }
 
     public Set<ProductID> getProductsIds() {
-        return productsIds != null ? Collections.unmodifiableSet(productsIds) : Collections.emptySet();
+        return productsIds;
     }
 
     public BigDecimal getTotal() {
@@ -108,12 +110,8 @@ public class Sale extends AggregateRoot<SaleID> {
         return paymentMethod;
     }
 
-    public String getNsu() {
-        return nsu;
-    }
-
-    public Long getAut() {
-        return aut;
+    public String getStatus() {
+        return status;
     }
 
     public Instant getCreatedAt() {

@@ -7,5 +7,4 @@ public interface PaymentGateway {
 
     String generateLink(Set<SaleItem> saleItems);
 
-    void process();
 }

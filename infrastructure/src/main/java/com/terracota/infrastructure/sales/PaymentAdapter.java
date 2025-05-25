@@ -51,9 +51,14 @@ public class PaymentAdapter implements PaymentGateway {
                     .items(items)
                     .backUrls(
                             PreferenceBackUrlsRequest.builder()
-                                    .success("https://test.com/success")
-                                    .failure("https://test.com/failure")
-                                    .pending("https://test.com/pending")
+                                    .success("https://terracota.vercel.app/compra")
+                                    .failure("https://terracota.vercel.app/")
+                                    .pending("")
+                                    .build())
+                    .paymentMethods(
+                            PreferencePaymentMethodsRequest.builder()
+                                    .installments(12)
+                                    .defaultInstallments(1)
                                     .build())
                     .build();
 
@@ -63,10 +68,5 @@ public class PaymentAdapter implements PaymentGateway {
         }catch (MPException | MPApiException e) {
             throw PaymentProcessingException.with("An error occurred while processing the payment with Mercado Pago.");
         }
-    }
-
-    @Override
-    public void process() {
-
     }
 }

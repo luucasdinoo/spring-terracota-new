@@ -21,17 +21,15 @@ public class DefaultCreateSaleUseCase extends CreateSaleUseCase{
     private final SalesGateway salesGateway;
     private final CustomerGateway customerGateway;
     private final CraftsmanGateway craftsmanGateway;
-    private final PaymentGateway paymentGateway;
 
     public DefaultCreateSaleUseCase(
             final SalesGateway salesGateway,
             final CustomerGateway customerGateway,
-            final CraftsmanGateway craftsmanGateway, PaymentGateway paymentGateway
+            final CraftsmanGateway craftsmanGateway
     ) {
         this.salesGateway = Objects.requireNonNull(salesGateway);
         this.customerGateway = Objects.requireNonNull(customerGateway);
         this.craftsmanGateway = Objects.requireNonNull(craftsmanGateway);
-        this.paymentGateway = Objects.requireNonNull(paymentGateway);
     }
 
     @Override
@@ -48,18 +46,15 @@ public class DefaultCreateSaleUseCase extends CreateSaleUseCase{
         PaymentMethod paymentMethod = PaymentMethod.of(input.paymentMethod())
                 .orElseThrow(() -> DomainException.with("Invalid payment method"));
 
-        SaleID saleId = SaleID.unique();
-        //this.paymentGateway.process(saleId, productIds);
-
         Sale sale = Sale.newSale(
-                saleId,
+                SaleID.from(input.preferenceId()),
+                input.paymentId(),
                 craftsman,
                 customer,
                 productIds,
-                BigDecimal.valueOf(input.total()),
+                new BigDecimal(input.total()),
                 paymentMethod,
-                input.nsu(),
-                input.aut()
+                input.status()
         );
 
         return CreateSaleOutput.from(this.salesGateway.create(sale));
