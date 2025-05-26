@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum PaymentMethod {
-    PIX("pix");
+    PIX("pix"),
+    CREDIT_CARD("credit_card");
 
     private final String value;
 

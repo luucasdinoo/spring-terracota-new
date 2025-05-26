@@ -3,25 +3,25 @@ package com.terracota.application.sales.create;
 import java.util.Set;
 
 public record CreateSaleCommand(
-        String orderId,
+        String preferenceId,
+        Long paymentId,
         String craftsmanId,
         String customerId,
         Set<String> productsIds,
-        long total,
+        Long total,
         String paymentMethod,
-        String nsu,
-        Long aut
+        String status
 ) {
     public static CreateSaleCommand with(
-            final String orderId,
+            final String preferenceId,
+            final Long paymentId,
             final String craftsmanId,
             final String customerId,
             final Set<String> productsIds,
-            final long total,
+            final Long total,
             final String paymentMethod,
-            final String nsu,
-            final Long aut
+            final String status
     ){
-        return new CreateSaleCommand(orderId, craftsmanId, customerId, productsIds, total, paymentMethod, nsu, aut);
+        return new CreateSaleCommand(preferenceId, paymentId, craftsmanId, customerId, productsIds, total, paymentMethod, status);
     }
 }

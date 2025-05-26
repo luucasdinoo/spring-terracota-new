@@ -1,9 +1,10 @@
+afterMigrate.sql
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-afterMigrate.sql
 
 ### STS ###
 .apt_generated

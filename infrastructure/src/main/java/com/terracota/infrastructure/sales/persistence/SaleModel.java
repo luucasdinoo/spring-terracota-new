@@ -22,7 +22,10 @@ import java.util.stream.Collectors;
 public class SaleModel {
 
     @Id
-    private String id;
+    private String preferenceId;
+
+    @Column(name = "payment_id", nullable = false)
+    private Long paymentId;
 
     @ManyToOne
     @JoinColumn(name = "craftsman_id", nullable = false)
@@ -35,11 +38,8 @@ public class SaleModel {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    @Column(name = "nsu", nullable = false)
-    private String nsu;
-
-    @Column(name = "aut", nullable = false)
-    private Long aut;
+    @Column(name = "status", nullable = false)
+    private String status;
 
     @ElementCollection
     @CollectionTable(name = "sale_products", joinColumns = @JoinColumn(name = "sale_id"))
@@ -54,11 +54,11 @@ public class SaleModel {
     public static SaleModel from(final Sale sale){
         return new SaleModel(
                 sale.getId().getValue(),
+                sale.getPaymentId(),
                 CraftsmanModel.from(sale.getCraftsman()),
                 CustomerModel.from(sale.getCustomer()),
                 sale.getPaymentMethod(),
-                sale.getNsu(),
-                sale.getAut(),
+                sale.getStatus(),
                 sale.getProductsIds().stream()
                         .map(ProductID::getValue).collect(Collectors.toSet()),
                 sale.getTotal(),
@@ -68,7 +68,8 @@ public class SaleModel {
 
     public Sale toDomain(){
         return Sale.with(
-                SaleID.from(getId()),
+                SaleID.from(getPreferenceId()),
+                getPaymentId(),
                 getCraftsman().toDomain(),
                 getCustomer().toDomain(),
                 getProductsIds().stream()
@@ -76,8 +77,7 @@ public class SaleModel {
                         .collect(Collectors.toSet()),
                 getTotal(),
                 getPaymentMethod(),
-                getNsu(),
-                getAut(),
+                getStatus(),
                 getCreatedAt()
         );
     }

@@ -3,10 +3,7 @@ package com.terracota.application.sales.create;
 import com.terracota.domain.exceptions.DomainException;
 import com.terracota.domain.exceptions.EntityNotFoundException;
 import com.terracota.domain.product.ProductID;
-import com.terracota.domain.sales.PaymentMethod;
-import com.terracota.domain.sales.Sale;
-import com.terracota.domain.sales.SaleID;
-import com.terracota.domain.sales.SalesGateway;
+import com.terracota.domain.sales.*;
 import com.terracota.domain.user.craftsman.Craftsman;
 import com.terracota.domain.user.craftsman.CraftsmanGateway;
 import com.terracota.domain.user.craftsman.CraftsmanID;
@@ -50,14 +47,14 @@ public class DefaultCreateSaleUseCase extends CreateSaleUseCase{
                 .orElseThrow(() -> DomainException.with("Invalid payment method"));
 
         Sale sale = Sale.newSale(
-                SaleID.from(input.orderId()),
+                SaleID.from(input.preferenceId()),
+                input.paymentId(),
                 craftsman,
                 customer,
                 productIds,
-                BigDecimal.valueOf(input.total()),
+                new BigDecimal(input.total()),
                 paymentMethod,
-                input.nsu(),
-                input.aut()
+                input.status()
         );
 
         return CreateSaleOutput.from(this.salesGateway.create(sale));

@@ -1,6 +1,7 @@
 package com.terracota.domain.product;
 
 import com.terracota.domain.AggregateRoot;
+import com.terracota.domain.resource.ImagePhoto;
 import com.terracota.domain.user.craftsman.Craftsman;
 
 import java.math.BigDecimal;
@@ -19,7 +20,7 @@ public class Product extends AggregateRoot<ProductID> {
 
     private ProductType type;
 
-    private ProductPhoto photo;
+    private ImagePhoto photo;
 
     private Craftsman craftsman;
 
@@ -34,7 +35,7 @@ public class Product extends AggregateRoot<ProductID> {
             final BigDecimal price,
             final int quantity,
             final ProductType type,
-            final ProductPhoto photo,
+            final ImagePhoto photo,
             final Craftsman craftsman,
             final Instant createdAt,
             final Instant updatedAt
@@ -57,7 +58,7 @@ public class Product extends AggregateRoot<ProductID> {
             final BigDecimal price,
             final int quantity,
             final ProductType type,
-            final ProductPhoto photo,
+            final ImagePhoto photo,
             final Craftsman craftsman
     ){
         ProductID anId = ProductID.unique();
@@ -72,7 +73,7 @@ public class Product extends AggregateRoot<ProductID> {
             final BigDecimal price,
             final int quantity,
             final ProductType type,
-            final ProductPhoto photo,
+            final ImagePhoto photo,
             final Craftsman craftsman,
             final Instant createdAt,
             final Instant updatedAt
@@ -124,7 +125,7 @@ public class Product extends AggregateRoot<ProductID> {
         return type;
     }
 
-    public Optional<ProductPhoto> getPhoto() {
+    public Optional<ImagePhoto> getPhoto() {
         return Optional.ofNullable(photo);
     }
 
