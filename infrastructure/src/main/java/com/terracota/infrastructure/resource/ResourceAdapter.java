@@ -41,7 +41,7 @@ public class ResourceAdapter implements ResourceGateway {
     }
 
     private <T extends Identifier> String id(final T anId) {
-        return locationPattern.replace("userId", anId.getValue());
+        return locationPattern.replace("id", anId.getValue());
     }
 
     private <T extends Identifier> String filepath(final T anId, final MediaType aType) {

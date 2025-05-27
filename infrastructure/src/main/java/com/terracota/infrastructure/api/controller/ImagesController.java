@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
@@ -34,7 +31,10 @@ public class ImagesController{
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "File uploaded successfully")
     })
-    public ResponseEntity<?> upload(final MultipartFile file, final String id) {
+    public ResponseEntity<?> upload(
+            @RequestPart("file") MultipartFile file,
+            @RequestPart("id") String id
+    ) {
         UploadImageCommand aCmd = UploadImageCommand.with(resourceOf(file), id);
         this.uploadImageUseCase.execute(aCmd);
         return ResponseEntity.noContent().build();
