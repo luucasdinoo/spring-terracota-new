@@ -41,6 +41,12 @@ public class ProductAdapter implements ProductGateway {
     }
 
     @Override
+    public Optional<Product> findById(ProductID productId) {
+        return this.productRepository.findById(productId.getValue())
+                .map(ProductModel::toDomain);
+    }
+
+    @Override
     public Pagination<Product> listByCraftsman(final Craftsman craftsman, final SearchQuery aQuery) {
         PageRequest page = PageRequest.of(
                 aQuery.page(),

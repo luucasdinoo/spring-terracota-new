@@ -13,6 +13,8 @@ public interface ProductGateway {
 
     Optional<Product> findById(ProductID productId, CraftsmanID craftsmanId);
 
+    Optional<Product> findById(ProductID productId);
+
     Pagination<Product> listByCraftsman(Craftsman craftsman, SearchQuery aQuery);
 
     Pagination<Product> list(SearchQuery aQuery);

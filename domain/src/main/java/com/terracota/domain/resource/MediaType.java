@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum MediaType {
-    PHOTO,
-    BANNER;
+    USER_PHOTO,
+    USER_BANNER,
+    PRODUCT_PHOTO;
 
     public static Optional<MediaType> of(final String value){
         return Arrays.stream(values())

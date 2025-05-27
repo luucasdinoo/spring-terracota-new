@@ -55,6 +55,7 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/craftsmen", "/craftsmen/{id}", "/craftsmen/email/{email}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products").permitAll()
                         .requestMatchers(HttpMethod.POST, "/chatbot").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/images").permitAll()
                         .requestMatchers(SWAGGER_LIST).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

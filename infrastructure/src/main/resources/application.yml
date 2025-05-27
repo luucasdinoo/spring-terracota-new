@@ -50,7 +50,7 @@ azure:
 
 storage:
   terracota:
-    location-pattern: userId
+    location-pattern: id
     filename-pattern: type
 
 mercado-pago:
