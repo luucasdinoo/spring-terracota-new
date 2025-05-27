@@ -51,9 +51,9 @@ public class PaymentAdapter implements PaymentGateway {
                     .items(items)
                     .backUrls(
                             PreferenceBackUrlsRequest.builder()
-                                    .success("https://terracota.vercel.app/compra")
-                                    .failure("https://terracota.vercel.app/")
-                                    .pending("")
+                                    .success("https://terracota.vercel.app")
+                                    .failure("https://terracota.vercel.app/carrinho")
+                                    .pending("https://terracota.vercel.app/carrinho")
                                     .build())
                     .paymentMethods(
                             PreferencePaymentMethodsRequest.builder()
