@@ -40,12 +40,12 @@ public class ResourceAdapter implements ResourceGateway {
         return filenamePattern.replace("type", aType.toString());
     }
 
-    private <T extends Identifier> String user(final T anId) {
+    private <T extends Identifier> String id(final T anId) {
         return locationPattern.replace("userId", anId.getValue());
     }
 
     private <T extends Identifier> String filepath(final T anId, final MediaType aType) {
-        return user(anId)
+        return id(anId)
                 .concat("-")
                 .concat(type(aType));
     }

@@ -143,6 +143,7 @@ public class Customer extends AggregateRoot<CustomerID> {
 
     public Customer setPhoto(final ImagePhoto photo) {
         this.photo = photo;
+        this.updatedAt = Instant.now();
         return this;
     }
 }

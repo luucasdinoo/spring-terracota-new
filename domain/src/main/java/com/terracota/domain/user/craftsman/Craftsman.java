@@ -105,6 +105,12 @@ public class Craftsman extends AggregateRoot<CraftsmanID> {
         return this;
     }
 
+    public Craftsman setPhoto(final ImagePhoto photo) {
+        this.photo = photo;
+        this.updatedAt = Instant.now();
+        return this;
+    }
+
     public String getName() {
         return name;
     }

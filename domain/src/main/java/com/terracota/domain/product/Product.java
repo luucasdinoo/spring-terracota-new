@@ -140,4 +140,10 @@ public class Product extends AggregateRoot<ProductID> {
     public Instant getUpdatedAt() {
         return updatedAt;
     }
+
+    public Product setPhoto(final ImagePhoto photo) {
+        this.photo = photo;
+        this.updatedAt = Instant.now();
+        return this;
+    }
 }
