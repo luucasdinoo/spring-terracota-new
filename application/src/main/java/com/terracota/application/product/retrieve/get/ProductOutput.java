@@ -1,6 +1,7 @@
 package com.terracota.application.product.retrieve.get;
 
 import com.terracota.domain.product.Product;
+import com.terracota.domain.resource.ImagePhoto;
 
 import java.time.Instant;
 
@@ -24,7 +25,9 @@ public record ProductOutput(
                 product.getPrice().doubleValue(),
                 product.getQuantity(),
                 product.getType().name(),
-                null,
+                product.getPhoto()
+                        .map(ImagePhoto::location)
+                        .orElse(null),
                 product.getCraftsman().getId().getValue(),
                 product.getCreatedAt(),
                 product.getUpdatedAt()

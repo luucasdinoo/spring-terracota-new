@@ -1,5 +1,6 @@
 package com.terracota.application.craftsman.retrieve.get;
 
+import com.terracota.domain.resource.ImagePhoto;
 import com.terracota.domain.user.Address;
 import com.terracota.domain.user.craftsman.Craftsman;
 
@@ -28,7 +29,9 @@ public record CraftsmanOutput(
                 craftsman.getPhone(),
                 craftsman.getCpf().getValue(),
                 craftsman.isActive(),
-                null,
+                craftsman.getPhoto()
+                        .map(ImagePhoto::location)
+                        .orElse(null),
                 craftsman.getAddress()
                         .map(Address::with)
                         .orElse(null),
