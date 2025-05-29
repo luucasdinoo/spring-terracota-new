@@ -24,7 +24,7 @@ public record ProductOutput(
                 product.getDescription(),
                 product.getPrice().doubleValue(),
                 product.getQuantity(),
-                product.getType().name(),
+                product.getType().getValue(),
                 product.getPhoto()
                         .map(ImagePhoto::location)
                         .orElse(null),

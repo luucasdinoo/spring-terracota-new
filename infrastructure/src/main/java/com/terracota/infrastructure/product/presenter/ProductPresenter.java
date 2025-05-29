@@ -28,6 +28,7 @@ public interface ProductPresenter {
                 output.name(),
                 output.description(),
                 output.price(),
+                output.type(),
                 output.quantity(),
                 output.photo(),
                 output.craftsmanId()
