@@ -6,6 +6,7 @@ import com.terracota.domain.user.craftsman.CraftsmanID;
 import com.terracota.infrastructure.user.AddressEmbedded;
 import com.terracota.infrastructure.user.ImagePhotoModel;
 import com.terracota.infrastructure.user.UserEmbedded;
+import com.terracota.infrastructure.user.company.CompanyModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -50,6 +51,10 @@ public class CraftsmanModel {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private CompanyModel company;
+
     public static CraftsmanModel from(final Craftsman craftsman) {
         return new CraftsmanModel(
                 craftsman.getId().getValue(),
@@ -65,7 +70,8 @@ public class CraftsmanModel {
                         .map(AddressEmbedded::from)
                         .orElse(null),
                 craftsman.getCreatedAt(),
-                craftsman.getUpdatedAt()
+                craftsman.getUpdatedAt(),
+                craftsman.getCompany().isPresent() ? CompanyModel.from(craftsman.getCompany().get()) : null
         );
     }
 
@@ -84,7 +90,10 @@ public class CraftsmanModel {
                         .map(AddressEmbedded::toDomain)
                         .orElse(null),
                 getCreatedAt(),
-                getUpdatedAt()
+                getUpdatedAt(),
+                Optional.ofNullable(getCompany())
+                        .map(CompanyModel::toDomain)
+                        .orElse(null)
         );
     }
 }

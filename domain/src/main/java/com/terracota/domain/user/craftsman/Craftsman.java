@@ -3,6 +3,7 @@ package com.terracota.domain.user.craftsman;
 import com.terracota.domain.AggregateRoot;
 import com.terracota.domain.resource.ImagePhoto;
 import com.terracota.domain.user.*;
+import com.terracota.domain.user.company.Company;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -27,6 +28,8 @@ public class Craftsman extends AggregateRoot<CraftsmanID> {
 
     private Instant updatedAt;
 
+    private Company company;
+
     private Craftsman(
             final CraftsmanID craftsmanID,
             final User user,
@@ -49,6 +52,32 @@ public class Craftsman extends AggregateRoot<CraftsmanID> {
         this.address = address;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    private Craftsman(
+            final CraftsmanID craftsmanID,
+            final User user,
+            final String name,
+            final String phone,
+            final CPF cpf,
+            final boolean isActive,
+            final ImagePhoto photo,
+            final Address address,
+            final Instant createdAt,
+            final Instant updatedAt,
+            final Company company
+    ) {
+        super(craftsmanID);
+        this.user = user;
+        this.name = name;
+        this.phone = phone;
+        this.cpf = cpf;
+        this.active = isActive;
+        this.photo = photo;
+        this.address = address;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.company = company;
     }
 
     public static Craftsman newCraftsman(
@@ -78,9 +107,10 @@ public class Craftsman extends AggregateRoot<CraftsmanID> {
             final ImagePhoto photo,
             final Address address,
             final Instant createdAt,
-            final Instant updatedAt
+            final Instant updatedAt,
+            final Company company
     ){
-        return new Craftsman(craftsmanID, user, name, phone, cpf, isActive, photo, address, createdAt, updatedAt);
+        return new Craftsman(craftsmanID, user, name, phone, cpf, isActive, photo, address, createdAt, updatedAt, company);
     }
 
     public void activate(){
@@ -145,5 +175,9 @@ public class Craftsman extends AggregateRoot<CraftsmanID> {
 
     public Optional<ImagePhoto> getPhoto() {
         return Optional.ofNullable(photo);
+    }
+
+    public Optional<Company> getCompany() {
+        return Optional.ofNullable(company);
     }
 }
