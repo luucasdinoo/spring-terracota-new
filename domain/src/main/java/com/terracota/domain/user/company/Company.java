@@ -61,7 +61,7 @@ public class Company extends AggregateRoot<CompanyID> {
         this.craftsmen = new HashSet<>();
     }
 
-    public static Company newCustomer(
+    public static Company newCompany(
             final String email,
             final String password,
             final Role role,
