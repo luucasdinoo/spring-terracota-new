@@ -5,6 +5,9 @@ import com.terracota.domain.product.Product;
 import com.terracota.domain.product.ProductGateway;
 import com.terracota.domain.product.ProductID;
 import com.terracota.domain.resource.*;
+import com.terracota.domain.user.company.Company;
+import com.terracota.domain.user.company.CompanyGateway;
+import com.terracota.domain.user.company.CompanyID;
 import com.terracota.domain.user.craftsman.Craftsman;
 import com.terracota.domain.user.craftsman.CraftsmanGateway;
 import com.terracota.domain.user.craftsman.CraftsmanID;
@@ -20,6 +23,7 @@ public class DefaultUploadImageUseCase extends UploadImageUseCase{
     private final ResourceGateway resourceGateway;
     private final CustomerGateway customerGateway;
     private final CraftsmanGateway craftsmanGateway;
+    private final CompanyGateway companyGateway;
     private final ProductGateway productGateway;
     private final ImageGateway imageGateway;
 
@@ -27,12 +31,14 @@ public class DefaultUploadImageUseCase extends UploadImageUseCase{
             final ResourceGateway resourceGateway,
             final CustomerGateway customerGateway,
             final CraftsmanGateway craftsmanGateway,
+            final CompanyGateway companyGateway,
             final ProductGateway productGateway,
             final ImageGateway imageGateway
     ) {
         this.resourceGateway = Objects.requireNonNull(resourceGateway);
         this.customerGateway = Objects.requireNonNull(customerGateway);
         this.craftsmanGateway = Objects.requireNonNull(craftsmanGateway);
+        this.companyGateway = Objects.requireNonNull(companyGateway);
         this.productGateway = Objects.requireNonNull(productGateway);
         this.imageGateway = Objects.requireNonNull(imageGateway);
     }
@@ -76,7 +82,20 @@ public class DefaultUploadImageUseCase extends UploadImageUseCase{
                     this.imageGateway.save(photo);
                 }
                 else {
-                    throw EntityNotFoundException.with("Entity not found");
+                    Optional<Company> companyOpt = this.companyGateway.findById(CompanyID.from(id));
+                    if (companyOpt.isPresent()){
+                        Company company = companyOpt.get();
+                        ImagePhoto photo = cmd.getResource()
+                                .map(it -> this.resourceGateway.storeImage(company.getId(), MediaResource.with(it, MediaType.PRODUCT_PHOTO)))
+                                .orElse(null);
+
+                        company.setPhoto(photo);
+                        this.companyGateway.update(company);
+                        this.imageGateway.save(photo);
+                }
+                    else {
+                        throw EntityNotFoundException.with("Resource not found for ID: " + id);
+                    }
                 }
             }
         }

@@ -17,6 +17,7 @@ import com.terracota.application.files.UploadImageUseCase;
 import com.terracota.domain.product.ProductGateway;
 import com.terracota.domain.resource.ImageGateway;
 import com.terracota.domain.resource.ResourceGateway;
+import com.terracota.domain.user.company.CompanyGateway;
 import com.terracota.domain.user.craftsman.CraftsmanGateway;
 import com.terracota.domain.user.customer.CustomerGateway;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,7 @@ public class CustomerUseCaseConfig {
 
     private final CustomerGateway customerGateway;
     private final CraftsmanGateway craftsmanGateway;
+    private final CompanyGateway companyGateway;
     private final ResourceGateway resourceGateway;
     private final ProductGateway productGateway;
     private final ImageGateway imageGateway;
@@ -36,12 +38,14 @@ public class CustomerUseCaseConfig {
     public CustomerUseCaseConfig(
             final CustomerGateway customerGateway,
             final CraftsmanGateway craftsmanGateway,
+            final CompanyGateway companyGateway,
             final ResourceGateway resourceGateway,
             final ProductGateway productGateway,
             final ImageGateway imageGateway
     ) {
         this.customerGateway = Objects.requireNonNull(customerGateway);
         this.craftsmanGateway = Objects.requireNonNull(craftsmanGateway);
+        this.companyGateway = Objects.requireNonNull(companyGateway);
         this.resourceGateway = Objects.requireNonNull(resourceGateway);
         this.productGateway = Objects.requireNonNull(productGateway);
         this.imageGateway = Objects.requireNonNull(imageGateway);
@@ -79,7 +83,7 @@ public class CustomerUseCaseConfig {
 
     @Bean
     public UploadImageUseCase uploadImageUseCase(){
-        return new DefaultUploadImageUseCase(resourceGateway, customerGateway, craftsmanGateway, productGateway, imageGateway);
+        return new DefaultUploadImageUseCase(resourceGateway, customerGateway, craftsmanGateway, companyGateway, productGateway, imageGateway);
     }
 
 }

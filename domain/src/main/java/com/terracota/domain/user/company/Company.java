@@ -116,6 +116,18 @@ public class Company extends AggregateRoot<CompanyID> {
         return this;
     }
 
+    public Company add(final Craftsman craftsman){
+        craftsmen.add(craftsman);
+        this.updatedAt = Instant.now();
+        return this;
+    }
+
+    public Company remove(final Craftsman craftsman){
+        craftsmen.remove(craftsman);
+        this.updatedAt = Instant.now();
+        return this;
+    }
+
     public User getOwner() {
         return owner;
     }
@@ -154,5 +166,11 @@ public class Company extends AggregateRoot<CompanyID> {
 
     public Set<Craftsman> getCraftsmen() {
         return craftsmen != null ? Collections.unmodifiableSet(craftsmen) : Collections.emptySet();
+    }
+
+    public Company setPhoto(final ImagePhoto photo) {
+        this.photo = photo;
+        this.updatedAt = Instant.now();
+        return this;
     }
 }
