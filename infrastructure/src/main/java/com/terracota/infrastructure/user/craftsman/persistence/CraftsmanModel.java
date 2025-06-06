@@ -6,7 +6,7 @@ import com.terracota.domain.user.craftsman.CraftsmanID;
 import com.terracota.infrastructure.user.AddressEmbedded;
 import com.terracota.infrastructure.user.ImagePhotoModel;
 import com.terracota.infrastructure.user.UserEmbedded;
-import com.terracota.infrastructure.user.company.CompanyModel;
+import com.terracota.infrastructure.user.company.persistence.CompanyModel;
 import jakarta.persistence.*;
 import lombok.*;
 

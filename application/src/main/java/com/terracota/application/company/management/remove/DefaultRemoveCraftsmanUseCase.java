@@ -1,7 +1,5 @@
 package com.terracota.application.company.management.remove;
 
-import com.terracota.application.company.management.add.AddCraftsmanCommand;
-import com.terracota.application.company.management.add.AddCraftsmanUseCase;
 import com.terracota.domain.exceptions.EntityNotFoundException;
 import com.terracota.domain.user.company.Company;
 import com.terracota.domain.user.company.CompanyGateway;
@@ -12,7 +10,7 @@ import com.terracota.domain.user.craftsman.CraftsmanID;
 
 import java.util.Objects;
 
-public class DefaultRemoveCraftsmanUseCase extends AddCraftsmanUseCase {
+public class DefaultRemoveCraftsmanUseCase extends RemoveCraftsmanUseCase {
 
     private final CompanyGateway companyGateway;
     private final CraftsmanGateway craftsmanGateway;
@@ -23,7 +21,7 @@ public class DefaultRemoveCraftsmanUseCase extends AddCraftsmanUseCase {
     }
 
     @Override
-    public void execute(final AddCraftsmanCommand input) {
+    public void execute(final RemoveCraftsmanCommand input) {
         CompanyID companyId = CompanyID.from(input.companyId());
         Company company = this.companyGateway.findById(companyId)
                 .orElseThrow(() -> EntityNotFoundException.with(Company.class, companyId));

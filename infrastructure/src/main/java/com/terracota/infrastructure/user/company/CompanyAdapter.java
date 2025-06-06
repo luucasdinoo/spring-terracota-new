@@ -3,6 +3,8 @@ package com.terracota.infrastructure.user.company;
 import com.terracota.domain.user.company.Company;
 import com.terracota.domain.user.company.CompanyGateway;
 import com.terracota.domain.user.company.CompanyID;
+import com.terracota.infrastructure.user.company.persistence.CompanyModel;
+import com.terracota.infrastructure.user.company.persistence.CompanyRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;

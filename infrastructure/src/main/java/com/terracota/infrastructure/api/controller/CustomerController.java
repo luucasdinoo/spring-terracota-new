@@ -10,17 +10,13 @@ import com.terracota.application.customer.retrieve.list.ListCustomerUseCase;
 import com.terracota.application.customer.update.UpdateCustomerCommand;
 import com.terracota.application.customer.update.UpdateCustomerOutput;
 import com.terracota.application.customer.update.UpdateCustomerUseCase;
-import com.terracota.application.files.UploadImageUseCase;
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.domain.pagination.SearchQuery;
-import com.terracota.domain.resource.Resource;
 import com.terracota.infrastructure.api.CustomerAPI;
 import com.terracota.infrastructure.user.customer.models.*;
 import com.terracota.infrastructure.user.customer.presenter.CustomerPresenter;
-import com.terracota.infrastructure.utils.HashingUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.util.Objects;
@@ -42,8 +38,7 @@ public class CustomerController implements CustomerAPI {
             final GetCustomerBydIdUseCase getCustomerBydIdUseCase,
             final GetCustomerByEmailUseCase getCustomerByEmailUseCase,
             final DeleteCustomerUseCase deleteCustomerUseCase,
-            final UpdateCustomerUseCase updateCustomerUseCase,
-            final UploadImageUseCase uploadImageUseCase
+            final UpdateCustomerUseCase updateCustomerUseCase
     ) {
         this.createCustomerUseCase = Objects.requireNonNull(createCustomerUseCase);
         this.listCustomerUseCase = Objects.requireNonNull(listCustomerUseCase);
