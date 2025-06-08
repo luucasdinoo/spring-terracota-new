@@ -39,7 +39,7 @@ public class CompanyModel {
     @Column(name = "phone", nullable = false, length = 11)
     private String phone;
 
-    @Column(name = "active", nullable = false)
+    @Column(name = "is_active", nullable = false)
     private boolean active;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)

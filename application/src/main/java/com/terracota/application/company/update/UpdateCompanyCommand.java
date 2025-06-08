@@ -7,7 +7,7 @@ public record UpdateCompanyCommand(
         String phone,
         boolean isActive
 ) {
-    public static UpdateCompanyCommand from(
+    public static UpdateCompanyCommand with(
             final String id,
             final String legalName,
             final String tradeName,

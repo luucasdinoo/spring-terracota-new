@@ -1,4 +1,4 @@
-CREATE TABLE customers(
+CREATE TABLE companies(
     id CHAR(32) NOT NULL PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -17,6 +17,6 @@ CREATE TABLE customers(
     CONSTRAINT fk_company_photo_id FOREIGN KEY (photo_id) REFERENCES resources (id) ON DELETE SET NULL
 );
 
-ALTER TABLE craftsmen ADD COLUMN company_id VARCHAR(255);
+ALTER TABLE craftsmen ADD COLUMN company_id CHAR(32);
 
 ALTER TABLE craftsmen ADD CONSTRAINT fk_craftsman_company FOREIGN KEY (company_id) REFERENCES companies(id);

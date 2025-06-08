@@ -55,7 +55,8 @@ public class UserEmbedded implements UserDetails {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_ADMIN"),
                     new SimpleGrantedAuthority("ROLE_CUSTOMER"),
-                    new SimpleGrantedAuthority("ROLE_CRAFTSMAN")
+                    new SimpleGrantedAuthority("ROLE_CRAFTSMAN"),
+                    new SimpleGrantedAuthority("ROLE_COMPANY")
             );
         }
         return List.of(new SimpleGrantedAuthority(this.role.getRole()));

@@ -7,6 +7,7 @@ public enum Role {
 
     CUSTOMER("customer"),
     CRAFTSMAN("craftsman"),
+    COMPANY("company"),
     ADMIN("admin");
 
     private String role;

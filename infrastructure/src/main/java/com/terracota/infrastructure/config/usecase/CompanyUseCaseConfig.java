@@ -14,6 +14,7 @@ import com.terracota.application.company.update.DefaultUpdateCompanyUseCase;
 import com.terracota.application.company.update.UpdateCompanyUseCase;
 import com.terracota.domain.user.company.CompanyGateway;
 import com.terracota.domain.user.craftsman.CraftsmanGateway;
+import com.terracota.domain.user.customer.CustomerGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,7 +26,10 @@ public class CompanyUseCaseConfig {
     private final CompanyGateway companyGateway;
     private final CraftsmanGateway craftsmanGateway;
 
-    public CompanyUseCaseConfig(final CompanyGateway companyGateway, final CraftsmanGateway craftsmanGateway) {
+    public CompanyUseCaseConfig(
+            final CompanyGateway companyGateway,
+            final CraftsmanGateway craftsmanGateway
+    ) {
         this.companyGateway = Objects.requireNonNull(companyGateway);
         this.craftsmanGateway = Objects.requireNonNull(craftsmanGateway);
     }

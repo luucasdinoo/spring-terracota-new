@@ -86,7 +86,7 @@ public class DefaultUploadImageUseCase extends UploadImageUseCase{
                     if (companyOpt.isPresent()){
                         Company company = companyOpt.get();
                         ImagePhoto photo = cmd.getResource()
-                                .map(it -> this.resourceGateway.storeImage(company.getId(), MediaResource.with(it, MediaType.PRODUCT_PHOTO)))
+                                .map(it -> this.resourceGateway.storeImage(company.getId(), MediaResource.with(it, MediaType.USER_PHOTO)))
                                 .orElse(null);
 
                         company.setPhoto(photo);

@@ -1,7 +1,9 @@
 package com.terracota.infrastructure.user.company.presenter;
 
 import com.terracota.application.company.retrieve.get.CompanyOutput;
+import com.terracota.application.company.retrieve.list.ListCompaniesOutput;
 import com.terracota.infrastructure.user.company.models.CompanyResponse;
+import com.terracota.infrastructure.user.company.models.ListCompaniesResponse;
 
 public interface CompanyPresenter {
 
@@ -15,6 +17,14 @@ public interface CompanyPresenter {
                 output.photo(),
                 output.createdAt(),
                 output.updatedAt()
+        );
+    }
+
+    static ListCompaniesResponse present(final ListCompaniesOutput output){
+        return new ListCompaniesResponse(
+                output.legalName(),
+                output.tradeName(),
+                output.cnpj()
         );
     }
 }

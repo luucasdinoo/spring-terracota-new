@@ -24,9 +24,11 @@ public class DefaultCreateCompanyUseCase extends CreateCompanyUseCase {
         if (role == Role.ADMIN)
             throw DomainException.with("Invalid role");
 
+        String hashPassword = this.companyGateway.hashPassword(input.password());
+
         Company company = Company.newCompany(
                 input.email(),
-                input.password(),
+                hashPassword,
                 role,
                 input.legalName(),
                 input.tradeName(),
