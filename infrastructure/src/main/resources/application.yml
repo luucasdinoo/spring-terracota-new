@@ -5,24 +5,19 @@ spring:
     url: ${postgres.url}
     username: ${postgres.username}
     password: ${postgres.password}
-    schema: ${postgres.schema}
     driver-class-name: org.postgresql.Driver
-
+  flyway:
+    locations:
+      - classpath:db/migration
   jpa:
     open-in-view: false
     show-sql: true
     hibernate:
       ddl-auto: none
-    driver-class-name: org.postgresql.Driver
-
   servlet:
     multipart:
       max-file-size: 15MB
       max-request-size: 15MB
-
-  flyway:
-    locations:
-      - classpath:db/migration
 
 server:
   port: 8080
@@ -60,7 +55,4 @@ storage:
 
 mercado-pago:
   terracota:
-    public-key: ${MERCADO_PAGO_PUBLIC_KEY}
     access-token: ${MERCADO_PAGO_ACCESS_TOKEN}
-    client-id: ${MERCADO_PAGO_CLIENT_ID}
-    client-secret: ${MERCADO_PAGO_CLIENT_SECRET}

@@ -1,5 +1,4 @@
 postgres:
   username: docker
   password: docker
-  schema: terracote_db_dev
   url: jdbc:postgresql://localhost:5432/terracote_db_dev
