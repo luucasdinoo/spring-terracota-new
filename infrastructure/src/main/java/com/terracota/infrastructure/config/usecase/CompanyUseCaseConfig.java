@@ -9,12 +9,13 @@ import com.terracota.application.company.management.remove.RemoveCraftsmanUseCas
 import com.terracota.application.company.retrieve.get.DefaultGetCompanyByIdUseCase;
 import com.terracota.application.company.retrieve.get.GetCompanyByIdUseCase;
 import com.terracota.application.company.retrieve.list.DefaultListCompaniesUseCase;
+import com.terracota.application.company.retrieve.list.DefaultListCraftsmenCompanyUseCase;
 import com.terracota.application.company.retrieve.list.ListCompaniesUseCase;
+import com.terracota.application.company.retrieve.list.ListCraftsmenCompanyUseCase;
 import com.terracota.application.company.update.DefaultUpdateCompanyUseCase;
 import com.terracota.application.company.update.UpdateCompanyUseCase;
 import com.terracota.domain.user.company.CompanyGateway;
 import com.terracota.domain.user.craftsman.CraftsmanGateway;
-import com.terracota.domain.user.customer.CustomerGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -62,5 +63,10 @@ public class CompanyUseCaseConfig {
     @Bean
     public RemoveCraftsmanUseCase removeCraftsmanUseCase(){
         return new DefaultRemoveCraftsmanUseCase(companyGateway, craftsmanGateway);
+    }
+
+    @Bean
+    public ListCraftsmenCompanyUseCase listCraftsmenCompanyUseCase(){
+        return new DefaultListCraftsmenCompanyUseCase(companyGateway);
     }
 }

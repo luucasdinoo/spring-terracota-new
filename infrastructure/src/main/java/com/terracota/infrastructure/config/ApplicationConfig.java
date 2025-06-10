@@ -4,11 +4,7 @@ import jakarta.annotation.PostConstruct;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
-import java.util.List;
 import java.util.TimeZone;
 
 @Configuration

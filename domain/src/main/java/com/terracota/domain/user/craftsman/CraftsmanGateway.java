@@ -15,7 +15,7 @@ public interface CraftsmanGateway {
 
     Optional<Craftsman> findByEmail(String email);
 
-    Craftsman update(Craftsman aCraftsman);
+    void update(Craftsman aCraftsman);
 
     Pagination<Craftsman> list(SearchQuery aQuery);
 

@@ -2,6 +2,8 @@ package com.terracota.domain.user.company;
 
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.domain.pagination.SearchQuery;
+import com.terracota.domain.pagination.projection.CraftsmenDomainProjection;
+import com.terracota.domain.user.craftsman.Craftsman;
 
 import java.util.Optional;
 
@@ -12,6 +14,8 @@ public interface CompanyGateway {
     Optional<Company> findById(CompanyID anId);
 
     Pagination<Company> list(SearchQuery aQuery);
+
+    Pagination<CraftsmenDomainProjection> list(SearchQuery aQuery, CompanyID id);
 
     Company update(Company aCompany);
 

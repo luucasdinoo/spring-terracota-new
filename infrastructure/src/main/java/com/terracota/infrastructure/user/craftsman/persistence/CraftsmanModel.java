@@ -1,5 +1,6 @@
 package com.terracota.infrastructure.user.craftsman.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.terracota.domain.user.CPF;
 import com.terracota.domain.user.craftsman.Craftsman;
 import com.terracota.domain.user.craftsman.CraftsmanID;
@@ -52,6 +53,7 @@ public class CraftsmanModel {
     private Instant updatedAt;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "company_id")
     private CompanyModel company;
 

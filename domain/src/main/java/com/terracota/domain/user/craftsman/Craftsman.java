@@ -180,4 +180,10 @@ public class Craftsman extends AggregateRoot<CraftsmanID> {
     public Optional<Company> getCompany() {
         return Optional.ofNullable(company);
     }
+
+    public Craftsman setCompany(final Company company) {
+        this.company = company;
+        this.updatedAt = Instant.now();
+        return this;
+    }
 }

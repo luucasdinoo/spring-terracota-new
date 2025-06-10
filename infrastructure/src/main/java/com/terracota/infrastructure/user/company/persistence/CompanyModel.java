@@ -1,5 +1,6 @@
 package com.terracota.infrastructure.user.company.persistence;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.terracota.domain.user.CNPJ;
 import com.terracota.domain.user.company.Company;
 import com.terracota.domain.user.company.CompanyID;
@@ -54,7 +55,6 @@ public class CompanyModel {
 
     @OneToMany(mappedBy = "company")
     private Set<CraftsmanModel> craftsmen;
-
 
     public static CompanyModel from(final Company company) {
         return new CompanyModel(

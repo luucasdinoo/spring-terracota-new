@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -54,8 +55,8 @@ public class CraftsmanAdapter implements CraftsmanGateway {
     }
 
     @Override
-    public Craftsman update(final Craftsman aCraftsman) {
-        return save(aCraftsman);
+    public void update(final Craftsman aCraftsman) {
+        this.craftsmanRepository.save(CraftsmanModel.from(aCraftsman));
     }
 
     @Override
