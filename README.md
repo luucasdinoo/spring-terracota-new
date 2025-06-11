@@ -1,165 +1,85 @@
-# Documentação TERRACOTA
+# 🏺 TERRACOTA
 
-## Introdução
-Esta documentação descreve os endpoints disponíveis na aplicação Terracota.
+**TERRACOTA** é uma plataforma de e-commerce especializada na venda e compra de produtos artesanais. O sistema oferece uma solução completa para artesãos gerenciarem seus produtos e vendas de forma eficiente e segura.
 
-## Endpoints
+*Documentação da API*
+- [https://spring-terracota-new.onrender.com/api/swagger-ui/index.html](https://spring-terracota-new.onrender.com/api/swagger-ui/index.html)
+---
 
-### Authentication
+## 🚀 Tecnologias Utilizadas
 
-#### 1. **POST /api/auth**
-- **Descrição:** Autenticação de usuário.
-```json
-{
-  "email": "",
-  "password": ""
-}
-```
-**Response**
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30"
-}
-```
+- **Java 21**
+- **Spring Boot**
+- **Spring Data JPA**
+- **Spring Security**
+- **SpringDoc OpenAPI**
+- **Flyway** (versionamento de banco de dados)
+- **Lombok**
+- **PostgreSQL**
+- **Azure Spring**
+- **Google Guava**
+- **Mercado Pago SDK**
+- **Auth0 JWT** (autenticação e autorização)
 
-### Customer
+---
 
-#### 1. **POST /api/customers**
-- **Descrição:** Cria um novo cliente.
-- **Request:**
-  ```json
-    {
-      "email": "",
-      "password": "",
-      "user_role": "CUSTOMER",
-      "name": "",
-      "phone": "",
-      "cpf": "",
-      "is_active": true,
-      "address": {
-        "address_street": "",
-        "address_number": "",
-        "address_neighborhood": "",
-        "address_city": "",
-        "address_state": "",
-        "address_zip_code": ""
-    }
-  }
-  ```
-#### 2. **GET /api/customers**
-- **Descrição:** Retorna a lista de clientes.
-- **Parâmetros de Consulta:**-
-- `search` (opcional)
-- `page` (opcional)
-- `perPage` (opcional)
-- `sort` (opcional)
-- `dir` (opcional)
+## 🧱 Arquitetura
 
-#### 3. **GET /api/customers/{id}**
-- **Descrição:** Retorna um cliente.
+O projeto adota a **Arquitetura Hexagonal (Ports and Adapters)**, com a seguinte estrutura principal:
 
-#### 4. **DELETE /api/customers/{id}**
-- **Descrição:** Deleta um cliente.
-
-#### 5. **PUT /api/customers/{id}**
-- **Descrição:** Atualiza um cliente.
-```json
-    {
-      "name": "",
-      "phone": "",
-      "is_active": true
-    }
+```bash
+terracota
+├── application      # Casos de uso
+├── domain           # Entidades, interfaces e lógica de negócio
+└── infrastructure   # Controllers, repositórios, configurações e integrações externas
 ```
 
-### Craftsman
+---
 
-#### 1. **POST /api/craftsmen**
-- **Descrição:** Cria um novo cliente.
-- **Request:**
-  ```json
-    {
-      "email": "",
-      "password": "",
-      "user_role": "CRAFTSMAN",
-      "name": "",
-      "phone": "",
-      "cpf": "",
-      "is_active": true,
-      "address": {
-        "address_street": "",
-        "address_number": "",
-        "address_neighborhood": "",
-        "address_city": "",
-        "address_state": "",
-        "address_zip_code": ""
-    }
-  }
-  ```
-#### 2. **GET /api/craftsmen/**
-- **Descrição:** Retorna a lista de artesãos.
-- `search` (opcional)
-- `page` (opcional)
-- `perPage` (opcional)
-- `sort` (opcional)
-- `dir` (opcional)
+## 🎯 Objetivo do Projeto
 
-#### 3. **GET /api/craftsmen/{id}**
-- **Descrição:** Retorna um artesão.
+Criar um sistema robusto e escalável que permita:
 
-#### 4. **DELETE /api/craftsmen/{id}**
-- **Descrição:** Deleta um artesão.
+- Gerenciar produtos artesanais
+- Realizar compras e vendas
+- Integrar com meios de pagamento (Mercado Pago)
+- Autenticação segura com JWT (Auth0)
+- Disponibilizar documentação automatizada da API
 
-#### 5. **PUT /api/craftsmen/{id}**
-- **Descrição:** Atualiza um artesão.
-```json
-    {
-      "name": "",
-      "phone": "",
-      "is_active": true
-    }
-```
+---
 
-### Product
+## 🧠 Integrações com IA
 
-#### 1. **POST /api/products**
-- **Descrição:** Cria um novo produto.
-  - **Request:**
-  ```json
-      {
-        "name": "",
-        "description": "",
-        "price": 0.0,
-        "type": "artesanato_em_papel",
-        "craftsman_id": ""
-       }
-  ```
-#### 2. **DELETE /api/products/{id}**
-- **Descrição:** Deleta um produto.
+O projeto conta com funcionalidades baseadas em inteligência artificial:
 
-#### 3. **GET /api/products/{product_id}/craftsmen/{craftsman_id}**
-- **Descrição:** Retorna um produto de um artesão.
+- **Chatbot inteligente** para auxiliar usuários durante a navegação e no processo de compra.
+- **Sistema de recomendação de produtos** personalizado com base no comportamento de navegação e histórico de compras dos usuários.
 
-#### 4. **GET /api/craftsmen/{id}**
-- **Descrição:** Retorna a lsita de produtos de um artesão.
-- `search` (opcional)
-- `page` (opcional)
-- `perPage` (opcional)
-- `sort` (opcional)
-- `dir` (opcional)
+---
 
-#### 5. **PUT /api/products/{product_id}/craftsmen/craftsmen_id**
-- **Descrição:** Atualiza um produto.
-```json
-{
-  "name": "",
-  "description": "",
-  "price": 0.0
-}
-```
-#### 6. **PATCH /api/products/{product_id}/craftsmen/craftsmen_id/add**
-- **Descrição:** Adiciona um produto.
-- `qtd` (opcional)
+## 🛠️ Como executar localmente
 
-#### 7. **PATCH /api/products/{product_id}/craftsmen/craftsmen_id/remove**
-- **Descrição:** Remove um produto.
-- `qtd` (opcional)
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/luucasdinoo/spring-terracota-new.git
+   cd spring-terracota-new
+   ```
+
+2. Inicie um banco de dados PostgreSQL localmente ou configure um banco remoto:
+   ```bash
+   docker compose up -d
+   ```
+
+3. Verifique as migrations do Flyway e execute-as logo em seguida:
+   ```bash
+   mvn flyway:info
+   mvn flyway:migrate
+   ```
+
+4. Adicione suas variáveis de ambiente, exemplo presente no arquivo `.env.example`.
+
+
+5. Execute o projeto:
+   ```bash
+   mvn spring-boot:run
+   ```
