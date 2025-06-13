@@ -30,7 +30,7 @@ public class DefaultAddCraftsmanUseCase extends AddCraftsmanUseCase{
         Craftsman craftsman = this.craftsmanGateway.findById(craftsmanId)
                 .orElseThrow(() -> EntityNotFoundException.with(Craftsman.class, craftsmanId));
 
-        company.add(craftsman);
-        this.companyGateway.update(company);
+        craftsman.setCompany(company);
+        this.craftsmanGateway.update(craftsman);
     }
 }

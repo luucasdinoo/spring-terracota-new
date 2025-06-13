@@ -54,8 +54,8 @@ public class CraftsmanAdapter implements CraftsmanGateway {
     }
 
     @Override
-    public Craftsman update(final Craftsman aCraftsman) {
-        return save(aCraftsman);
+    public void update(final Craftsman aCraftsman) {
+        this.craftsmanRepository.save(CraftsmanModel.from(aCraftsman));
     }
 
     @Override

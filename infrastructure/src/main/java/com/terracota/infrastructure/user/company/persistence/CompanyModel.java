@@ -1,5 +1,6 @@
 package com.terracota.infrastructure.user.company.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.terracota.domain.user.CNPJ;
 import com.terracota.domain.user.company.Company;
 import com.terracota.domain.user.company.CompanyID;
@@ -52,9 +53,9 @@ public class CompanyModel {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<CraftsmanModel> craftsmen;
-
 
     public static CompanyModel from(final Company company) {
         return new CompanyModel(
@@ -70,9 +71,7 @@ public class CompanyModel {
                         .orElse(null),
                 company.getCreatedAt(),
                 company.getUpdatedAt(),
-                company.getCraftsmen().stream()
-                        .map(CraftsmanModel::from)
-                        .collect(Collectors.toSet())
+                null
         );
     }
 
@@ -90,9 +89,7 @@ public class CompanyModel {
                         .orElse(null),
                 getCreatedAt(),
                 getUpdatedAt(),
-                getCraftsmen().stream()
-                        .map(CraftsmanModel::toDomain)
-                        .collect(Collectors.toSet())
+                null
         );
     }
 }

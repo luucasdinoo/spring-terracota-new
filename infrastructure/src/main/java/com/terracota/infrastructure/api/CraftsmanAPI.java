@@ -5,7 +5,6 @@ import com.terracota.infrastructure.user.craftsman.models.CraftsmanResponse;
 import com.terracota.infrastructure.user.craftsman.models.CreateCraftsmanRequest;
 import com.terracota.infrastructure.user.craftsman.models.ListCraftsmenResponse;
 import com.terracota.infrastructure.user.craftsman.models.UpdateCraftsmanRequest;
-import com.terracota.infrastructure.user.customer.models.CustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -36,7 +35,7 @@ public interface CraftsmanAPI {
             @RequestParam(name = "search", required = false, defaultValue = "") final String search,
             @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
             @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
-            @RequestParam(name = "sort", required = false, defaultValue = "name") final String sort,
+            @RequestParam(name = "sort", required = false, defaultValue = "id") final String sort,
             @RequestParam(name = "dir", required = false, defaultValue = "asc") final String dir
     );
 
@@ -55,7 +54,7 @@ public interface CraftsmanAPI {
     CraftsmanResponse getByEmail(@PathVariable String email);
 
     @DeleteMapping(value = "{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN', 'COMPANY')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete craftsman by id")
     @ApiResponses(value = {

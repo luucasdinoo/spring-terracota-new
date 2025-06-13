@@ -29,7 +29,7 @@ public class PaymentAdapter implements PaymentGateway {
             PreferenceClient client = new PreferenceClient();
             List<PreferenceItemRequest> items = new ArrayList<>();
             saleItems.forEach(saleItem -> {
-                productRepository.findById(saleItem.productId().getValue())
+                productRepository.findById(saleItem.productId())
                         .ifPresent(productModel -> {
                             Product product = productModel.toDomain();
                             Optional<ImagePhoto> photo = product.getPhoto();
@@ -60,10 +60,11 @@ public class PaymentAdapter implements PaymentGateway {
                                     .installments(12)
                                     .defaultInstallments(1)
                                     .build())
+                    .autoReturn("approved")
                     .build();
 
             Preference preference = client.create(preferenceRequest);
-            return preference.getSandboxInitPoint();
+            return preference.getInitPoint();
 
         }catch (MPException | MPApiException e) {
             throw PaymentProcessingException.with("An error occurred while processing the payment with Mercado Pago.");

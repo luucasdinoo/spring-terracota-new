@@ -22,7 +22,7 @@ public class DefaultUpdateCraftsmanUseCase extends UpdateCraftsmanUseCase{
                 .orElseThrow(() -> EntityNotFoundException.with(Craftsman.class, anId));
 
         Craftsman updatedCraftsman = craftsman.update(input.name(), input.phone(), input.isActive());
-
-        return UpdateCraftsmanOutput.from(this.craftsmanGateway.update(updatedCraftsman));
+        this.craftsmanGateway.update(updatedCraftsman);
+        return UpdateCraftsmanOutput.from(updatedCraftsman);
     }
 }
