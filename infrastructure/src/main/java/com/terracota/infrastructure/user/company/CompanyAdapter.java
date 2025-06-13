@@ -45,6 +45,12 @@ public class CompanyAdapter implements CompanyGateway {
     }
 
     @Override
+    public Optional<Company> findByEmail(final String email) {
+        return this.companyRepository.findByUserEmail(email)
+                .map(CompanyModel::toDomain);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Pagination<Company> list(final SearchQuery aQuery) {
         PageRequest page = PageRequest.of(

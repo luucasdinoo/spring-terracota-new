@@ -57,7 +57,7 @@ public class SpringSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/chatbot").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/images").permitAll()
                         .requestMatchers(HttpMethod.POST, "/companies").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/companies", "/companies/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/companies", "/companies/{id}", "/companies/email/{email}").permitAll()
                         .requestMatchers(SWAGGER_LIST).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

@@ -52,6 +52,13 @@ public interface CompanyAPI {
     })
     CompanyResponse getById(@PathVariable String id);
 
+    @GetMapping(value = "email/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Retrieve company by email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Company retrieved successfully")
+    })
+    CompanyResponse getByEmail(@PathVariable String email);
+
     @GetMapping(value = "{companyId}/craftsmen", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN', 'COMPANY')")
     @Operation(summary = "List craftsmen companies")

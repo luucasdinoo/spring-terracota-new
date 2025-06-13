@@ -6,7 +6,9 @@ import com.terracota.application.company.management.add.AddCraftsmanUseCase;
 import com.terracota.application.company.management.add.DefaultAddCraftsmanUseCase;
 import com.terracota.application.company.management.remove.DefaultRemoveCraftsmanUseCase;
 import com.terracota.application.company.management.remove.RemoveCraftsmanUseCase;
+import com.terracota.application.company.retrieve.get.DefaultCompanyByEmailUseCase;
 import com.terracota.application.company.retrieve.get.DefaultGetCompanyByIdUseCase;
+import com.terracota.application.company.retrieve.get.GetCompanyByEmailUseCase;
 import com.terracota.application.company.retrieve.get.GetCompanyByIdUseCase;
 import com.terracota.application.company.retrieve.list.DefaultListCraftsmenCompanyUseCase;
 import com.terracota.application.company.retrieve.list.ListCraftsmenCompanyUseCase;
@@ -41,6 +43,11 @@ public class CompanyUseCaseConfig {
     @Bean
     public GetCompanyByIdUseCase getCompanyByIdUseCase(){
         return new DefaultGetCompanyByIdUseCase(companyGateway);
+    }
+
+    @Bean
+    public GetCompanyByEmailUseCase getCompanyByEmailUseCase(){
+        return new DefaultCompanyByEmailUseCase(companyGateway);
     }
 
 

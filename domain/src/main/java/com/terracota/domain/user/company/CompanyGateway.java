@@ -12,6 +12,8 @@ public interface CompanyGateway {
 
     Optional<Company> findById(CompanyID anId);
 
+    Optional<Company> findByEmail(String email);
+
     Pagination<Company> list(SearchQuery aQuery);
 
     Pagination<CraftsmenDomainProjection> list(SearchQuery aQuery, CompanyID id);
