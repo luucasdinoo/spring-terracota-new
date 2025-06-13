@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public interface ProductAPI {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN', 'COMPANY')")
     @Operation(summary = "Create new Product")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Product created successfully")
@@ -35,7 +35,7 @@ public interface ProductAPI {
     ProductResponse getById(@PathVariable String productId, @PathVariable String craftsmanId);
 
     @DeleteMapping(value = "{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN', 'COMPANY')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete Product by id")
     @ApiResponses(value = {
@@ -48,7 +48,7 @@ public interface ProductAPI {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN', 'COMPANY')")
     @Operation(summary = "Update Product by identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Product updated successfully")
@@ -87,7 +87,7 @@ public interface ProductAPI {
     );
 
     @PatchMapping("{productId}/craftsmen/{craftsmanId}/add")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN', 'COMPANY')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Add product")
     @ApiResponses(value = {
@@ -100,7 +100,7 @@ public interface ProductAPI {
     );
 
     @PatchMapping("{productId}/craftsmen/{craftsmanId}/remove")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN', 'COMPANY')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Remove product")
     @ApiResponses(value = {

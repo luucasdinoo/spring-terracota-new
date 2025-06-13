@@ -54,7 +54,7 @@ public interface CraftsmanAPI {
     CraftsmanResponse getByEmail(@PathVariable String email);
 
     @DeleteMapping(value = "{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CRAFTSMAN', 'COMPANY')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete craftsman by id")
     @ApiResponses(value = {

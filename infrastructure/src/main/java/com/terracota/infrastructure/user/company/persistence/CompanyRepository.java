@@ -31,5 +31,4 @@ public interface CompanyRepository extends JpaRepository<CompanyModel, String> {
 
     @Query("FROM Company c LEFT JOIN FETCH c.craftsmen WHERE c.id = :id")
     Optional<CompanyModel> findByIdWithCraftsmen(@Param("id") String id);
-
 }

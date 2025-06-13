@@ -2,7 +2,10 @@ package com.terracota.domain.user.craftsman;
 
 import com.terracota.domain.AggregateRoot;
 import com.terracota.domain.resource.ImagePhoto;
-import com.terracota.domain.user.*;
+import com.terracota.domain.user.Address;
+import com.terracota.domain.user.CPF;
+import com.terracota.domain.user.Role;
+import com.terracota.domain.user.User;
 import com.terracota.domain.user.company.Company;
 
 import java.time.Instant;

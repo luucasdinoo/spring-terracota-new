@@ -8,7 +8,6 @@ import com.terracota.application.company.management.add.AddCraftsmanUseCase;
 import com.terracota.application.company.management.remove.RemoveCraftsmanCommand;
 import com.terracota.application.company.management.remove.RemoveCraftsmanUseCase;
 import com.terracota.application.company.retrieve.get.GetCompanyByIdUseCase;
-import com.terracota.application.company.retrieve.list.ListCompaniesUseCase;
 import com.terracota.application.company.retrieve.list.ListCraftsmenCompanyCommand;
 import com.terracota.application.company.retrieve.list.ListCraftsmenCompanyUseCase;
 import com.terracota.application.company.update.UpdateCompanyCommand;
@@ -18,7 +17,6 @@ import com.terracota.domain.pagination.SearchQuery;
 import com.terracota.infrastructure.api.CompanyAPI;
 import com.terracota.infrastructure.user.company.models.CompanyResponse;
 import com.terracota.infrastructure.user.company.models.CreateCompanyRequest;
-import com.terracota.infrastructure.user.company.models.ListCompaniesResponse;
 import com.terracota.infrastructure.user.company.models.UpdateCompanyRequest;
 import com.terracota.infrastructure.user.company.presenter.CompanyPresenter;
 import com.terracota.infrastructure.user.craftsman.models.ListCraftsmenResponse;
@@ -34,7 +32,6 @@ public class CompanyController implements CompanyAPI {
 
     private final CreateCompanyUseCase createCompanyUseCase;
     private final GetCompanyByIdUseCase getCompanyByIdUseCase;
-    private final ListCompaniesUseCase listCompaniesUseCase;
     private final ListCraftsmenCompanyUseCase listCraftsmenCompanyUseCase;
     private final UpdateCompanyUseCase updateCompanyUseCase;
     private final AddCraftsmanUseCase addCraftsmanUseCase;
@@ -43,7 +40,6 @@ public class CompanyController implements CompanyAPI {
     public CompanyController(
             final CreateCompanyUseCase createCompanyUseCase,
             final GetCompanyByIdUseCase getCompanyByIdUseCase,
-            final ListCompaniesUseCase listCompaniesUseCase,
             final ListCraftsmenCompanyUseCase listCraftsmenCompanyUseCase,
             final UpdateCompanyUseCase updateCompanyUseCase,
             final AddCraftsmanUseCase addCraftsmanUseCase,
@@ -51,7 +47,6 @@ public class CompanyController implements CompanyAPI {
     ) {
         this.createCompanyUseCase = Objects.requireNonNull(createCompanyUseCase);
         this.getCompanyByIdUseCase = Objects.requireNonNull(getCompanyByIdUseCase);
-        this.listCompaniesUseCase = Objects.requireNonNull(listCompaniesUseCase);
         this.listCraftsmenCompanyUseCase = Objects.requireNonNull(listCraftsmenCompanyUseCase);
         this.updateCompanyUseCase = Objects.requireNonNull(updateCompanyUseCase);
         this.addCraftsmanUseCase = Objects.requireNonNull(addCraftsmanUseCase);
@@ -88,12 +83,6 @@ public class CompanyController implements CompanyAPI {
     }
 
     @Override
-    public Pagination<ListCompaniesResponse> list(final String search, int page, int perPage, String sort, final String dir) {
-        return this.listCompaniesUseCase.execute(new SearchQuery(page, perPage, search, sort, dir))
-                .map(CompanyPresenter::present);
-    }
-
-    @Override
     public Pagination<ListCraftsmenResponse> list(
             final String companyId, final String search, final int page, final int perPage, final String sort, final String dir
     ) {
@@ -110,7 +99,7 @@ public class CompanyController implements CompanyAPI {
     }
 
     @Override
-    public void removeCraftsmanToCompany(final String companyId, final String craftsmanId) {
-        this.removeCraftsmanUseCase.execute(RemoveCraftsmanCommand.with(companyId, craftsmanId));
+    public void removeCraftsmanToCompany(final String craftsmanId) {
+        this.removeCraftsmanUseCase.execute(RemoveCraftsmanCommand.with(craftsmanId));
     }
 }

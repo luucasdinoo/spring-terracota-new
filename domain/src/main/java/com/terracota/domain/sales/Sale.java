@@ -1,23 +1,21 @@
 package com.terracota.domain.sales;
 
 import com.terracota.domain.AggregateRoot;
-import com.terracota.domain.product.ProductID;
-import com.terracota.domain.user.craftsman.Craftsman;
+import com.terracota.domain.product.Product;
 import com.terracota.domain.user.customer.Customer;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Collections;
 import java.util.Set;
 
 public class Sale extends AggregateRoot<SaleID> {
 
     private Long paymentId;
 
-    private Craftsman craftsman;
-
     private Customer customer;
 
-    private Set<ProductID> productsIds;
+    private Set<Product> products;
 
     private BigDecimal total;
 
@@ -30,9 +28,8 @@ public class Sale extends AggregateRoot<SaleID> {
     private Sale(
             final SaleID saleID,
             final Long paymentId,
-            final Craftsman craftsman,
             final Customer customer,
-            final Set<ProductID> productsIds,
+            final Set<Product> products,
             final BigDecimal total,
             final PaymentMethod paymentMethod,
             final String status,
@@ -40,9 +37,8 @@ public class Sale extends AggregateRoot<SaleID> {
     ) {
         super(saleID);
         this.paymentId = paymentId;
-        this.craftsman = craftsman;
         this.customer = customer;
-        this.productsIds = productsIds;
+        this.products = products;
         this.total = total;
         this.paymentMethod = paymentMethod;
         this.status = status;
@@ -52,9 +48,8 @@ public class Sale extends AggregateRoot<SaleID> {
     public static Sale newSale(
             final SaleID saleID,
             final Long paymentId,
-            final Craftsman craftsman,
             final Customer customer,
-            final Set<ProductID> productsIds,
+            final Set<Product> products,
             final BigDecimal total,
             final PaymentMethod paymentMethod,
             final String status
@@ -62,9 +57,8 @@ public class Sale extends AggregateRoot<SaleID> {
         return new Sale(
                 saleID,
                 paymentId,
-                craftsman,
                 customer,
-                productsIds,
+                products,
                 total,
                 paymentMethod,
                 status,
@@ -75,31 +69,26 @@ public class Sale extends AggregateRoot<SaleID> {
     public static Sale with(
             final SaleID saleID,
             final Long paymentId,
-            final Craftsman craftsman,
             final Customer customer,
-            final Set<ProductID> productsIds,
+            final Set<Product> products,
             final BigDecimal total,
             final PaymentMethod paymentMethod,
             final String status,
             final Instant createdAt
     ){
-        return new Sale(saleID, paymentId, craftsman, customer, productsIds, total, paymentMethod, status, createdAt);
+        return new Sale(saleID, paymentId, customer, products, total, paymentMethod, status, createdAt);
     }
 
     public Long getPaymentId() {
         return paymentId;
     }
 
-    public Craftsman getCraftsman() {
-        return craftsman;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
 
-    public Set<ProductID> getProductsIds() {
-        return productsIds;
+    public Set<Product> getProducts() {
+        return products != null ? Collections.unmodifiableSet(products) : Collections.emptySet();
     }
 
     public BigDecimal getTotal() {

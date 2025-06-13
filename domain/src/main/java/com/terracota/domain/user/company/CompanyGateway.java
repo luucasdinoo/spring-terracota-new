@@ -3,7 +3,6 @@ package com.terracota.domain.user.company;
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.domain.pagination.SearchQuery;
 import com.terracota.domain.pagination.projection.CraftsmenDomainProjection;
-import com.terracota.domain.user.craftsman.Craftsman;
 
 import java.util.Optional;
 

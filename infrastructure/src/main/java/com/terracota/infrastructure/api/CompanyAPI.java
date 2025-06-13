@@ -3,18 +3,19 @@ package com.terracota.infrastructure.api;
 import com.terracota.domain.pagination.Pagination;
 import com.terracota.infrastructure.user.company.models.CompanyResponse;
 import com.terracota.infrastructure.user.company.models.CreateCompanyRequest;
-import com.terracota.infrastructure.user.company.models.ListCompaniesResponse;
 import com.terracota.infrastructure.user.company.models.UpdateCompanyRequest;
 import com.terracota.infrastructure.user.craftsman.models.ListCraftsmenResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("companies")
+@Tag(name = "Company")
 public interface CompanyAPI {
 
     @PostMapping(
@@ -51,19 +52,6 @@ public interface CompanyAPI {
     })
     CompanyResponse getById(@PathVariable String id);
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "List companies")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Companies listed successfully")
-    })
-    Pagination<ListCompaniesResponse> list(
-            @RequestParam(name = "search", required = false, defaultValue = "") final String search,
-            @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
-            @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
-            @RequestParam(name = "sort", required = false, defaultValue = "legalName") final String sort,
-            @RequestParam(name = "dir", required = false, defaultValue = "asc") final String dir
-    );
-
     @GetMapping(value = "{companyId}/craftsmen", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ADMIN', 'COMPANY')")
     @Operation(summary = "List craftsmen companies")
@@ -90,14 +78,13 @@ public interface CompanyAPI {
             @PathVariable String craftsmanId
     );
 
-    @DeleteMapping(value = "{companyId}/craftsmen/{craftsmanId}")
+    @DeleteMapping(value = "craftsmen/{craftsmanId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'COMPANY')")
     @Operation(summary = "Remove craftsman to company")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Craftsman removed")
     })
     void removeCraftsmanToCompany(
-            @PathVariable String companyId,
             @PathVariable String craftsmanId
     );
 }

@@ -1,10 +1,9 @@
 package com.terracota.infrastructure.sales.persistence;
 
-import com.terracota.domain.product.ProductID;
 import com.terracota.domain.sales.PaymentMethod;
 import com.terracota.domain.sales.Sale;
 import com.terracota.domain.sales.SaleID;
-import com.terracota.infrastructure.user.craftsman.persistence.CraftsmanModel;
+import com.terracota.infrastructure.product.persistence.ProductModel;
 import com.terracota.infrastructure.user.customer.persistence.CustomerModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,10 +27,6 @@ public class SaleModel {
     private Long paymentId;
 
     @ManyToOne
-    @JoinColumn(name = "craftsman_id", nullable = false)
-    private CraftsmanModel craftsman;
-
-    @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private CustomerModel customer;
 
@@ -41,9 +36,13 @@ public class SaleModel {
     @Column(name = "status", nullable = false)
     private String status;
 
-    @ElementCollection
-    @CollectionTable(name = "sale_products", joinColumns = @JoinColumn(name = "sale_id"))
-    private Set<String> productsIds;
+    @ManyToMany
+    @JoinTable(
+            name = "sale_products",
+            joinColumns = @JoinColumn(name = "sale_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<ProductModel> products;
 
     @Column(name = "total", nullable = false)
     private BigDecimal total;
@@ -55,12 +54,12 @@ public class SaleModel {
         return new SaleModel(
                 sale.getId().getValue(),
                 sale.getPaymentId(),
-                CraftsmanModel.from(sale.getCraftsman()),
                 CustomerModel.from(sale.getCustomer()),
                 sale.getPaymentMethod(),
                 sale.getStatus(),
-                sale.getProductsIds().stream()
-                        .map(ProductID::getValue).collect(Collectors.toSet()),
+                sale.getProducts().stream()
+                        .map(ProductModel::from)
+                        .collect(Collectors.toSet()),
                 sale.getTotal(),
                 sale.getCreatedAt()
         );
@@ -70,10 +69,9 @@ public class SaleModel {
         return Sale.with(
                 SaleID.from(getPreferenceId()),
                 getPaymentId(),
-                getCraftsman().toDomain(),
                 getCustomer().toDomain(),
-                getProductsIds().stream()
-                        .map(ProductID::from)
+                getProducts().stream()
+                        .map(ProductModel::toDomain)
                         .collect(Collectors.toSet()),
                 getTotal(),
                 getPaymentMethod(),

@@ -35,7 +35,6 @@ public class SalesController implements SalesAPI {
         CreateSaleCommand aCmd = CreateSaleCommand.with(
                 request.preferenceId(),
                 request.paymentId(),
-                request.craftsmanId(),
                 request.customerId(),
                 request.productsIds(),
                 request.total(),
