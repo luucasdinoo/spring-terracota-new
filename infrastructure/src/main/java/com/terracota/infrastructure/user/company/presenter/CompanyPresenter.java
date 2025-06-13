@@ -7,6 +7,8 @@ public interface CompanyPresenter {
 
     static CompanyResponse present(final CompanyOutput output) {
         return new CompanyResponse(
+                output.id(),
+                output.ownerEmail(),
                 output.legalName(),
                 output.tradeName(),
                 output.cnpj(),

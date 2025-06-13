@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 
 public record CompanyResponse(
+        String id,
+        @JsonProperty("owner_email") String ownerEmail,
         @JsonProperty("legal_name") String legalName,
         @JsonProperty("trade_name") String tradeName,
         String cnpj,

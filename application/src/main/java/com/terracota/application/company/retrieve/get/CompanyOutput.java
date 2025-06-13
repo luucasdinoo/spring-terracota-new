@@ -6,6 +6,8 @@ import com.terracota.domain.user.company.Company;
 import java.time.Instant;
 
 public record CompanyOutput(
+    String id,
+    String ownerEmail,
     String legalName,
     String tradeName,
     String cnpj,
@@ -17,6 +19,8 @@ public record CompanyOutput(
 ) {
     public static CompanyOutput from(final Company company) {
         return new CompanyOutput(
+            company.getId().getValue(),
+            company.getOwner().getEmail(),
             company.getLegalName(),
             company.getTradeName(),
             company.getCnpj().getValue(),
