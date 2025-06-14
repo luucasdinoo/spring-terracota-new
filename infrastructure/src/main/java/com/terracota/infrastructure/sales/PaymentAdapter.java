@@ -64,7 +64,7 @@ public class PaymentAdapter implements PaymentGateway {
                     .build();
 
             Preference preference = client.create(preferenceRequest);
-            return preference.getInitPoint();
+            return preference.getSandboxInitPoint();
 
         }catch (MPException | MPApiException e) {
             throw PaymentProcessingException.with("An error occurred while processing the payment with Mercado Pago.");
