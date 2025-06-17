@@ -1,0 +1,4 @@
+postgres:
+  username: docker
+  password: docker
+  url: jdbc:postgresql://localhost:5432/terracote_db_dev

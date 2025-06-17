@@ -1,0 +1,58 @@
+spring:
+  profiles:
+    active: ${CONTEXT_PROFILE:development}
+  datasource:
+    url: ${postgres.url}
+    username: ${postgres.username}
+    password: ${postgres.password}
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    locations:
+      - classpath:db/migration
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+open-router:
+  api:
+    key: ${OPEN_ROUTER_API_KEY}
+
+security:
+  secret-key: ${SECURITY_SECRET_KEY}
+  expiration-token: 1 # hours
+
+logging:
+  level:
+    org.springframework:
+      web: DEBUG
+      security: DEBUG
+      web.multipart: DEBUG
+      http.converter: DEBUG
+
+azure:
+  storage:
+    terracota:
+      account-name: ${AZURE_STORAGE_ACCOUNT_NAME}
+      account-key: ${AZURE_STORAGE_ACCOUNT_KEY}
+      blob-endpoint: ${AZURE_STORAGE_BLOB_ENDPOINT}
+      photos-container-name: ${AZURE_STORAGE_PHOTOS_CONTAINER_NAME}
+
+storage:
+  terracota:
+    location-pattern: id
+    filename-pattern: type
+
+mercado-pago:
+  terracota:
+    access-token: ${MERCADO_PAGO_ACCESS_TOKEN}
